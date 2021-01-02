@@ -73,7 +73,7 @@ exports.editData = (req, res) => {
       id: req.body.id,
     }
   })
-  .then((user) => {
+  .then(() => {
     res.send({ message: "User edit successfully!"});
   })
   .catch((err) =>{
@@ -95,9 +95,8 @@ exports.userInfo = (req, res) => {
 };
 
 
+
 exports.changePassword = (req, res) => {
-
-
     User.findOne({
       where: {
         id: req.body.id,
