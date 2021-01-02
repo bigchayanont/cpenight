@@ -137,3 +137,21 @@ exports.signin = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
+
+
+exports.checkEmailExists = (req,res) => {
+  User.findOne({ 
+    where: {
+      email: req.body.email,
+    },
+  })
+  .then((user) => {
+    if(user) {
+      res.status(404).send({message: 'Email duplicate'});
+    }
+    else
+    {
+      res.status(200).send({ message:"Email is not duplicated"})
+    }
+  })
+}
