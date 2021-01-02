@@ -99,40 +99,9 @@
         this.$store.state.userInfo.organ = this.user.organ;
         this.$store.state.userInfo.role = this.user.role;
         this.$store.state.userInfo.field = this.user.field;
+        this.$store.state.userInfo.accountType = "EMAIL";
         this.message = '';
         this.submitted = true;
-        this.user.email = this.$store.state.userInfo.email;
-        this.user.password = this.$store.state.userInfo.password;
-        this.user.firstName = this.$store.state.userInfo.firstName;
-        this.user.lastName = this.$store.state.userInfo.lastName;
-        this.user.nickName = this.$store.state.userInfo.nickName;
-        this.user.birthday_day = this.$store.state.userInfo.birthday_day;
-        this.user.birthday_month = this.$store.state.userInfo.birthday_month;
-        this.user.birthday_year = this.$store.state.userInfo.birthday_year;
-        this.user.classOf = this.$store.state.userInfo.classOf;
-        this.user.phoneNumber = this.$store.state.userInfo.phoneNumber;
-        this.user.line = this.$store.state.userInfo.line;
-        this.user.facebookAccount = this.$store.state.userInfo.facebookAccount;
-        this.user.organ = this.$store.state.userInfo.organ;
-        this.user.role = this.$store.state.userInfo.role;
-        this.user.field = this.$store.state.userInfo.field;
-        console.log("Register5:");
-        console.log(this.user.email);
-        console.log(this.user.password);
-        console.log(this.user.firstName);
-        console.log(this.user.lastName);
-        console.log(this.user.nickName);
-        console.log(this.user.birthday_day);
-        console.log(this.user.birthday_month);
-        console.log(this.user.birthday_year);
-        console.log(this.user.classOf);
-        console.log(this.user.phoneNumber);
-        console.log(this.user.line);
-        console.log(this.user.facebookAccount);
-        console.log(this.user.organ);
-        console.log(this.user.role);
-        console.log(this.user.field);
-        console.log(JSON.stringify(this.user));
         // this.$validator.validate().then(isValid => {
         //   if (isValid) {
         //     this.$store.dispatch('auth/register', this.user).then(
@@ -150,7 +119,7 @@
         //     );
         //   }
         // });
-            this.$store.dispatch('auth/register', this.user).then(
+            this.$store.dispatch('auth/register', this.$store.state.userInfo).then(
               data => {
                 this.message = data.message;
                 this.successful = true;
