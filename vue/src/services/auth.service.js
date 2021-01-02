@@ -28,6 +28,7 @@ class AuthService {
       email: user.email,
       password: user.password,
       firstName: user.firstName,
+      accountType: user.accountType,
       lastName: user.lastName,
       nickName: user.nickName,
       birthday_day: user.birthday_day,
@@ -41,6 +42,23 @@ class AuthService {
       role: user.role,
       field: user.field,
     });
+  }
+
+  checkEmailExists(email) {
+    return axios
+      .post(API_URL + "checkEmailExists", {
+        email: email,
+      })
+      .then(
+        response => {
+        console.log("response " + response)
+        return response.data;
+      })
+      .catch(() => {
+        // console.log("err" + err)
+        return "err"
+      })
+    
   }
 }
 
