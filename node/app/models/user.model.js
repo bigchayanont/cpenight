@@ -11,6 +11,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     accountType: {
       type: Sequelize.STRING,
+      allowNull: false,
     },
     authId: {
       type: Sequelize.STRING,
