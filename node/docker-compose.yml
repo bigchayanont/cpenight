@@ -1,0 +1,26 @@
+version: "3.1"
+services:
+  be:
+    container_name: CPE-Night-be
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./:/app"
+    environment:
+      DB_URL: CPE-Night-DB
+  nightDB:
+    container_name: CPE-Night-DB
+    image: mysql
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: cpeNight!1
+      MYSQL_DATABASE: cpeNightdb
+      TZ: Asia/Bangkok
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/var/lib/mysql
