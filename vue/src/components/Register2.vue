@@ -51,6 +51,7 @@
 
 // import change from "@/profileData/profile.js";
 import User from '../models/user';
+import AuthService from '../services/auth.service';
 export default {
     name:"register2",
     computed:{
@@ -88,27 +89,38 @@ export default {
         }
         else
         {
-          this.$store.state.userInfo.email = this.user.email;
-          this.$store.state.userInfo.password = this.user.password;
-          
-          console.log("Register2:");
-          console.log(this.$store.state.userInfo.email);
-          console.log(this.$store.state.userInfo.password);
-          console.log(this.$store.state.userInfo.firstName);
-          console.log(this.$store.state.userInfo.lastName);
-          console.log(this.$store.state.userInfo.nickName);
-          console.log(this.$store.state.userInfo.birthday_day);
-          console.log(this.$store.state.userInfo.birthday_month);
-          console.log(this.$store.state.userInfo.birthday_year);
-          console.log(this.$store.state.userInfo.cpe);
-          console.log(this.$store.state.userInfo.phoneNumber);
-          console.log(this.$store.state.userInfo.line);
-          console.log(this.$store.state.userInfo.facebookAccount);
-          console.log(this.$store.state.userInfo.organ);
-          console.log(this.$store.state.userInfo.role);
-          console.log(this.$store.state.userInfo.field);
+          console.log(this.user.email)
+          AuthService.checkEmailExists(this.user.email)
+          .then(
+          response => {
+          if((response === "err")) {
+            alert('email duplicated')    
+            }
+            else
+            { 
+              this.$store.state.userInfo.email = this.user.email;
+              this.$store.state.userInfo.password = this.user.password;
+        
+              console.log("Register2:");
+              console.log(this.$store.state.userInfo.email);
+              console.log(this.$store.state.userInfo.password);
+              console.log(this.$store.state.userInfo.firstName);
+              console.log(this.$store.state.userInfo.lastName);
+              console.log(this.$store.state.userInfo.nickName);
+              console.log(this.$store.state.userInfo.birthday_day);
+              console.log(this.$store.state.userInfo.birthday_month);
+              console.log(this.$store.state.userInfo.birthday_year);
+              console.log(this.$store.state.userInfo.cpe);
+              console.log(this.$store.state.userInfo.phoneNumber);
+              console.log(this.$store.state.userInfo.line);
+              console.log(this.$store.state.userInfo.facebookAccount);
+              console.log(this.$store.state.userInfo.organ);
+              console.log(this.$store.state.userInfo.role);
+              console.log(this.$store.state.userInfo.field);
 
-          this.$emit("pageReturn",3);
+              this.$emit("pageReturn",3);
+            }
+          })
         }
 
       },
@@ -117,7 +129,7 @@ export default {
           return re.test(email);
        },
        validPassword: function(password) {
-          this.password_length = password.length ;
+          this.password_length = password.length;
           const format = /[^A-Za-z0-9]/;
           if (this.password_length > 8) {
             this.contains_eight_characters = true;
