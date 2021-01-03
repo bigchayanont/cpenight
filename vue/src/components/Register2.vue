@@ -1,44 +1,191 @@
 <template>
-  <div id= "register2">
-    <div class="row" style="min-height: 100vh; display: grid; grid-template-columns: 37% 63%">
-      <div id="left-side">
-        <img style="height: 537px;" src="@/assets/Logo.png">
+  <div class="two-background">
+    <vue-particles
+      color="#dedede"
+      :particleOpacity="0.3"
+      :particlesNumber="60"
+      shapeType="circle"
+      :particleSize="3"
+      :lineLinked="false"
+      :moveSpeed="1.5"
+      :hoverEffect="false"
+      hoverMode="grab"
+      :clickEffect="true"
+      clickMode="push"
+    >
+    </vue-particles>
+    <div class="row page-container" id="login-container">
+      <div id="right-side">
+        <img id="cpe-logo" src="@/assets/Logo.png" />
       </div>
-      <div style="background: #282667; padding-top:50px; ">
-        <a href="/" style="text-decoration: none; display: inline;" id="backToMain"> &lt; Back to Main Page </a>
-        <div id="right-side" class="column">
-            <div>
-            <h1 style="margin-top:30px;" class="title"> REGISTER </h1>
-            <!-- Input -->
-            <div class="box" style="display: grid; grid-template-columns: 10% 90%">
-              <img style="height:43px; margin-top:-5px;" src="@/assets/icons8-male-user-64.png">
-              <input v-model="user.email" class="input" type="text" placeholder="Email">
+      <div>
+        <div class="section">
+          <div>
+            <div style="display: flex; align-items: center">
+              <a href="/register" style="text-decoration: none" id="backToMain"
+                >&lt; Back</a
+              >
+              <img
+                style="padding-left: 10px; width: 23px"
+                src="@/assets/user/home.png"
+              />
             </div>
+            <div id="left-side" class="column" style="">
+              <div>
+                <h1 class="title">REGISTER</h1>
+                <!-- Input -->
+                <div class="box">
+                  <img id="img-user" src="@/assets/icons8-male-user-64.png" />
+                  <input
+                    v-model="user.email"
+                    class="input"
+                    type="text"
+                    placeholder="Email"
+                  />
+                </div>
 
-            <hr style="margin-top:20px; margin-bottom:40px; height:2px;border:none;color:#FFFFFF;background-color:#FFFFFF;" />
+                <hr class="underline" />
 
-            <div class="box" style="display: grid; grid-template-columns: 10% 90%">
-              <img style="height:37px; margin-top:-5px;" src="@/assets/icons8-lock-52.png">
-              <input v-model="user.password" class="input" type="password" placeholder="Password">
-            </div>
+                <div class="box">
+                  <img id="img-lock" src="@/assets/icons8-lock-52.png" />
+                  <input
+                    v-model="user.password"
+                    @input="updateValue"
+                    class="input"
+                    type="password"
+                    placeholder="Password"
+                  />
+                </div>
 
-            <hr style="margin-top:20px; margin-bottom:40px; height:2px;border:none;color:#FFFFFF;background-color:#FFFFFF;" />
+                <hr class="underline" />
 
-            <div class="box" style="display: grid; grid-template-columns: 10% 90%">
-              <img style="height:45px; margin-top:-5px;" src="@/assets/Confirm Pass.png">
-              <input v-model="user.confirmPassword" class="input" type="password" placeholder="Confirm Password">
-            </div>
+                <div class="box">
+                  <img id="img-user" src="@/assets/Confirm Pass.png" />
+                  <input
+                    v-model="user.confirmPassword"
+                    class="input"
+                    type="password"
+                    placeholder="Confirm Password"
+                  />
+                </div>
 
-            <hr style="margin-top:20px; margin-bottom:20px; height:2px;border:none;color:#FFFFFF;background-color:#FFFFFF;" />
-          
-              <br>
-                <button @click="checkRegister()" id="loginButton" style="margin-bottom:20px;">REGISTER</button>
-              <br/>
+                <hr class="underline" />
 
-            <br>
-            <div style="text-align:center; margin-top:5px;">
-              <span style="color:#FFFFFF; letter-spacing: 1.6px; font-size:18px; font-family: 'CloudBold';">Already have an account ?</span>
-              <a style="margin-left:10px; color:#F28093; letter-spacing: 1.6px; font-size:18px; font-family: 'CloudBold';" href="/login">Login</a>
+                <div id="validatePassword">
+                  <h3
+                    style="
+                      margin-bottom: 0px;
+                      font-family: 'CloudBold';
+                      color: #ffffff;
+                      opacity: 0.7;
+                    "
+                  >
+                    Password must meet the following requirements :
+                  </h3>
+                  <div style="display: flex; align-items: center">
+                    <img
+                      v-show="warningColor1 == false"
+                      class="password-icon"
+                      src="@/assets/Icon_Cross.png"
+                    />
+                    <img
+                      v-show="warningColor1"
+                      class="password-icon"
+                      src="@/assets/Icon_Checkmark.png"
+                    />
+                    <p
+                      style="font-family: 'CloudLight'"
+                      :class="changeColor1()"
+                    >
+                      Be at least
+                      <span style="font-family: 'CloudBold'">8 characters</span>
+                    </p>
+                  </div>
+
+                  <div style="display: flex; align-items: center">
+                    <img
+                      v-show="warningColor2 == false"
+                      class="password-icon"
+                      src="@/assets/Icon_Cross.png"
+                    />
+                    <img
+                      v-show="warningColor2"
+                      class="password-icon"
+                      src="@/assets/Icon_Checkmark.png"
+                    />
+                    <p
+                      style="font-family: 'CloudLight'"
+                      :class="changeColor2()"
+                    >
+                      At least
+                      <span style="font-family: 'CloudBold'"
+                        >one uppercase</span
+                      >
+                    </p>
+                  </div>
+
+                  <div style="display: flex; align-items: center">
+                    <img
+                      v-show="warningColor3 == false"
+                      class="password-icon"
+                      src="@/assets/Icon_Cross.png"
+                    />
+                    <img
+                      v-show="warningColor3"
+                      class="password-icon"
+                      src="@/assets/Icon_Checkmark.png"
+                    />
+                    <p
+                      style="font-family: 'CloudLight'"
+                      :class="changeColor3()"
+                    >
+                      At least
+                      <span style="font-family: 'CloudBold'">one number</span>
+                    </p>
+                  </div>
+
+                  <div style="display: flex; align-items: center">
+                    <img
+                      v-show="warningColor4 == false"
+                      class="password-icon"
+                      src="@/assets/Icon_Cross.png"
+                    />
+                    <img
+                      v-show="warningColor4"
+                      class="password-icon"
+                      src="@/assets/Icon_Checkmark.png"
+                    />
+                    <p
+                      style="font-family: 'CloudLight'"
+                      :class="changeColor4()"
+                    >
+                      At least
+                      <span style="font-family: 'CloudBold'"
+                        >one special characters</span
+                      >
+                    </p>
+                  </div>
+                </div>
+                <br />
+                <button
+                  @click="checkRegister()"
+                  id="nextButton"
+                  style="background-color: #f28093"
+                >
+                  CONTINUE
+                </button>
+                <div id="register-section">
+                  <span class="descript-text" style="color: #ffffff"
+                    >Already have an account ?</span
+                  >
+                  <a
+                    class="descript-text"
+                    style="margin-left: 10px; color: #f28093"
+                    href="/login"
+                    >Login</a
+                  >
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -90,7 +237,7 @@ export default {
         else
         {
           console.log(this.user.email)
-          AuthService.checkEmailExists(this.user.email)
+          AuthService.checkEmailExists(this.user.email.trim())
           .then(
           response => {
           if((response === "err")) {
@@ -146,13 +293,82 @@ export default {
               this.contains_number === true) {
                 return this.valid_password = true;	
           } else {
-            return this.valid_password = false;
-          }
+        if (this.contains_eight_characters === false) {
+          alert("Password must have more than 8 characters");
+        } else if (this.contains_uppercase === false) {
+          alert("Password must have at least 1 uppercase");
+        } else if (this.contains_number === false) {
+          alert("Password must have at least 1 number");
+        } else if (this.contains_special_character === false) {
+          alert("Password must have at least 1 special characters");
         }
+        return (this.valid_password = false);
+      }
+       },
+       changeColor1() {
+      let red = "colorRed";
+      let green = "colorGreen";
+      if (this.warningColor1 === true) {
+        return green;
+      }
+      return red;
     },
+    changeColor2() {
+      let red = "colorRed";
+      let green = "colorGreen";
+      if (this.warningColor2 === true) {
+        return green;
+      }
+      return red;
+    },
+    changeColor3() {
+      let red = "colorRed";
+      let green = "colorGreen";
+      if (this.warningColor3 === true) {
+        return green;
+      }
+      return red;
+    },
+    changeColor4() {
+      let red = "colorRed";
+      let green = "colorGreen";
+      if (this.warningColor4 === true) {
+        return green;
+      }
+      return red;
+    },
+    updateValue(event) {
+      const value = event.target.value;
+      const upper = /[A-Z]/.test(value);
+      const number = /\d/.test(value);
+      const format = /[^A-Za-z0-9]/;
+      const special = format.test(value);
+      if (String(value).length >= 8) {
+        this.warningColor1 = true;
+      } else {
+        this.warningColor1 = false;
+      }
+      if (upper === true) {
+        this.warningColor2 = true;
+      } else {
+        this.warningColor2 = false;
+      }
+      if (number === true) {
+        this.warningColor3 = true;
+      } else {
+        this.warningColor3 = false;
+      }
+      if (special === true) {
+        this.warningColor4 = true;
+      } else {
+        this.warningColor4 = false;
+      }
+    },
+    },
+
     data() {
         return {
-          user: new User('','','','','','','','','','','','','','','','','','',''),
+          user: new User(),
           submitted: false,
           successful: false,
           message: '',
@@ -162,127 +378,280 @@ export default {
           contains_uppercase: false,
           contains_special_character: false,
           valid_password: false,
-      }
+          warningColor1: false,
+          warningColor2: false,
+          warningColor3: false,
+          warningColor4: false,
+        }
   },
 }
 </script>
 
 <style scoped>
-  #backToMain{
-    font-family: "CloudBold";
-    font-size:22px;
-    color: #FFFFFF; 
-    margin-top: 50px;
-    padding-left: 75px;
-  }
+* {
+  z-index: 1;
+}
+.password-icon {
+  width: 15px;
+  padding-top: 3px;
+  padding-right: 5px;
+}
+#validatePassword {
+  font-size: 1.25em;
+}
+#register-section {
+  text-align: center;
+  margin-top: 15px;
+}
+#login-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+#img-user {
+  height: 30px;
+  margin-top: -5px;
+}
+#img-lock {
+  height: 24px;
+  margin-top: -5px;
+}
+#cpe-logo {
+  height: 407px;
+}
 
-  .box{
-    margin-top : 15px;
-    font-family: "CloudLight";
-  }
-
-  .textDivider{
-   width: 100%; 
-   text-align: center; 
-   border-bottom: 2px solid #d5d5df; 
-   line-height: 0.1em;
-   margin: 10px 0 20px; 
-  }
-
-  input[type=text] {
-  color: white;
-  font-size: 26px;
+.img-login {
+  width: 350px;
+}
+.underline {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  height: 1px;
+  opacity: 0.7;
+  border: none;
+  color: #ffffff;
+  background-color: #ffffff;
   font-family: "CloudLight";
-  }
-
-  input[type=password] {
-  color: white;
-  font-size: 26px;
+}
+.descript-text {
+  letter-spacing: 1.6px;
+  font-size: 1.5em;
   font-family: "CloudLight";
-  }
+}
+.two-background {
+  background: linear-gradient(90deg, #302e71 50%, #282567 50%);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+#or-text {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: "CloudLight";
+  font-size: 2em;
+  letter-spacing: 1.6px;
+  color: #fbdad3;
+  opacity: 0.5;
+}
+#login-page {
+  width: 1440px;
+  max-width: 1440px;
+}
+#backToMain {
+  font-family: "CloudBold";
+  font-size: 2em;
+  color: #ffffff;
+}
 
-  .textDivider span { 
-    background: #282667; 
-    font-size: 26px;
-    font-family: "CloudBold";
-    padding:0 10px; 
-    color: #FFFFFF;
-    }
+.box {
+  margin-top: 15px;
+  font-family: "CloudLight";
+  display: flex;
+  align-items: center;
+}
 
-  #loginButton{
-    color: #FFFFFF;
-    background-color: #F28093;
-    border: none;
-    width: 100%;
-    margin-top:10px;
-    padding-top: 14px;
-    padding-bottom: 14px;
-    padding-left: 250px;
-    padding-right: 250px;
-    font-size: 30px;
-    font-family: "CloudBold";
-  }
+.textDivider {
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid #d5d5df;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
 
-  ::placeholder {
+input[type="text"] {
+  color: white;
+  font-size: 2em;
+  font-family: "CloudLight";
+}
+
+input[type="password"] {
+  color: white;
+  font-size: 2em;
+  font-family: "CloudLight";
+}
+
+#nextButton {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  color: #ffffff;
+  background-color: #f28093;
+  border: none;
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: 2.5em;
+  letter-spacing: 3px;
+  font-family: "CloudBold";
+}
+
+input[type="text"]:focus {
+  border: none;
+  background-color: none;
+  outline: 0;
+}
+
+input[type="password"]:focus {
+  border: none;
+  background-color: none;
+  outline: 0;
+}
+
+::placeholder {
   color: #bbbde4;
-  font-size: 26px;
+  font-size: 0.8em;
   font-family: "CloudLight";
-  }
-  
-  .input{
-    margin-left: 10px;
-    padding-left:10px ;
-    background: transparent;
-    border: none;
-  }
-  body, html {
+  opacity: 0.6;
+}
+
+.input {
+  margin-left: 10px;
+  padding-left: 10px;
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+body,
+html {
   padding: 0;
   margin: 0;
-  }
-    
-  #forgot{
-    text-align:right; 
-    font-size:18px;
-    font-family: "CloudLight";
-    color: white;
-    margin-bottom: 0px;
-  }
-  .title{
-    font-size: 112px;
-    font-family: "CloudBold";
-    letter-spacing: 11.6px;
-    color: #FFFFFF;
-    opacity: 1;
-    margin-bottom: 0px;
-    margin-top:0px;
-    z-index: 2;
-  }
+}
 
-  #right-side{
-    
-    background-color: #282667;
+#forgot {
+  text-align: right;
+  font-size: 2em;
+  font-family: "CloudLight";
+  color: white;
+  margin-bottom: 10px;
+  margin-top: 0;
+  opacity: 0.7;
+}
+
+.title {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 0px;
+  font-size: 8em;
+  font-family: "CloudBold";
+  letter-spacing: 7.6px;
+  color: #ffffff;
+  opacity: 1;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  z-index: 2;
+}
+
+#left-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#right-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.colorGreen {
+  color: #3caf6c;
+}
+.colorRed {
+  color: #bd6887;
+}
+
+.colorGreen,
+.colorRed {
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+@media screen and (max-width: 1024px) {
+  .two-background {
+    background: #282567;
+  }
+  #login-container {
+    display: block;
+  }
+  #right-side {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  #validatePassword {
+    padding-top: 10px;
+  }
+  .title {
+    padding-top: 30px;
+    font-size: 6em;
+  }
+  .underline {
+    margin-bottom: 16px;
+  }
+  #forgot {
+    font-size: 1.75em;
+    margin-bottom: 5px;
+  }
+  #backToMain,
+  .descript-text,
+  #or-text {
+    font-size: 1.5em;
+  }
+  #register-section {
+    margin-top: 25px;
+  }
+  .title {
+    font-size: 6em;
+  }
+  .two-background {
     display: flex;
     justify-content: center;
-    align-items: top;
+    align-items: normal;
+    padding-top: 25px;
+    background: #282567;
+    height: 100vh;
   }
-
-  #left-side{
-    background-color: #312e71;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+@media screen and (max-width: 375px) {
+  .img-login {
+    width: 300px;
   }
-
-  .loginwith
-  {
-    font-size: 20px;
-    font-family: "CloudLight";
-    letter-spacing: 1.6px;
-    color: #F9C0BD;
-    margin-top:10px;
-    text-align: center; 
-    border-bottom: 2px solid #d5d5df; 
-    line-height: 0.1em;
-    margin: 10px 0 20px; 
+  #img-user {
+    height: 25px;
+    margin-top: -1px;
   }
+  #img-lock {
+    height: 19px;
+    margin-top: 0px;
+  }
+}
+@media screen and (max-width: 360px) {
+  .img-login {
+    width: 290px;
+  }
+}
 </style>

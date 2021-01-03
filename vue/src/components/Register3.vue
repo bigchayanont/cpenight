@@ -1,85 +1,183 @@
 <template>
-  <div class="row" style="min-height: 100vh; display: grid; grid-template-columns: 37% 63%">
-    <div id="left-side">
-      <img style="height: 537px;" src="@/assets/Logo.png">
-    </div>
-      <div id="right-side" class="column">
-        <div>
-          <div style="display:grid; grid-template-columns: 60% 40%">
+  <div class="two-background">
+    <vue-particles
+      color="#dedede"
+      :particleOpacity="0.3"
+      :particlesNumber="60"
+      shapeType="circle"
+      :particleSize="3"
+      :lineLinked="false"
+      :moveSpeed="1.5"
+      :hoverEffect="false"
+      hoverMode="grab"
+      :clickEffect="true"
+      clickMode="push"
+    >
+    </vue-particles>
+    <div class="row page-container" id="login-container">
+      <div id="right-side">
+        <img id="cpe-logo" src="@/assets/Logo.png" />
+      </div>
+      <div>
+        <div class="section">
           <div>
-            <h1 class="title" style="margin:0px;">Please tell us</h1>
-            <h1 class="title" style="margin:0px;">more about yourself.</h1>
-          </div>
-          <div>
-            <img style="width:130px; padding-left:231px;" src="@/assets/Circle-02.png">
-          </div>
-        </div>
+            <div id="left-side" class="column">
+              <div>
+                <div id="header-section">
+                  <div>
+                    <h1 class="title" style="margin: 0px">
+                      Please tell us <br />
+                      more about yourself.
+                    </h1>
+                  </div>
+                  <div>
+                    <img id="circle" src="@/assets/Circle-02.png" />
+                  </div>
+                </div>
 
-        <div>
-          <!-- First Section-->
-          <h2 style="margin-top:35px;">What's your name?</h2>
-            <div class="row" style="display: grid; grid-template-columns: 50% 50%">
-              <div>
-                <!-- Input Section -->
-                <div style="padding-right:33px;">
-                  <h1 class="inputText">FIRST NAME*</h1>
-                  <div style="margin-top:20px; padding-right:10px;">
-                    <input v-model="user.firstName" style="margin:0px; width:100%;" class="input" type="text" placeholder="Enter your first name">
+                <div>
+                  <!-- First Section-->
+                  <h2 class="question">What's your name?</h2>
+                  <div>
+                    <div class="input-section">
+                      <!-- Input Section -->
+                      <div class="input-space">
+                        <h1 class="inputText">FIRST NAME*</h1>
+                        <div style="margin-top: 20px; padding-right: 10px">
+                          <input
+                            v-model="user.firstname"
+                            style="margin: 0px; width: 100%"
+                            class="input"
+                            type="text"
+                            placeholder="Enter your first name"
+                          />
+                        </div>
+                        <hr class="underline" />
+                      </div>
+                      <!-- Input Section -->
+                      <!-- Input Section -->
+                      <div>
+                        <h1 class="inputText">LAST NAME*</h1>
+                        <div style="margin-top: 20px; padding-right: 10px">
+                          <input
+                            v-model="user.lastname"
+                            style="margin: 0px; width: 100%"
+                            class="input"
+                            type="text"
+                            placeholder="Enter your last name"
+                          />
+                        </div>
+                        <hr class="underline" />
+                      </div>
+                      <!-- Input Section -->
+                    </div>
+
+                    <div class="input-single">
+                      <!-- Input Section -->
+                      <div class="input-space">
+                        <h1 class="inputText">NICKNAME*</h1>
+                        <div style="margin-top: 20px; padding-right: 10px">
+                          <input
+                            v-model="user.nickname"
+                            style="margin: 0px; width: 100%"
+                            class="input"
+                            type="text"
+                            placeholder="Enter your nickname"
+                          />
+                        </div>
+                        <hr class="underline" />
+                      </div>
+                      <!-- Input Section -->
+                    </div>
                   </div>
-                  <hr style="margin-top:10px; margin-bottom:30px; height:2px;border:none; color:#FFFFFF; background-color:#FFFFFF;" />
-                </div>
-              <!-- Input Section -->
-              <!-- Input Section -->
-                <div style="padding-right:33px;">
-                  <h1 class="inputText">NICKNAME*</h1>
-                  <div style="margin-top:20px; padding-right:10px;">
-                    <input v-model="user.nickName" style="margin:0px; width:100%;" class="input" type="text" placeholder="Enter your nickname">
+
+                  <!-- Second Section-->
+                  <h2 class="question">When is your birthday?</h2>
+                  <h1 style="padding-bottom: 5px" class="inputText">
+                    DATE OF BIRTH
+                  </h1>
+                  <div style="display: flex; padding-top: 5px">
+                    <div id="day-select">
+                      <div class="select-dropdown">
+                        <select>
+                          <option selected disabled>Day</option>
+                          <option v-for="day in days" v-bind:key="day">
+                            {{ day }}
+                          </option>
+                        </select>
+                      </div>
+                      <hr class="underline" />
+                    </div>
+
+                    <div id="month-select">
+                      <div class="select-dropdown">
+                        <select>
+                          <option selected disabled>Month</option>
+                          <option v-for="month in months" v-bind:key="month">
+                            {{ month.value }}
+                          </option>
+                        </select>
+                      </div>
+                      <hr class="underline" />
+                    </div>
+
+                    <div id="year-select">
+                      <div  class="select-dropdown">
+                        <select>
+                          <option selected disabled>Year</option>
+                          <option v-for="year in years" v-bind:key="year">
+                            {{ year }}
+                          </option>
+                        </select>
+                      </div>
+                      <hr class="underline" />
+                    </div>
+
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                      "
+                    ></div>
                   </div>
-                  <hr style="margin-top:10px; margin-bottom:30px; height:2px;border:none;color:#FFFFFF;background-color:#FFFFFF;" />
                 </div>
-              <!-- Input Section -->
-              </div>
- 
-              <div>
-                <!-- Input Section -->
-                <div style="padding-right:33px;">
-                  <h1 class="inputText">LAST NAME*</h1>
-                  <div style="margin-top:20px; padding-right:10px;">
-                    <input v-model="user.lastName" style="margin:0px; width:100%;" class="input" type="text" placeholder="Enter your last name">
+                <link
+                  rel="stylesheet"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+                />
+                <div
+                  class="row"
+                  style="
+                    margin-top: 30px;
+                    display: flex;
+                    justify-content: space-between;
+                  "
+                >
+                  <div>
+                    <button id="backButton" @click="backPage()">
+                      <i
+                        style="align: center; padding-right: 20px"
+                        class="fa fa-arrow-left"
+                      ></i
+                      >BACK
+                    </button>
                   </div>
-                  <hr style="margin-top:10px; margin-bottom:30px; height:2px;border:none;color:#FFFFFF;background-color:#FFFFFF;" />
+                  <div>
+                    <button id="nextButton" @click="checkRegister1()">
+                      NEXT<i
+                        style="align: center; padding-left: 20px"
+                        class="fa fa-arrow-right"
+                      ></i>
+                    </button>
+                  </div>
                 </div>
-              <!-- Input Section -->
-              
               </div>
             </div>
-
-          <!-- Second Section-->
-          <h2 style="margin-top:35px;">When is your birthday?</h2>
-          <h1 class="inputText">DATE OF BIRTH</h1>
-          <div>
-            <v-select :options="getDayList()" class="style-chooser" style="display: inline-block; width:15%;" placeholder="Day" v-model="user.birthday_day"></v-select>
-            <v-select :options="getMonthList()" class="style-chooser" style="margin-left:25px; display: inline-block; width:20%;" placeholder="Month"  v-model="user.birthday_month"></v-select>
-            <v-select :options="getYearList()" class="style-chooser" style="margin-left:25px; display: inline-block; width:20%;" placeholder="Year"  v-model="user.birthday_year"></v-select>
           </div>
-          <div>
-            <hr align="left" style="display: inline-block; width:15%; margin-top:10px; margin-bottom:30px; height:2px;border:none; color:#FFFFFF; background-color:#FFFFFF;" />
-            <hr align="left" style="display: inline-block; width:20%; margin-left:25px; margin-top:10px; margin-bottom:30px; height:2px;border:none; color:#FFFFFF; background-color:#FFFFFF;" />
-            <hr align="left" style="display: inline-block; width:20%; margin-left:25px; margin-top:10px; margin-bottom:30px; height:2px;border:none; color:#FFFFFF; background-color:#FFFFFF;" />
-          </div>
-        </div>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <div class="row" style="margin-top:68px; display: grid; grid-template-columns: 50% 50%">
-          <div>
-            <button id="backButton" @click="backPage()"><i style="align:center; padding-right:20px;" class="fa fa-arrow-left"></i>BACK</button>
-          </div>
-          <div>
-            <button id="nextButton" @click="checkRegister1()">NEXT<i style="align:center; padding-left:20px;" class="fa fa-arrow-right"></i></button>
-          </div>
-        </div>
-
         </div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -93,9 +191,29 @@
   export default {
     data() {
       return {
-      user: new User('','','','','','','','','','','','','','','','','','',''),
+      user: new User(),
+      days: [],
+      months: [
+        { value: "January", text: "JAN" },
+        { value: "February", text: "FEB" },
+        { value: "March", text: "MAR" },
+        { value: "April", text: "APR" },
+        { value: "May", text: "MAY" },
+        { value: "June", text: "JUN" },
+        { value: "July", text: "JUL" },
+        { value: "August", text: "AUG" },
+        { value: "September", text: "SEP" },
+        { value: "October", text: "OCT" },
+        { value: "November", text: "NOV" },
+        { value: "December", text: "DEC" },
+      ],
+      years: [],
       }
 
+    },
+    created() {
+    for (var i = 1; i <= 31; i++) this.days.push(i);
+    for (var j = 1920; j <= 2020; j++) this.years.push(j);
     },
     methods: {
       checkRegister1() {
@@ -143,214 +261,387 @@
           this.$emit("registerData",this.user)
           this.$emit("pageReturn",2)
       },
-      getDayList(){
-        var dayList = [];
-
-        for (var i = 1; i <= 31; i++)
-          {
-          dayList.push(i);
-          }
-
-        return dayList;
-      },
-      getMonthList(){
-        return ["January","February","March","April","May","June","July",
-                "August","September","October","November","December"];
-      },
-      getYearList(){
-        var yearList = [];
-
-        for (var i = 1920; i <= 2020; i++)
-          {
-          yearList.push(i);
-          }
-
-        return yearList;
-      }
     }
   }
 </script>
 
-<style>
-
-  .box{
-    margin-top : 15px;
-    font-family: "CloudLight";
-  }
-
-  .vs__dropdown-menu{
-    max-height: 250px;
-  }
-
-  .textDivider{
-   width: 100%; 
-   text-align: center; 
-   border-bottom: 2px solid #d5d5df; 
-   line-height: 0.1em;
-   margin: 10px 0 20px; 
-  }
-  
-
-
-  input[type=text] {
+<style scoped>
+  * {
+  z-index: 1;
+}
+.select-dropdown,
+.select-dropdown * {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+}
+.select-dropdown {
+  position: relative;
+  background-color: #302e71;
+  border-radius: 0px;
+}
+.select-dropdown select {
   color: white;
-  font-size: 26px;
-  letter-spacing: 1.6px;
+  font-size: 1.75em;
   font-family: "CloudLight";
-  opacity: 0.7;
-  }
-
-  input[data-v-7ecbf6ee] {
-    margin: 0px;
-    padding-left: 10px;
-    background: transparent;
-    border: none;
-    width:100%;
+  max-width: 100%;
+  padding: 8px 24px 8px 10px;
+  border: none;
+  background-color: #302e71;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.select-dropdown select:active,
+.select-dropdown select:focus {
+  outline: none;
+  box-shadow: none;
+}
+.select-dropdown:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 0;
+  height: 0;
+  margin-top: -2px;
+  border-top: 5px solid #ffffff;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+.input-space {
+  padding-right: 33px;
+}
+.input-section {
+  display: flex;
+  justify-content: space-between;
 }
 
-  input[type=password] {
-  color: white;
-  font-size: 26px;
+.input-single {
+  display: flex;
+  justify-content: space-between;
+}
+
+#day-select {
+  width: 80px;
+}
+
+#month-select {
+  width: 120px;
+  margin-left: 20px;
+}
+
+#year-select {
+  width: 85px;
+  margin-left: 20px;
+}
+
+#nextButton {
+  color: #ffffff;
+  background: #f28093;
+  border: 2px solid #f28093;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 32px;
+  padding-right: 32px;
+  font-size: 1.75em;
+  font-family: "CloudBold";
+}
+
+#backButton {
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  background-color: transparent;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 32px;
+  padding-right: 32px;
+  font-size: 1.75em;
+  font-family: "CloudBold";
+}
+
+#header-section {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30px;
+}
+.question {
+  margin: 15px 0px;
+  text-align: left;
+  font-family: "CloudBold";
+  letter-spacing: 2px;
+  color: #ffffff;
+  font-size: 2.25em;
+}
+.inputText {
+  font-family: "CloudLight";
+  font-weight: 900;
   letter-spacing: 1.6px;
-  font-family: "CloudLight";
+  color: #ffffff;
   opacity: 0.7;
-  }
+  font-size: 1.5em;
+}
+#circle {
+  width: 70px;
+  padding-left: 20px;
+}
+#register-section {
+  text-align: center;
+  margin-top: 35px;
+}
+#login-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+#img-user {
+  height: 30px;
+  margin-top: -5px;
+}
+#img-lock {
+  height: 24px;
+  margin-top: -5px;
+}
+#cpe-logo {
+  height: 407px;
+}
 
-  .inputText{
-    font-family: "CloudLight";
-    letter-spacing: 1.6px;
-    color: #FFFFFF;
-    opacity: 0.7;
-    font-size: 20px;
-  }
-
-  .textDivider span { 
-    background: #282667; 
-    font-size: 26px;
-    font-family: "CloudBold";
-    padding:0 10px; 
-    color: #FFFFFF
-    }
-  
-
-  #nextButton{
-    color: #FFFFFF;
-    background:#F28093;
-    border: none;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 32px;
-    padding-right: 32px;
-    font-size: 28px;
-    font-family: "CloudBold";
-    margin-left:240px;
-  }
-
-  #backButton{
-    color: #FFFFFF;
-    border: 3px solid #FFFFFF;
-    background-color: transparent;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 32px;
-    padding-right: 32px;
-    font-size: 28px;
-    font-family: "CloudBold";
-  }
-
-  ::placeholder {
-  color: #FFFFFF;
-  font-size: 20px;
-  font-family: "CloudLight";
+.img-login {
+  width: 350px;
+}
+.underline {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  height: 1px;
   opacity: 0.7;
-  }
-  
-  .input{
-    margin-left: 10px;
-    padding-left:10px ;
-    background: transparent;
-    border: none;
-  }
-  body, html {
+  border: none;
+  color: #ffffff;
+  background-color: #ffffff;
+  font-family: "CloudLight";
+}
+.descript-text {
+  letter-spacing: 1.6px;
+  font-size: 2em;
+  font-family: "CloudLight";
+}
+.two-background {
+  background: linear-gradient(90deg, #302e71 50%, #282567 50%);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+#or-text {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: "CloudLight";
+  font-size: 2em;
+  letter-spacing: 1.6px;
+  color: #fbdad3;
+  opacity: 0.5;
+}
+#login-page {
+  width: 1440px;
+  max-width: 1440px;
+}
+#backToMain {
+  font-family: "CloudBold";
+  font-size: 2em;
+  color: #ffffff;
+}
+
+.box {
+  margin-top: 15px;
+  font-family: "CloudLight";
+}
+
+.textDivider {
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid #d5d5df;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+input[type="text"] {
+  color: white;
+  font-size: 2em;
+  font-family: "CloudLight";
+}
+
+input[type="password"] {
+  color: white;
+  font-size: 2em;
+  font-family: "CloudLight";
+}
+
+#loginButton {
+  color: #ffffff;
+  background-color: #f28093;
+  border: none;
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: 2.5em;
+  letter-spacing: 3px;
+  font-family: "CloudBold";
+}
+
+input[type="text"]:focus {
+  border: none;
+  background-color: none;
+  outline: 0;
+}
+
+input[type="password"]:focus {
+  border: none;
+  background-color: none;
+  outline: 0;
+}
+
+::placeholder {
+  color: #bbbde4;
+  font-size: 0.65em;
+  font-family: "CloudLight";
+  opacity: 0.6;
+}
+
+.input {
+  margin-left: 10px;
+  padding-left: 10px;
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+body,
+html {
   padding: 0;
   margin: 0;
+}
+
+#forgot {
+  text-align: right;
+  font-size: 2em;
+  font-family: "CloudLight";
+  color: white;
+  margin-bottom: 10px;
+  margin-top: 0;
+  opacity: 0.7;
+}
+
+.title {
+  text-align: flex-start;
+  font-size: 3em;
+  font-family: "CloudBold";
+  letter-spacing: 3px;
+  color: #ffffff;
+  opacity: 1;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+#left-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#right-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .two-background {
+    background: #282567;
   }
-    
-  .title{
-    font-size: 44px;
-    font-family: "CloudBold";
-    letter-spacing: 4.4px;
-    color: #FFFFFF;
-    z-index: 2;
+  #login-container {
+    display: block;
+  }
+  #right-side {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  #circle {
+    width: 60px;
+    padding-left: 20px;
+  }
+  .input-space {
+    padding-right: 0px;
   }
 
-  h2{
-    text-align: left;
-    font-family: "CloudBold";
-    letter-spacing: 3px;
-    color: #FFFFFF;
-    font-size: 30px;
+  .input-section {
+    display: block;
+    justify-content: space-between;
   }
 
-  .style-chooser .vs__search::placeholder,
-  .style-chooser .vs__dropdown-toggle{
-    background: #282667; 
-    border: none;
-    font-family: "CloudLight";
-    letter-spacing: 1.6px;
-    color: #FFFFFF;
-    opacity: 0.7;
-    font-size: 20px;
+  .input-single {
+    display: block;
+    justify-content: space-between;
+    padding-bottom: 10px;
   }
 
-  .style-chooser .vs__dropdown-menu {
-    background: #FFFFFF; 
-    border: none;
-    font-family: "CloudLight";
-    letter-spacing: 1.6px;
-    color: #FFFFFF;
-    font-size: 20px;
+  .title {
+    font-size: 3em;
   }
-
-  .vs__selected{
-    background: #282667; 
-    border: none;
-    font-family: "CloudLight";
-    letter-spacing: 1.6px;
-    color: #FFFFFF;
-    opacity: 0.7;
-    font-size: 26px;
+  .underline {
+    margin-bottom: 16px;
   }
-
-  .style-chooser .vs__clear,
-  .style-chooser .vs__open-indicator {
-    fill: #FFFFFF;
+  #forgot {
+    font-size: 1.75em;
+    margin-bottom: 5px;
   }
-
-  #right-side{
-    
-    background-color: #282667;
+  #backToMain,
+  .descript-text,
+  #or-text {
+    font-size: 1.75em;
+  }
+  #register-section {
+    margin-top: 25px;
+  }
+  .title {
+    font-size: 3em;
+  }
+  .two-background {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 25px;
+    background: #282567;
+    height: 750px;
+  }
+}
+@media screen and (max-width: 375px) {
+  #circle {
+    padding-left: 10px;
+    width: 55px;
+  }
+  .title {
+    font-size: 2.5em;
+  }
+  .img-login {
+    width: 300px;
   }
 
-  #left-side{
-    background-color: #312e71;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  #img-user {
+    height: 25px;
+    margin-top: -1px;
   }
-
-  .loginwith
-  {
-    font-size: 20px;
-    font-family: "CloudLight";
-    letter-spacing: 1.6px;
-    color: #F9C0BD;
-    margin-top:0px;
+  #img-lock {
+    height: 19px;
+    margin-top: 0px;
   }
-
-
-
+}
+@media screen and (max-width: 360px) {
+  .img-login {
+    width: 290px;
+  }
+}
 </style>

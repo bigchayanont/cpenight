@@ -1,78 +1,161 @@
 <template>
-  <div id = "Register4">
-    <div class="row" style="min-height: 100vh; display: grid; grid-template-columns: 37% 63%">
-      <div id="left-side">
-        <img style="height: 537px;" src="@/assets/Logo.png">
+  <div class="two-background">
+    <vue-particles
+      color="#dedede"
+      :particleOpacity="0.3"
+      :particlesNumber="60"
+      shapeType="circle"
+      :particleSize="3"
+      :lineLinked="false"
+      :moveSpeed="1.5"
+      :hoverEffect="false"
+      hoverMode="grab"
+      :clickEffect="true"
+      clickMode="push"
+    >
+    </vue-particles>
+    <div class="row page-container" id="login-container">
+      <div id="right-side">
+        <img id="cpe-logo" src="@/assets/Logo.png" />
       </div>
-        <div id="right-side" class="column">
+      <div>
+        <div class="section">
           <div>
-            <div style="display:grid; grid-template-columns: 60% 40%">
-            <div>
-              <h1 class="title" style="margin:0px;">Please tell us</h1>
-              <h1 class="title" style="margin:0px;">more about yourself.</h1>
-            </div>
-            <div>
-              <img style="width:130px; padding-left:231px;" src="@/assets/Circle-03.png">
-            </div>
-          </div>
-
-          <div>
-            <!-- Second Section-->
-            <h2 style="margin-top:35px;">Which CPE Class are you?</h2>
-            <h1 class="inputText">CLASS OF</h1>
-            <v-select :options="classList()" class="style-chooser" style=" width:25%;" placeholder="CPE" v-model="user.classOf"></v-select>
-            <hr align="left" style="width:25%; margin-top:10px; margin-bottom:30px; height:2px;border:none; color:#FFFFFF; background-color:#FFFFFF;" />
-            <!-- First Section-->
-            <h2 style="margin-top:35px;">How can we contract you?</h2>
-              <div class="row" style="display: grid; grid-template-columns: 50% 50%">
-                <div>
-                  <!-- Input Section -->
-                  <div style="padding-right:33px;">
-                    <h1 class="inputText">PHONE*</h1>
-                    <div style="margin-top:20px; padding-right:10px;">
-                      <input v-model="user.phoneNumber"  style="margin:0px; width:100%;" class="input" type="text" placeholder="Enter your phone number">
-                    </div>
-                    <hr style="margin-top:10px; margin-bottom:30px; height:2px;border:none; color:#FFFFFF; background-color:#FFFFFF;" />
+            <div id="left-side" class="column">
+              <div>
+                <div id="header-section">
+                  <div>
+                    <h1 class="title" style="margin: 0px">
+                      Please tell us <br />
+                      more about yourself.
+                    </h1>
                   </div>
-                <!-- Input Section -->
-                <!-- Input Section -->
-                  <div style="padding-right:33px;">
-                    <h1 class="inputText">FACEBOOK</h1>
-                    <div style="margin-top:20px; padding-right:10px;">
-                      <input v-model="user.facebookAccount"  style="margin:0px; width:100%;" class="input" type="text" placeholder="Enter your Facebook name">
-                    </div>
-                    <hr style="margin-top:10px; margin-bottom:30px; height:2px;border:none;color:#FFFFFF;background-color:#FFFFFF;" />
+                  <div>
+                    <img id="circle" src="@/assets/Circle-03.png" />
                   </div>
-                <!-- Input Section -->
                 </div>
 
                 <div>
-                  <!-- Input Section -->
-                  <div style="padding-right:33px;">
-                    <h1 class="inputText">LINE</h1>
-                    <div style="margin-top:20px; padding-right:10px;">
-                      <input v-model="user.line"  style="margin:0px; width:100%;" class="input" type="text" placeholder="Enter your LINE ID">
+                  <!-- Second Section-->
+                  <h2 class="question">Which CPE Class are you?</h2>
+                  <div style="padding-top: 5px">
+                    <h1 style="padding-bottom: 5px" class="inputText">
+                      CLASS OF*
+                    </h1>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                      "
+                    >
+                      <div id="cpe-select">
+                        <div class="select-dropdown">
+                          <select>
+                            <option selected disabled>CPE</option>
+                            <option
+                              v-for="classOf in classLists"
+                              v-bind:key="classOf"
+                            >
+                              {{ classOf }}
+                            </option>
+                          </select>
+                        </div>
+                        <hr class="underline" />
+                      </div>
                     </div>
-                    <hr style="margin-top:10px; margin-bottom:30px; height:2px;border:none;color:#FFFFFF;background-color:#FFFFFF;" />
                   </div>
-                <!-- Input Section -->
-                
+                  <!-- First Section-->
+                  <h2 class="question">How can we contact you?</h2>
+                  <div>
+                    <div class="input-section">
+                      <!-- Input Section -->
+                      <div class="input-space">
+                        <h1 class="inputText">PHONE*</h1>
+                        <div style="margin-top: 20px; padding-right: 10px">
+                          <input
+                            style="margin: 0px; width: 100%"
+                            class="input"
+                            type="number"
+                            placeholder="Enter your phone number"
+                            @input="updateValue"
+                            :value="phone"
+                          />
+                        </div>
+                        <hr class="underline" />
+                      </div>
+                      <!-- Input Section -->
+                      <!-- Input Section -->
+                      <div>
+                        <h1 class="inputText">LINE (OPTIONAL)</h1>
+                        <div style="margin-top: 20px; padding-right: 10px">
+                          <input
+                            v-model="line"
+                            style="margin: 0px; width: 100%"
+                            class="input"
+                            type="text"
+                            placeholder="Enter your LINE ID"
+                          />
+                        </div>
+                        <hr class="underline" />
+                      </div>
+                      <!-- Input Section -->
+                    </div>
+
+                    <div class="input-single">
+                      <!-- Input Section -->
+                      <div class="input-space">
+                        <h1 class="inputText">FACEBOOK (OPTIONAL)</h1>
+                        <div style="margin-top: 20px; padding-right: 10px">
+                          <input
+                            v-model="facebook"
+                            style="margin: 0px; width: 100%"
+                            class="input"
+                            type="text"
+                            placeholder="Enter your Facebook name"
+                          />
+                        </div>
+                        <hr class="underline" />
+                      </div>
+                      <!-- Input Section -->
+                    </div>
+                  </div>
+                </div>
+                <link
+                  rel="stylesheet"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+                />
+                <div
+                  class="row"
+                  style="
+                    margin-top: 30px;
+                    display: flex;
+                    justify-content: space-between;
+                  "
+                >
+                  <div>
+                    <button id="backButton" @click="backPage()">
+                      <i
+                        style="align: center; padding-right: 20px"
+                        class="fa fa-arrow-left"
+                      ></i
+                      >BACK
+                    </button>
+                  </div>
+                  <div>
+                    <button id="nextButton" @click="nextPage()">
+                      NEXT<i
+                        style="align: center; padding-left: 20px"
+                        class="fa fa-arrow-right"
+                      ></i>
+                    </button>
+                  </div>
                 </div>
               </div>
-
-          </div>
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-          <div class="row" style="margin-top:68px; display: grid; grid-template-columns: 50% 50%">
-            <div>
-              <button id="backButton" @click="backPage()"><i style="align:center; padding-right:20px;" class="fa fa-arrow-left"></i>BACK</button>
             </div>
-            <div>
-              <button id="nextButton" @click="nextPage()">NEXT<i style="align:center; padding-left:20px;" class="fa fa-arrow-right"></i></button>
-            </div>
-          </div>
-
           </div>
         </div>
+      </div>
     </div>
   </div>
 </template>
@@ -90,9 +173,13 @@
     },
     data() {
       return {
-        user: new User('','','','','','','','','','','','','','','','','','',''),      
+        user: new User(),  
+        classLists: [],    
       }
 
+    },
+    created() {
+    for (var i = 1; i <= 34; i++) this.classLists.push("CPE " + i);
     },
     methods: {
       nextPage(){
@@ -122,206 +209,398 @@
           
           this.$emit("pageReturn",3)
       },
-      classList(){
-        var classList = ['อาจารย์','บุคคลากร'];
-
-        for (var i = 1; i <= 34; i++)
-          {
-          classList.push("CPE " + i);
-          }
-
-        return classList;
-      }
     }
   }
 </script>
 
 <style scoped>
-
-  .box{
-    margin-top : 15px;
-    font-family: "CloudLight";
-  }
-  
-  .textDivider{
-   width: 100%; 
-   text-align: center; 
-   border-bottom: 2px solid #d5d5df; 
-   line-height: 0.1em;
-   margin: 10px 0 20px; 
-  }
-
-  .style-chooser .vs__search::placeholder,
-  .style-chooser .vs__dropdown-toggle{
-    background: #282667; 
-    border: none;
-    font-family: "CloudLight";
-    letter-spacing: 1.6px;
-    color: #FFFFFF;
-    opacity: 0.7;
-    font-size: 20px;
-  }
-
-  .style-chooser .vs__dropdown-menu {
-    background: #FFFFFF; 
-    border: none;
-    font-family: "CloudLight";
-    letter-spacing: 1.6px;
-    color: #FFFFFF;
-    font-size: 20px;
-  }
-
-  .vs__selected{
-    background: #282667; 
-    border: none;
-    font-family: "CloudLight";
-    letter-spacing: 1.6px;
-    color: #FFFFFF;
-    opacity: 0.7;
-    font-size: 20px;
-  }
-
-  .style-chooser .vs__clear,
-  .style-chooser .vs__open-indicator {
-    fill: #FFFFFF;
-  }
-
-  .date-dropdown-select[data-v-67d74744]{
-    border-radius: 0px;
-    border-color: #282667; 
-    padding: 8px;
-    margin-right: 10px;
-    font-size: 20px;
-    letter-spacing: 1.6px;
-    color: #FFFFFF;
-    opacity: 0.7;
-    background-color:transparent;
+* {
+  z-index: 1;
+}
+.select-dropdown,
+.select-dropdown * {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+}
+.select-dropdown {
+  position: relative;
+  background-color: #302e71;
+  border-radius: 0px;
+}
+.select-dropdown select {
+  color: white;
+  font-size: 1.75em;
+  font-family: "CloudLight";
+  max-width: 100%;
+  padding: 8px 24px 8px 10px;
+  border: none;
+  background-color: #302e71;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.select-dropdown select:active,
+.select-dropdown select:focus {
+  outline: none;
+  box-shadow: none;
+}
+.select-dropdown:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 0;
+  height: 0;
+  margin-top: -2px;
+  border-top: 5px solid #ffffff;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+.input-space {
+  padding-right: 33px;
 }
 
-  input[type=text] {
-  color: white;
-  font-size: 26px;
-  letter-spacing: 1.6px;
-  font-family: "CloudLight";
-  opacity: 0.7;
-  }
-
-  input[data-v-7ecbf6ee] {
-    margin: 0px;
-    padding-left: 10px;
-    background: transparent;
-    border: none;
-    width:100%;
+.input-section {
+  display: flex;
+  justify-content: space-between;
 }
 
-  input[type=password] {
-  color: white;
-  font-size: 26px;
+.input-single {
+  display: flex;
+  justify-content: space-between;
+}
+
+#nextButton {
+  color: #ffffff;
+  background: #f28093;
+  border: 2px solid #f28093;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 32px;
+  padding-right: 32px;
+  font-size: 1.75em;
+  font-family: "CloudBold";
+}
+
+#cpe-select {
+  width: 105px;
+}
+
+#backButton {
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  background-color: transparent;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 32px;
+  padding-right: 32px;
+  font-size: 1.75em;
+  font-family: "CloudBold";
+}
+
+#header-section {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30px;
+}
+.question {
+  margin: 15px 0px;
+  text-align: left;
+  font-family: "CloudBold";
+  letter-spacing: 2px;
+  color: #ffffff;
+  font-size: 2.25em;
+}
+.inputText {
+  font-family: "CloudLight";
+  font-weight: 900;
   letter-spacing: 1.6px;
-  font-family: "CloudLight";
+  color: #ffffff;
   opacity: 0.7;
-  }
+  font-size: 1.5em;
+}
+#circle {
+  width: 70px;
+  padding-left: 20px;
+}
+#register-section {
+  text-align: center;
+  margin-top: 35px;
+}
+#login-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+#img-user {
+  height: 30px;
+  margin-top: -5px;
+}
+#img-lock {
+  height: 24px;
+  margin-top: -5px;
+}
+#cpe-logo {
+  height: 407px;
+}
 
-  .inputText{
-    font-family: "CloudLight";
-    letter-spacing: 1.6px;
-    color: #FFFFFF;
-    opacity: 0.7;
-    font-size: 20px;
-  }
-
-  .textDivider span { 
-    background: #282667; 
-    font-size: 26px;
-    font-family: "CloudBold";
-    padding:0 10px; 
-    color: #FFFFFF
-    }
-  
-
-  #nextButton{
-    color: #FFFFFF;
-    background:#F28093;
-    border: none;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 32px;
-    padding-right: 32px;
-    font-size: 28px;
-    font-family: "CloudBold";
-    margin-left:240px;
-  }
-
-  #backButton{
-    color: #FFFFFF;
-    border: 3px solid #FFFFFF;
-    background-color: transparent;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 32px;
-    padding-right: 32px;
-    font-size: 28px;
-    font-family: "CloudBold";
-  }
-
-  ::placeholder {
-  color: #FFFFFF;
-  font-size: 20px;
-  font-family: "CloudLight";
+.img-login {
+  width: 350px;
+}
+.underline {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  height: 1px;
   opacity: 0.7;
-  }
-  
-  .input{
-    margin-left: 10px;
-    padding-left:10px ;
-    background: transparent;
-    border: none;
-  }
-  body, html {
+  border: none;
+  color: #ffffff;
+  background-color: #ffffff;
+  font-family: "CloudLight";
+}
+.descript-text {
+  letter-spacing: 1.6px;
+  font-size: 2em;
+  font-family: "CloudLight";
+}
+.two-background {
+  background: linear-gradient(90deg, #302e71 50%, #282567 50%);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+#or-text {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: "CloudLight";
+  font-size: 2em;
+  letter-spacing: 1.6px;
+  color: #fbdad3;
+  opacity: 0.5;
+}
+#login-page {
+  width: 1440px;
+  max-width: 1440px;
+}
+#backToMain {
+  font-family: "CloudBold";
+  font-size: 2em;
+  color: #ffffff;
+}
+
+.box {
+  margin-top: 15px;
+  font-family: "CloudLight";
+}
+
+.textDivider {
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid #d5d5df;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+input[type="text"] {
+  color: white;
+  font-size: 2em;
+  font-family: "CloudLight";
+}
+
+input[type="number"] {
+  color: white;
+  font-size: 2em;
+  font-family: "CloudLight";
+  -moz-appearance: textfield;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="password"] {
+  color: white;
+  font-size: 2em;
+  font-family: "CloudLight";
+}
+
+#loginButton {
+  color: #ffffff;
+  background-color: #f28093;
+  border: none;
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: 2.5em;
+  letter-spacing: 3px;
+  font-family: "CloudBold";
+}
+
+input[type="text"]:focus {
+  border: none;
+  background-color: none;
+  outline: 0;
+}
+
+input[type="number"]:focus {
+  border: none;
+  background-color: none;
+  outline: 0;
+}
+
+input[type="password"]:focus {
+  border: none;
+  background-color: none;
+  outline: 0;
+}
+
+::placeholder {
+  color: #bbbde4;
+  font-size: 0.65em;
+  font-family: "CloudLight";
+  opacity: 0.6;
+}
+
+.input {
+  margin-left: 10px;
+  padding-left: 10px;
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+body,
+html {
   padding: 0;
   margin: 0;
+}
+
+#forgot {
+  text-align: right;
+  font-size: 2em;
+  font-family: "CloudLight";
+  color: white;
+  margin-bottom: 10px;
+  margin-top: 0;
+  opacity: 0.7;
+}
+
+.title {
+  text-align: flex-start;
+  font-size: 3em;
+  font-family: "CloudBold";
+  letter-spacing: 3px;
+  color: #ffffff;
+  opacity: 1;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+#left-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#right-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .two-background {
+    background: #282567;
   }
-    
-  .title{
-    font-size: 44px;
-    font-family: "CloudBold";
-    letter-spacing: 4.4px;
-    color: #FFFFFF;
-    z-index: 2;
+  #login-container {
+    display: block;
+  }
+  #right-side {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  #circle {
+    width: 60px;
+    padding-left: 20px;
+  }
+  .input-space {
+    padding-right: 0px;
+  }
+  .input-section {
+    display: block;
+    justify-content: space-between;
   }
 
-  h2{
-    text-align: left;
-    font-family: "CloudBold";
-    letter-spacing: 3px;
-    color: #FFFFFF;
-    font-size: 30px;
+  .input-single {
+    display: block;
+    justify-content: space-between;
+    padding-bottom: 10px;
   }
 
-  #right-side{
-    
-    background-color: #282667;
+  .title {
+    font-size: 3em;
+  }
+  .underline {
+    margin-bottom: 16px;
+  }
+  #forgot {
+    font-size: 1.75em;
+    margin-bottom: 5px;
+  }
+  #backToMain,
+  .descript-text,
+  #or-text {
+    font-size: 1.75em;
+  }
+  #register-section {
+    margin-top: 25px;
+  }
+  .title {
+    font-size: 3em;
+  }
+  .two-background {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 25px;
+     background: #282567;
+    height: 750px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .img-login {
+    width: 300px;
   }
 
-  #left-side{
-    background-color: #312e71;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  #circle {
+    width: 55px;
+    padding-left: 10px;
+  }
+  .title {
+    font-size: 2.5em;
   }
 
-  .loginwith
-  {
-    font-size: 20px;
-    font-family: "CloudLight";
-    letter-spacing: 1.6px;
-    color: #F9C0BD;
-    margin-top:0px;
+  #img-user {
+    height: 25px;
+    margin-top: -1px;
   }
-
-
-
+  #img-lock {
+    height: 19px;
+    margin-top: 0px;
+  }
+}
+@media screen and (max-width: 360px) {
+  .img-login {
+    width: 290px;
+  }
+}
 </style>
