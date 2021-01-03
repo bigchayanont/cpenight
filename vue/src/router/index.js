@@ -11,17 +11,15 @@ import Register5 from "@/components/Register5.vue";
 import userManagement from "../views/userManagement.vue";
 import MyAccount from "@/components/MyAccount.vue";
 import MyTicket from "@/components/MyTicket.vue";
-import MyPurchase from "@/components/MyPurchase.vue";
-import cart from "../views/cart.vue";
 import souvenir from "../views/souvenir.vue";
-import Shipping from "@/components/Shipping.vue"
 import newMainpage from "../views/newMainpage.vue"
+import backup from "@/components/backup.vue"
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/mainpage",
     name: "Mainpage",
     component: Mainpage
   },
@@ -36,27 +34,27 @@ const routes = [
     component: Register
   },
   {
-    path: "/register1:user",
+    path: "/register1",
     name: "Register1",
     component: Register1
   },
   {
-    path: "/register2:user",
+    path: "/register2",
     name: "Register2",
     component: Register2
   },
   {
-    path: "/register3:user",
+    path: "/register3",
     name: "Register3",
     component: Register3
   },
   {
-    path: "/register4:user",
+    path: "/register4",
     name: "Register4",
     component: Register4
   },
   {
-    path: "/register5:user",
+    path: "/register5",
     name: "Register5",
     component: Register5
   },
@@ -76,29 +74,19 @@ const routes = [
     component: MyTicket
   },
   {
-    path: "/mypurchase",
-    name: "mypurchase",
-    component: MyPurchase
-  },
-  {
-    path: "/cart",
-    name: "cart",
-    component: cart
-  },
-  {
     path: "/souvenir",
     name: "souvenir",
     component: souvenir
   },
   {
-    path: "/shipping",
-    name: "shipping",
-    component: Shipping
-  },
-  {
-    path: "/newmain",
+    path: "/",
     name: "newmain",
     component: newMainpage
+  },
+  {
+    path: "/backup",
+    name: "backup",
+    component: backup
   },
 ];
 

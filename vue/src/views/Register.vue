@@ -1,25 +1,24 @@
 <template>
   <div id="register">
-    <div id="register1" v-show="page == 1">
+    <div id="register1" v-if="page == 1">
       <Register1 @pageReturn="pageReturn"/>
     </div>
-    <div id="register2" v-show="page == 2">
+    <div id="register2" v-if="page == 2">
       <Register2 @pageReturn="pageReturn"/>
     </div>
-    <div id="register3" v-show="page == 3">
+    <div id="register3" v-if="page == 3">
       <Register3 @pageReturn="pageReturn"/>
     </div>
-    <div id="register4" v-show="page == 4">
+    <div id="register4" v-if="page == 4">
       <Register4 @pageReturn="pageReturn"/>
     </div>
-    <div id="register5" v-show="page == 5">
+    <div id="register5" v-if="page == 5">
       <Register5 @pageReturn="pageReturn"/>
     </div>
   </div>
 </template>
 
 <script>
- import User from '../models/user';  
  import Register1 from "@/components/Register1.vue"
  import Register2 from "@/components/Register2.vue"
  import Register3 from "@/components/Register3.vue"
@@ -43,13 +42,12 @@ export default {
     },
     data() {
         return {
-            user: new User('','','','','','','','','',''),
             page : 1,           
         }
     },
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

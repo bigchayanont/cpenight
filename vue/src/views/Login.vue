@@ -1,47 +1,102 @@
 <template>
-  <div class="row" style="min-height: 100vh; display: grid; grid-template-columns: 63% 37%">
-    <div style="background: #282667; padding-top:50px; ">
-      <a href="/" style="text-decoration: none; display: inline;" id="backToMain">&lt; Back to Main Page</a>
-      <div id="left-side" class="column" style="">
+  <div class="two-background">
+    <vue-particles
+      color="#dedede"
+      :particleOpacity="0.3"
+      :particlesNumber="60"
+      shapeType="circle"
+      :particleSize="3"
+      :lineLinked="false"
+      :moveSpeed="1.5"
+      :hoverEffect="false"
+      hoverMode="grab"
+      :clickEffect="true"
+      clickMode="push"
+    >
+    </vue-particles>
+    <div class="row page-container" id="login-container">
+      <div id="right-side">
+        <img id="cpe-logo" src="@/assets/Logo.png" />
+      </div>
+      <div>
+        <div class="section">
           <div>
-          <h1 style="text-align:center; margin-top:90px;" class="title"> LOGIN </h1>
-          <!-- Input -->
-          <div class="box" style="display: grid; grid-template-columns: 10% 90%">
-            <img style="height:43px; margin-top:-5px;" src="@/assets/icons8-male-user-64.png">
-            <input v-model="user.email" class="input" type="text" placeholder="Email">
+            <div style="display: flex; align-items: center">
+              <a href="/" style="text-decoration: none" id="backToMain"
+                >&lt; Main Page</a
+              >
+              <img
+                style="padding-left: 10px; width: 23px"
+                src="@/assets/user/home.png"
+              />
+            </div>
+            <div id="left-side" class="column" style="">
+              <div>
+                <h1 class="title">LOGIN</h1>
+                <!-- Input -->
+                <div class="box">
+                  <img id="img-user" src="@/assets/icons8-male-user-64.png" />
+                  <input
+                    v-model="user.email"
+                    class="input"
+                    type="text"
+                    placeholder="Email"
+                    required
+                  />
+                </div>
+
+                <hr class="underline" />
+
+                <div class="box">
+                  <img id="img-lock" src="@/assets/icons8-lock-52.png" />
+                  <input
+                    v-model="user.password"
+                    class="input"
+                    type="password"
+                    placeholder="Password"
+                    required
+                  />
+                </div>
+
+                <hr class="underline" />
+
+                <p id="forgot">Forgot password ?</p>
+                <br />
+                <button @click="checkInput()" id="loginButton">LOG IN</button>
+                <br />
+
+                <p id="or-text">
+                  <span>OR</span>
+                </p>
+
+                <div>
+                  <img class="img-login" src="@/assets/Google-3.png" />
+                  <br />
+                  <img
+                    class="img-login"
+                    style="margin-top: 15px"
+                    src="@/assets/Facebook-3.png"
+                  />
+
+                  <br />
+                </div>
+
+                <div id="register-section">
+                  <span class="descript-text" style="color: #ffffff"
+                    >Don't have an account yet ?</span
+                  >
+                  <a
+                    class="descript-text"
+                    style="margin-left: 10px; color: #f28093"
+                    href="/register"
+                    >Register</a
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-
-          <hr style="margin-top:20px; margin-bottom:40px; height:2px;border:none;color:#FFFFFF;background-color:#FFFFFF;" />
-
-          <div class="box" style="display: grid; grid-template-columns: 10% 90%">
-            <img style="height:37px; margin-top:-5px;" src="@/assets/icons8-lock-52.png">
-            <input v-model="user.password" class="input" type="password" placeholder="Password">
-          </div>
-
-          <hr style="margin-top:20px; margin-bottom:20px; height:2px;border:none;color:#FFFFFF;background-color:#FFFFFF;" />
-
-          <p id="forgot">Forgot password ?</p>
-            <br>
-              <button @click="checkInput()" id="loginButton">LOG IN</button>
-            <br/>
-
-          <p style="text-align:center; margin-top:20px; margin-bottom:20px; font: normal normal 300 20px/27px Cloud; letter-spacing: 1.6px; color: #FBDAD3; opacity: 0.5;"><span>OR</span></p>
-
-          <img src="@/assets/Google-3.png">
-          <br>
-          <img style="margin-top:15px;" src="@/assets/Facebook-3.png">
-
-          <br>
-          <div style="text-align:center; margin-top:35px;">
-            <span style="color:#FFFFFF; letter-spacing: 1.6px; font-size:18px; font-family: 'CloudLight';">Don't have an account yet ?</span>
-            <a style="margin-left:10px; margin-bottom:240px; color:#F28093; letter-spacing: 1.6px; font-size:18px; font-family: 'CloudLight';" href="/register">Register</a>
-          </div>
-
         </div>
       </div>
-    </div>
-    <div id="right-side">
-      <img style="height: 537px;" src="@/assets/Logo.png">
     </div>
   </div>
 </template>
@@ -53,7 +108,7 @@ export default {
     name:"login_page",
     data() {
       return {
-        user: new User('', ''),
+        user: new User(),
         loading: false,
         message: ''
       };
@@ -96,108 +151,250 @@ export default {
             }
           );
         }
-      
-    }
+      }
     },    
 }
 </script>
 
 <style scoped>
-  #backToMain{
-    font-family: "CloudBold";
-    font-size:22px;
-    color: #FFFFFF; 
-    margin-top: 50px;
-    padding-left: 75px;
-  }
+* {
+  z-index: 1;
+}
+#register-section {
+  text-align: center;
+  margin-top: 35px;
+}
+#login-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+#img-user {
+  height: 30px;
+  margin-top: -5px;
+}
+#img-lock {
+  height: 24px;
+  margin-top: -5px;
+}
+#cpe-logo {
+  height: 407px;
+}
 
-  .box{
-    margin-top : 15px;
-    font-family: "CloudLight";
-  }
-
-  .textDivider{
-   width: 100%; 
-   text-align: center; 
-   border-bottom: 2px solid #d5d5df; 
-   line-height: 0.1em;
-   margin: 10px 0 20px; 
-  }
-
-  input[type=text] {
-  color: white;
-  font-size: 26px;
+.img-login {
+  width: 350px;
+}
+.underline {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  height: 1px;
+  opacity: 0.7;
+  border: none;
+  color: #ffffff;
+  background-color: #ffffff;
   font-family: "CloudLight";
-  }
-
-  input[type=password] {
-  color: white;
-  font-size: 26px;
+}
+.descript-text {
+  letter-spacing: 1.6px;
+  font-size: 1.5em;
   font-family: "CloudLight";
-  }
+}
+.two-background {
+  background: linear-gradient(90deg, #302e71 50%, #282567 50%);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+#or-text {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: "CloudLight";
+  font-size: 2em;
+  letter-spacing: 1.6px;
+  color: #fbdad3;
+  opacity: 0.5;
+}
+#login-page {
+  width: 1440px;
+  max-width: 1440px;
+}
+#backToMain {
+  font-family: "CloudBold";
+  font-size: 2em;
+  color: #ffffff;
+}
 
-  #loginButton{
-    color: #FFFFFF;
-    background-color: #F28093;
-    border: none;
-    width: 100%;
-    padding-top: 14px;
-    padding-bottom: 14px;
-    font-size: 30px;
-    letter-spacing: 3px;
-    font-family: "CloudBold";
-  }
+.box {
+  margin-top: 15px;
+  font-family: "CloudLight";
+  display: flex;
+  align-items: center;
+}
 
-  ::placeholder {
+.textDivider {
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid #d5d5df;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+input[type="text"] {
+  color: white;
+  font-size: 2em;
+  font-family: "CloudLight";
+}
+
+input[type="password"] {
+  color: white;
+  font-size: 2em;
+  font-family: "CloudLight";
+}
+
+#loginButton {
+  color: #ffffff;
+  background-color: #f28093;
+  border: none;
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: 2.5em;
+  letter-spacing: 3px;
+  font-family: "CloudBold";
+}
+
+input[type="text"]:focus {
+  border: none;
+  background-color: none;
+  outline: 0;
+}
+
+input[type="password"]:focus {
+  border: none;
+  background-color: none;
+  outline: 0;
+}
+
+::placeholder {
   color: #bbbde4;
-  font-size: 26px;
+  font-size: 0.8em;
   font-family: "CloudLight";
-  }
-  
-  .input{
-    margin-left: 10px;
-    padding-left:10px ;
-    background: transparent;
-    border: none;
-  }
-  body, html {
+  opacity: 0.6;
+}
+
+.input {
+  margin-left: 10px;
+  padding-left: 10px;
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+body,
+html {
   padding: 0;
   margin: 0;
-  }
-    
-  #forgot{
-    text-align:right; 
-    font-size:18px;
-    font-family: "CloudLight";
-    color: white;
-    margin-bottom: 0px;
-    opacity: 0.7;
-  }
-  .title{
-    font-size: 112px;
-    font-family: "CloudBold";
-    letter-spacing: 11.6px;
-    color: #FFFFFF;
-    opacity: 1;
-    margin-bottom: 0px;
-    margin-top:0px;
-    z-index: 2;
-  }
+}
 
-  #left-side{
-    
-    background-color: #282667;
+#forgot {
+  text-align: right;
+  font-size: 2em;
+  font-family: "CloudLight";
+  color: white;
+  margin-bottom: 10px;
+  margin-top: 0;
+  opacity: 0.7;
+}
+
+.title {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 10px;
+  font-size: 8em;
+  font-family: "CloudBold";
+  letter-spacing: 11.6px;
+  color: #ffffff;
+  opacity: 1;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  z-index: 2;
+}
+
+#left-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#right-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .two-background {
+    background: #282567;
+  }
+  #login-container {
+    display: block;
+  }
+  #right-side {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .title {
+    font-size: 6em;
+  }
+  .underline {
+    margin-bottom: 16px;
+  }
+  #forgot {
+    font-size: 1.75em;
+    margin-bottom: 5px;
+  }
+  #backToMain,
+  .descript-text,
+  #or-text {
+    font-size: 1.5em;
+  }
+  #register-section {
+    margin-top: 25px;
+  }
+  .title {
+    font-size: 6em;
+  }
+  .two-background {
     display: flex;
     justify-content: center;
-    align-items: top;
+    align-items: normal;
+    padding-top: 25px;
+    padding-top:25px;
+    background: #282567;
+    height: 100vh;
   }
-
-  #right-side{
-    background-color: #312e71;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+@media screen and (max-width: 375px) {
+  .img-login {
+    width: 300px;
   }
-
-
+  #img-user {
+    height: 25px;
+    margin-top: -1px;
+  }
+  #img-lock {
+    height: 19px;
+    margin-top: 0px;
+  }
+}
+@media screen and (max-width: 360px) {
+  .img-login {
+    width: 290px;
+  }
+}
 </style>

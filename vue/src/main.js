@@ -4,6 +4,10 @@ import router from "./router";
 import store from "./store";
 import VeeValidate from 'vee-validate';
 import Vuex from 'vuex';
+import VueParticles from "vue-particles"
+
+Vue.config.productionTip = false;
+Vue.use(VueParticles)
 
 
 Vue.config.productionTip = false;
