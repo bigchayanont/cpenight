@@ -84,7 +84,7 @@ export default {
     return {
       googleAuth: {
         params: {
-          client_id: "691961416858-9n4gn62s613l3v6ubp3g562e5b6brp1b.apps.googleusercontent.com",
+          client_id: "",
         },
         renderParams: {
             width: 250,
@@ -93,7 +93,7 @@ export default {
         }
       },
       facebookAuth: {
-        appID : "854867715338418",
+        appID : "",
         isConnected: false,
         name: '',
         email: '',
