@@ -1,5 +1,8 @@
 module.exports = {
   devServer: {
-    port: 8081
+    open: process.platform === 'darwin',
+    port: 8081,
+    https: true,
+    hotOnly: false,
   }
 }
