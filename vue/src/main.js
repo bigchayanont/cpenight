@@ -11,6 +11,7 @@ Vue.use(VueParticles)
 
 
 Vue.config.productionTip = false;
+export const bus = new Vue();
 
 Vue.use(VeeValidate);
 Vue.use(Vuex);
