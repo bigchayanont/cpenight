@@ -32,7 +32,7 @@
             </div>
             <div id="left-side" class="column" style="">
               <div>
-                <h1 class="title">LOGIN</h1>
+                <h1 style="cursor: default;" class="title">LOGIN</h1>
                 <!-- Input -->
                 <div class="box">
                   <img id="img-user" src="@/assets/icons8-male-user-64.png" />
@@ -50,6 +50,7 @@
                 <div class="box">
                   <img id="img-lock" src="@/assets/icons8-lock-52.png" />
                   <input
+                  style="margin-left:16px;"
                     v-model="user.password"
                     class="input"
                     type="password"
@@ -60,21 +61,21 @@
 
                 <hr class="underline" />
 
-                <p id="forgot">Forgot password ?</p>
+                <p @click="forgetCheck()" id="forgot" style="cursor: pointer;">Forgot password ?</p>
                 <br />
-                <button @click="checkInput()" id="loginButton">LOG IN</button>
+                <button @click="checkInput()" id="loginButton" style="cursor: pointer;">LOG IN</button>
                 <br />
 
                 <p id="or-text">
-                  <span>OR</span>
+                  <span style="cursor: default;">OR</span>
                 </p>
 
                 <div>
-                  <img class="img-login" src="@/assets/Google-3.png" />
+                  <img style="cursor: pointer;" class="img-login" src="@/assets/Google-3.png" />
                   <br />
                   <img
                     class="img-login"
-                    style="margin-top: 15px"
+                    style="margin-top: 15px; cursor: pointer;"
                     src="@/assets/Facebook-3.png"
                   />
 
@@ -82,7 +83,7 @@
                 </div>
 
                 <div id="register-section">
-                  <span class="descript-text" style="color: #ffffff"
+                  <span class="descript-text" style="color: #ffffff; cursor: default;"
                     >Don't have an account yet ?</span
                   >
                   <a
@@ -125,6 +126,9 @@ export default {
 
     },
     methods: {
+      forgetCheck(){
+        alert('กดทำเหี้ยไรไอสัส ยังไม่ได้ทำเย็ดแม่!');
+      },
       checkInput(){
       this.loading = true;
       // this.$validator.validateAll().then(isValid => {
