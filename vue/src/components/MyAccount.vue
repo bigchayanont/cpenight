@@ -1,666 +1,626 @@
 <template>
-  <div id="myaccount">
-    <h1 class="title">MY ACCOUNT</h1>
+  <div class="section">
+    <div class="page-container" id="myaccount">
+      <h1 class="title" style="cursor: default;">MY ACCOUNT</h1>
 
-    <!-- Bar -->
-    <div
-      style="
-        margin-top: 30px;
-        width: 100%;
-        display: grid;
-        grid-template-columns: 15% 20% 65%;
-      "
-    >
-      <h2 style="padding-left: 40px" class="bartext">Profile</h2>
-      <h2 @click="OnclickChange()" class="bartext">Change Password</h2>
-    </div>
-    <!-- Bar -->
-
-    <!-- Bar -->
-    <div style="margin-top: 2px">
-      <hr style="display: inline-block; width: 11%" class="line_select" />
-      <hr style="display: inline-block; width: 20%" class="line" />
-      <hr style="display: inline-block; width: 67%" class="line" />
-    </div>
-    <!-- Bar -->
-
-    <!-- Profile -->
-    <div
-      style="
-        margin-top: 63px;
-        width: 100%;
-        display: grid;
-        grid-template-columns: 20% 80%;
-      "
-    >
-      <!-- Profile Pic-->
-      <div style="position: relative; left: 0; top: 0">
-        <img
-          class="profilepic"
-          style="
-            position: relative;
-            top: 0;
-            left: 0;
-            margin-top: 1px;
-            margin-left: 1px;
-            width: 229px;
-          "
-          src="@/assets/user/profile.jpg"
-        />
-        <img
-          class="profilepic"
-          style="position: absolute; top: 0px; left: 0px; width: 232px"
-          src="@/assets/user/maskfix.png"
-        />
+      <!-- Bar -->
+      <div style="margin-top: 30px; width: 100%; display: flex">
+        <h2 style="cursor: default;" id="first-bar" class="bartext">Profile</h2>
+        <h2 @click="OnclickChange()" style="padding-left: 40px; cursor: pointer;" class="bartext">
+          Change Password
+        </h2>
       </div>
-      <!-- Profile Pic-->
+      <!-- Bar -->
 
-      <!-- Input -->
-      <div style="margin-left: 30px">
-        <!-- General -->
-        <div class="box" style="padding: 25px">
-          <h1 class="inputHead">GENERAL</h1>
-          <div style="margin-top: 20px; margin-left: 25px">
-            <!-- Input Container -->
-            <div
-              style="width: 100%; display: grid; grid-template-columns: 50% 50%"
-            >
-              <div
-                style="
-                  width: 100%;
-                  align-items: center;
-                  justify-content: center;
-                  display: grid;
-                  grid-template-columns: 30% 70%;
-                "
-              >
-                <h3 class="inputText">FIRST NAME</h3>
-                <input
-                  v-if="editSelect == false"
-                  style="margin-left: 20px; width: 85%"
-                  class="input"
-                  type="text"
-                  v-model="profile.firstName"
-                  disabled
-                />
-                <input
-                  v-else
-                  style="
-                    border-bottom: 2px solid #312f71;
-                    margin-left: 20px;
-                    width: 85%;
-                  "
-                  class="input"
-                  type="text"
-                  ref="firstName"
-                  :value="profile.firstName"
-                />
-              </div>
-              <div
-                style="
-                  margin-left: 10px;
-                  width: 100%;
-                  align-items: center;
-                  justify-content: center;
-                  display: grid;
-                  grid-template-columns: 30% 70%;
-                "
-              >
-                <h3 class="inputText">BIRTH DATE</h3>
-                <input
-                  v-if="editSelect == false"
-                  style="margin-left: 20px; width: 85%"
-                  class="input"
-                  type="text"
-                  v-model="connectDate"
-                  disabled
-                />
-                <div v-else style="margin-left: 20px">
-                  <v-select
-                    :options="getDayList()"
-                    :clearable="false"
-                    :searchable="false"
-                    class="style-chooser"
-                    style="display: inline-block; width: 26%"
-                    ref="birthday_day"
-                    v-model="day"
-                    placeholder="Day"
-                  ></v-select>
-                  <v-select
-                    :options="months"
-                    :clearable="false"
-                    :searchable="false"
-                    class="style-chooser"
-                    style="margin-left: 10px; display: inline-block; width: 33%"
-                    :reduce="(abbreMonth) => abbreMonth.fullMonth"
-                    ref="birthday_month"
-                    v-model="month"
-                    label="abbreMonth"
-                    placeholder="Month"
-                  ></v-select>
-                  <v-select
-                    :options="getYearList()"
-                    :clearable="false"
-                    :searchable="false"
-                    class="style-chooser"
-                    style="margin-left: 10px; display: inline-block; width: 34%"
-                    ref="birthday_year"
-                    v-model="year"
-                    placeholder="Year"
-                  ></v-select>
-                </div>
-              </div>
-            </div>
-            <!-- Input Container -->
-
-            <!-- Input Container -->
-            <div
-              style="
-                margin-top: 25px;
-                width: 100%;
-                display: grid;
-                grid-template-columns: 50% 50%;
-              "
-            >
-              <div
-                style="
-                  width: 100%;
-                  align-items: center;
-                  justify-content: center;
-                  display: grid;
-                  grid-template-columns: 30% 70%;
-                "
-              >
-                <h3 class="inputText">LAST NAME</h3>
-                <input
-                  v-if="editSelect == false"
-                  style="margin-left: 20px; width: 85%"
-                  class="input"
-                  type="text"
-                  v-model="profile.lastName"
-                  disabled
-                />
-                <input
-                  v-else
-                  style="
-                    border-bottom: 2px solid #312f71;
-                    margin-left: 20px;
-                    width: 85%;
-                  "
-                  class="input"
-                  type="text"
-                  ref="lastName"
-                  :value="profile.lastName"
-                />
-              </div>
-              <div
-                style="
-                  margin-left: 10px;
-                  width: 100%;
-                  align-items: center;
-                  justify-content: center;
-                  display: grid;
-                  grid-template-columns: 30% 70%;
-                "
-              >
-                <h3 class="inputText">CPE</h3>
-                <input
-                  v-if="editSelect == false"
-                  style="margin-left: 20px; width: 85%"
-                  class="input"
-                  type="text"
-                  v-model="profile.classOf"
-                  disabled
-                />
-                <v-select
-                  v-else
-                  :clearable="false"
-                  :options="classList()"
-                  :searchable="false"
-                  class="style-chooser"
-                  style="margin-left: 20px; width: 40%"
-                  ref="classOf"
-                  v-model="classOf"
-                  placeholder="CPE"
-                ></v-select>
-              </div>
-            </div>
-            <!-- Input Container -->
-
-            <!-- Input Container -->
-            <div
-              style="
-                margin-top: 25px;
-                margin-bottom: 30px;
-                width: 100%;
-                display: grid;
-                grid-template-columns: 50% 50%;
-              "
-            >
-              <div
-                style="
-                  width: 100%;
-                  align-items: center;
-                  justify-content: center;
-                  display: grid;
-                  grid-template-columns: 30% 70%;
-                "
-              >
-                <h3 class="inputText">NICKNAME</h3>
-                <input
-                  v-if="editSelect == false"
-                  style="margin-left: 20px; width: 85%"
-                  class="input"
-                  type="text"
-                  v-model="profile.nickName"
-                  disabled
-                />
-                <input
-                  v-else
-                  style="
-                    border-bottom: 2px solid #312f71;
-                    margin-left: 20px;
-                    width: 85%;
-                  "
-                  class="input"
-                  type="text"
-                  ref="nickName"
-                  :value="profile.nickName"
-                />
-              </div>
-            </div>
-            <!-- Input Container -->
-          </div>
-        </div>
-
-        <!-- Second Section -->
-        <div
-          style="
-            margin-top: 25px;
-            margin-bottom: 30px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 50% 50%;
-          "
-        >
-          <div class="box" style="padding: 25px; margin-right: 12px">
-            <h1 class="inputHead">CONTACT</h1>
-            <div style="margin-top: 20px; margin-left: 25px">
-              <!-- Input Container -->
-              <div
-                style="
-                  margin-top: 25px;
-                  width: 100%;
-                  display: grid;
-                  grid-template-columns: 100%;
-                "
-              >
-                <div
-                  style="
-                    width: 100%;
-                    align-items: center;
-                    justify-content: center;
-                    display: grid;
-                    grid-template-columns: 40% 60%;
-                  "
-                >
-                  <h3 class="inputText">Phone</h3>
-                  <input
-                    v-if="editSelect == false"
-                    style="margin-left: 30px; width: 85%"
-                    class="input"
-                    type="text"
-                    v-model="profile.phoneNumber"
-                    disabled
-                  />
-                  <input
-                    v-else
-                    style="
-                      border-bottom: 2px solid #312f71;
-                      margin-left: 30px;
-                      width: 85%;
-                    "
-                    class="input"
-                    type="number"
-                    ref="phoneNumber"
-                    @input="updateValue"
-                    :value="phoneNumber"
-                  />
-                </div>
-              </div>
-              <!-- Input Container -->
-
-              <!-- Input Container -->
-              <div
-                style="
-                  margin-top: 25px;
-                  width: 100%;
-                  display: grid;
-                  grid-template-columns: 100%;
-                "
-              >
-                <div
-                  style="
-                    width: 100%;
-                    align-items: center;
-                    justify-content: center;
-                    display: grid;
-                    grid-template-columns: 40% 60%;
-                  "
-                >
-                  <h3 class="inputText">LINE</h3>
-                  <input
-                    v-if="editSelect == false"
-                    style="margin-left: 30px; width: 85%"
-                    class="input"
-                    type="text"
-                    v-model="profile.line"
-                    disabled
-                  />
-                  <input
-                    v-else
-                    style="
-                      border-bottom: 2px solid #312f71;
-                      margin-left: 30px;
-                      width: 85%;
-                    "
-                    class="input"
-                    type="text"
-                    ref="line"
-                    :value="profile.line"
-                  />
-                </div>
-              </div>
-              <!-- Input Container -->
-
-              <!-- Input Container -->
-              <div
-                style="
-                  margin-top: 25px;
-                  width: 100%;
-                  display: grid;
-                  grid-template-columns: 100%;
-                "
-              >
-                <div
-                  style="
-                    width: 100%;
-                    align-items: center;
-                    justify-content: center;
-                    display: grid;
-                    grid-template-columns: 40% 60%;
-                  "
-                >
-                  <h3 class="inputText">Facebook Account</h3>
-                  <input
-                    v-if="editSelect == false"
-                    style="margin-left: 30px; width: 85%"
-                    class="input"
-                    type="text"
-                    v-model="profile.facebookAccount"
-                    disabled
-                  />
-                  <input
-                    v-else
-                    style="
-                      border-bottom: 2px solid #312f71;
-                      margin-left: 30px;
-                      width: 85%;
-                    "
-                    class="input"
-                    type="text"
-                    ref="facebookAccount"
-                    :value="profile.facebookAccount"
-                  />
-                </div>
-              </div>
-              <!-- Input Container -->
-            </div>
-          </div>
-
-          <div class="box" style="padding: 25px; margin-left: 12px">
-            <h1 class="inputHead">WORK</h1>
-            <div style="margin-top: 20px; margin-left: 25px">
-              <!-- Input Container -->
-              <div
-                style="
-                  margin-top: 25px;
-                  width: 100%;
-                  display: grid;
-                  grid-template-columns: 100%;
-                "
-              >
-                <div
-                  style="
-                    width: 100%;
-                    align-items: center;
-                    justify-content: center;
-                    display: grid;
-                    grid-template-columns: 40% 60%;
-                  "
-                >
-                  <h3 class="inputText">ORGANIZATION</h3>
-                  <input
-                    v-if="editSelect == false"
-                    style="margin-left: 30px; width: 85%"
-                    class="input"
-                    type="text"
-                    v-model="profile.organ"
-                    disabled
-                  />
-                  <input
-                    v-else
-                    style="
-                      border-bottom: 2px solid #312f71;
-                      margin-left: 30px;
-                      width: 85%;
-                    "
-                    class="input"
-                    type="text"
-                    ref="organ"
-                    :value="profile.organ"
-                  />
-                </div>
-              </div>
-              <!-- Input Container -->
-
-              <!-- Input Container -->
-              <div
-                style="
-                  margin-top: 25px;
-                  width: 100%;
-                  display: grid;
-                  grid-template-columns: 100%;
-                "
-              >
-                <div
-                  style="
-                    width: 100%;
-                    align-items: center;
-                    justify-content: center;
-                    display: grid;
-                    grid-template-columns: 40% 60%;
-                  "
-                >
-                  <h3 class="inputText">ROLE</h3>
-                  <input
-                    v-if="editSelect == false"
-                    style="margin-left: 30px; width: 85%"
-                    class="input"
-                    type="text"
-                    v-model="profile.role"
-                    disabled
-                  />
-                  <input
-                    v-else
-                    style="
-                      border-bottom: 2px solid #312f71;
-                      margin-left: 30px;
-                      width: 85%;
-                    "
-                    class="input"
-                    type="text"
-                    ref="role"
-                    :value="profile.role"
-                  />
-                </div>
-              </div>
-              <!-- Input Container -->
-
-              <!-- Input Container -->
-              <div
-                style="
-                  margin-top: 25px;
-                  width: 100%;
-                  display: grid;
-                  grid-template-columns: 100%;
-                "
-              >
-                <div
-                  style="
-                    width: 100%;
-                    align-items: center;
-                    justify-content: center;
-                    display: grid;
-                    grid-template-columns: 40% 60%;
-                  "
-                >
-                  <h3 class="inputText">FIELD</h3>
-                  <input
-                    v-if="editSelect == false"
-                    style="margin-left: 30px; width: 85%"
-                    class="input"
-                    type="text"
-                    v-model="profile.field"
-                    disabled
-                  />
-                  <input
-                    v-else
-                    style="
-                      border-bottom: 2px solid #312f71;
-                      margin-left: 30px;
-                      width: 85%;
-                    "
-                    class="input"
-                    type="text"
-                    ref="field"
-                    :value="profile.field"
-                  />
-                </div>
-              </div>
-              <!-- Input Container -->
-            </div>
-          </div>
-        </div>
-        <!-- Second Section -->
-
-        <!-- Button -->
-        <div id="button">
-          <!-- Edit -->
-          <div v-show="!editSelect">
-            <button @click="editProfileSelected()" class="white_button">
-              EDIT PROFILE
-            </button>
-          </div>
-
-          <!-- Save/Cancle -->
-          <div v-show="editSelect">
-            <button
-              @click="saveProfile()"
-              style="margin-right: 30px"
-              class="pink_button"
-            >
-              SAVE CHANGE
-            </button>
-            <button
-              @click="cancel()"
-              class="white_button"
-            >
-              CANCEL
-            </button>
-          </div>
-        </div>
-        <!-- Button -->
+      <!-- Bar -->
+      <div style="margin-top: 2px; display: flex; align-items: center">
+        <hr id="select-profile" class="line_select" />
+        <hr id="select-password" class="line" />
+        <hr id="select-none" class="line" />
       </div>
-      <!-- Input -->
+      <!-- Bar -->
+
+      <!-- Profile -->
+      <div id="profile-section">
+        <!-- Profile Pic-->
+        <div id="picture-container">
+          <img class="profilepic" src="@/assets/user/profile.jpg" />
+        </div>
+        <!-- Profile Pic-->
+
+        <!-- Input -->
+        <div id="input-section">
+          <!-- General -->
+          <div class="box" style="padding: 15px">
+            <h1 style="cursor: default;" class="inputHead">GENERAL</h1>
+            <div class="input-container">
+              <div>
+                <div class="general-container">
+                  <div>
+                    <div
+                      style="
+                        width: 100%;
+                        align-items: center;
+                        justify-content: center;
+                        display: grid;
+                        grid-template-columns: 40% 60%;
+                      "
+                    >
+                      <h3 style="cursor: default;" class="inputText">FIRST NAME</h3>
+                      <input
+                        v-if="editSelect == false"
+                        style="width: 85%"
+                        class="input input-left"
+                        type="text"
+                        v-model="profile.firstName"
+                        disabled
+                      />
+                      <input
+                        v-else
+                        style="border-bottom: 1px solid #312f71; width: 75%"
+                        class="input input-left"
+                        type="text"
+                        ref="firstName"
+                        :value="profile.firstName"
+                      />
+                    </div>
+                    <div
+                      style="
+                        width: 100%;
+                        align-items: center;
+                        justify-content: center;
+                        display: grid;
+                        grid-template-columns: 40% 60%;
+                        margin-top: 15px;
+                      "
+                    >
+                      <h3 style="cursor: default;" class="inputText">LAST NAME</h3>
+                      <input
+                        v-if="editSelect == false"
+                        style="width: 85%"
+                        class="input input-left"
+                        type="text"
+                        v-model="profile.lastName"
+                        disabled
+                      />
+                      <input
+                        v-else
+                        style="
+                          border-bottom: 1px solid #312f71;
+
+                          width: 75%;
+                        "
+                        class="input input-left"
+                        type="text"
+                        ref="lastName"
+                        :value="profile.lastName"
+                      />
+                    </div>
+                    <div
+                      style="
+                        width: 100%;
+                        align-items: center;
+                        justify-content: center;
+                        display: grid;
+                        grid-template-columns: 40% 60%;
+                        margin-top: 15px;
+                      "
+                    >
+                      <h3 style="cursor: default;" class="inputText">NICKNAME</h3>
+                      <input
+                        v-if="editSelect == false"
+                        style="width: 85%"
+                        class="input input-left"
+                        type="text"
+                        v-model="profile.nickName"
+                        disabled
+                      />
+                      <input
+                        v-else
+                        style="
+                          border-bottom: 1px solid #312f71;
+
+                          width: 75%;
+                        "
+                        class="input input-left"
+                        type="text"
+                        ref="nickName"
+                        :value="profile.nickName"
+                      />
+                    </div>
+                  </div>
+                  <div id="general-second-section">
+                    <div
+                      style="
+                        width: 100%;
+                        align-items: center;
+                        justify-content: center;
+                        display: grid;
+                        grid-template-columns: 40% 60%;
+                      "
+                    >
+                      <h3 style="cursor: default;" class="inputText">BIRTH DATE</h3>
+                      <input
+                        v-if="editSelect == false"
+                        style="width: 85%"
+                        class="input input-left"
+                        type="text"
+                        v-model="connectDate"
+                        disabled
+                      />
+                      <div
+                        v-else
+                        style="display: flex; justify-content: space-between"
+                        class="input-left-date"
+                      >
+                        <div class="select-dropdown">
+                          <select v-model="day">
+                            <option selected disabled>DAY</option>
+                            <option v-for="(day,index) in days" v-bind:key="index">
+                              {{ day }}
+                            </option>
+                          </select>
+                        </div>
+                        <div id="month-select">
+                          <div class="select-dropdown">
+                            <select v-model="month">
+                              <option selected disabled>MON</option>
+                              <option
+                                v-for="(month,index) in months"
+                                v-bind:key="index"
+                              >
+                                {{ month }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div id="year-select">
+                          <div class="select-dropdown">
+                            <select v-model="year">
+                              <option selected disabled>YEAR</option>
+                              <option v-for="(year,index) in years" v-bind:key="index">
+                                {{ year }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        width: 100%;
+                        align-items: center;
+                        justify-content: center;
+                        display: grid;
+                        grid-template-columns: 40% 60%;
+                        margin-top: 15px;
+                      "
+                    >
+                      <h3 style="cursor: default;" class="inputText">CPE</h3>
+                      <input
+                        v-if="editSelect == false"
+                        style="width: 85%"
+                        class="input input-left"
+                        type="text"
+                        v-model="profile.classOf"
+                        disabled
+                      />
+                      <div v-else id="cpe-select" class="input-left">
+                        <div class="select-dropdown">
+                          <select v-model="classOf">
+                            <option selected disabled>CPE {{ classOf }}</option>
+                            <option
+                              v-for="(classOf,index) in classLists"
+                              v-bind:key="index"
+                            >
+                              {{ classOf }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Second Section -->
+          <div
+            class="general-container"
+            style="margin-top: 20px; margin-bottom: 30px; width: 100%"
+          >
+            <div class="box" id="contact-container">
+              <h1 style="cursor: default;" class="inputHead">CONTACT</h1>
+              <div class="input-container">
+                <!-- Input Container -->
+                <div
+                  style="
+                    width: 100%;
+                    display: grid;
+                    grid-template-columns: 100%;
+                  "
+                >
+                  <div
+                    style="
+                      width: 100%;
+                      align-items: center;
+                      justify-content: center;
+                      display: grid;
+                      grid-template-columns: 40% 60%;
+                    "
+                  >
+                    <h3 style="cursor: default;" class="inputText">PHONE</h3>
+                    <input
+                      v-if="editSelect == false"
+                      style="margin-left: 30px; width: 85%"
+                      class="input"
+                      type="text"
+                      v-model="profile.phoneNumber"
+                      onkeydown="return event.keyCode !== 69 && event.keyCode !== 189"
+                      disabled
+                    />
+                    <input
+                      v-else
+                      style="
+                        border-bottom: 1px solid #312f71;
+                        margin-left: 30px;
+                        width: 75%;
+                      "
+                      class="input"
+                      type="number"
+                      ref="phoneNumber"
+                      @input="updateValue"
+                      onkeydown="return event.keyCode !== 69 && event.keyCode !== 189"
+                      :value="phoneNumber"
+                    />
+                  </div>
+                </div>
+                <!-- Input Container -->
+
+                <!-- Input Container -->
+                <div
+                  style="
+                    margin-top: 15px;
+                    width: 100%;
+                    display: grid;
+                    grid-template-columns: 100%;
+                  "
+                >
+                  <div
+                    style="
+                      width: 100%;
+                      align-items: center;
+                      justify-content: center;
+                      display: grid;
+                      grid-template-columns: 40% 60%;
+                    "
+                  >
+                    <h3 style="cursor: default;" class="inputText">LINE</h3>
+                    <input
+                      v-if="editSelect == false"
+                      style="margin-left: 30px; width: 85%"
+                      class="input"
+                      type="text"
+                      placeholder="-"
+                      v-model="profile.line"
+                      disabled
+                    />
+                    <input
+                      v-else
+                      style="
+                        border-bottom: 1px solid #312f71;
+                        margin-left: 30px;
+                        width: 75%;
+                      "
+                      class="input"
+                      ref="line"
+                      type="text"
+                      :value="profile.line"
+                    />
+                  </div>
+                </div>
+                <!-- Input Container -->
+
+                <!-- Input Container -->
+                <div
+                  style="
+                    margin-top: 15px;
+                    width: 100%;
+                    display: grid;
+                    grid-template-columns: 100%;
+                  "
+                >
+                  <div
+                    style="
+                      width: 100%;
+                      align-items: center;
+                      justify-content: center;
+                      display: grid;
+                      grid-template-columns: 40% 60%;
+                    "
+                  >
+                    <h3 style="cursor: default;" class="inputText">FACEBOOK</h3>
+                    <input
+                      v-if="editSelect == false"
+                      style="margin-left: 30px; width: 85%"
+                      class="input"
+                      type="text"
+                      placeholder="-"
+                      v-model="profile.facebookAccount"
+                      disabled
+                    />
+                    <input
+                      v-else
+                      style="
+                        border-bottom: 1px solid #312f71;
+                        margin-left: 30px;
+                        width: 75%;
+                      "
+                      class="input"
+                      ref="facebookAccount"
+                      type="text"
+                      :value="profile.facebookAccount"
+                    />
+                  </div>
+                </div>
+                <!-- Input Container -->
+              </div>
+            </div>
+
+            <div class="box" id="work-container">
+              <h1 style="cursor: default;" class="inputHead">WORK</h1>
+              <div class="input-container">
+                <!-- Input Container -->
+                <div
+                  style="
+                    width: 100%;
+                    display: grid;
+                    grid-template-columns: 100%;
+                  "
+                >
+                  <div
+                    style="
+                      width: 100%;
+                      align-items: center;
+                      justify-content: center;
+                      display: grid;
+                      grid-template-columns: 40% 60%;
+                    "
+                  >
+                    <h3 style="cursor: default;" class="inputText">ORGANIZATION</h3>
+                    <input
+                      v-if="editSelect == false"
+                      style="margin-left: 30px; width: 85%"
+                      class="input"
+                      type="text"
+                      placeholder="-"
+                      v-model="profile.organ"
+                      disabled
+                    />
+                    <input
+                      v-else
+                      style="
+                        border-bottom: 1px solid #312f71;
+                        margin-left: 30px;
+                        width: 75%;
+                      "
+                      class="input"
+                      ref="organ"
+                      type="text"
+                      :value="profile.organ"
+                    />
+                  </div>
+                </div>
+                <!-- Input Container -->
+
+                <!-- Input Container -->
+                <div
+                  style="
+                    margin-top: 15px;
+                    width: 100%;
+                    display: grid;
+                    grid-template-columns: 100%;
+                  "
+                >
+                  <div
+                    style="
+                      width: 100%;
+                      align-items: center;
+                      justify-content: center;
+                      display: grid;
+                      grid-template-columns: 40% 60%;
+                    "
+                  >
+                    <h3 style="cursor: default;" class="inputText">ROLE</h3>
+                    <input
+                      v-if="editSelect == false"
+                      style="margin-left: 30px; width: 85%"
+                      class="input"
+                      type="text"
+                      placeholder="-"
+                      v-model="profile.role"
+                      disabled
+                    />
+                    <input
+                      v-else
+                      style="
+                        border-bottom: 1px solid #312f71;
+                        margin-left: 30px;
+                        width: 75%;
+                      "
+                      class="input"
+                      ref="role"
+                      type="text"
+                      :value="profile.role"
+                    />
+                  </div>
+                </div>
+                <!-- Input Container -->
+
+                <!-- Input Container -->
+                <div
+                  style="
+                    margin-top: 15px;
+                    width: 100%;
+                    display: grid;
+                    grid-template-columns: 100%;
+                  "
+                >
+                  <div
+                    style="
+                      width: 100%;
+                      align-items: center;
+                      justify-content: center;
+                      display: grid;
+                      grid-template-columns: 40% 60%;
+                    "
+                  >
+                    <h3 style="cursor: default;" class="inputText">FIELD</h3>
+                    <input
+                      v-if="editSelect == false"
+                      style="margin-left: 30px; width: 85%"
+                      class="input"
+                      type="text"
+                      placeholder="-"
+                      v-model="profile.field"
+                      disabled
+                    />
+                    <input
+                      v-else
+                      style="
+                        border-bottom: 1px solid #312f71;
+                        margin-left: 30px;
+                        width: 75%;
+                      "
+                      class="input"
+                      ref="field"
+                      type="text"
+                      :value="profile.field"
+                    />
+                  </div>
+                </div>
+                <!-- Input Container -->
+              </div>
+            </div>
+          </div>
+          <!-- Second Section -->
+
+          <!-- Button -->
+          <div id="button">
+            <!-- Edit -->
+            <div v-show="!editSelect">
+              <button style="cursor: pointer;" @click="editSelect = true" class="white_button">
+                EDIT PROFILE
+              </button>
+            </div>
+
+            <!-- Save/Cancle -->
+            <div v-show="editSelect" style="display: flex;">
+              <button
+                @click="saveProfile()"
+                style="margin-right: 30px; cursor: pointer;"
+                class="pink_button"
+              >
+                SAVE CHANGE
+              </button>
+              <button
+                @click="
+                  cancel();
+                  editSelect = false;
+                "
+                style="cursor: pointer;"
+                class="white_button"
+              >
+                CANCEL
+              </button>
+            </div>
+          </div>
+          <!-- Button -->
+        </div>
+        <!-- Input -->
+      </div>
+      <!-- Profile -->
     </div>
-    <!-- Profile -->
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-import vSelect from "vue-select";
-import UserService from '../services/user.service';
 import User from '../models/user';
 import decode from "jwt-decode";
-import "vue-select/dist/vue-select.css";
-
-Vue.component("v-select", vSelect);
+import UserService from '../services/user.service';
+import {bus} from '../main'
 
 export default {
-  created() {
-      let userData = decode(localStorage.getItem("user"));
-      UserService.getUserData(userData)
-      .then(
-      response => {
-      if(response) {
-        this.profile = response;
-        this.connectDate = this.profile.birthday_day + " " + this.profile.birthday_month + " " + this.profile.birthday_year;
-        }
-      })
-      .catch(
-        () => {
-          this.$router.push('/login');
-        }
-      )
-    },
   data() {
     return {
       img: require("@/assets/user/profile.jpg"),
       selected_pro: true,
       selected_change: false,
       editSelect: false,
-      day: "",
-      month: "",
-      year: "",
       classOf: "",
       phoneNumber: "",
       connectDate: "",
+      day: "",
+      month: "",
+      year: "",
       profile: new User(),
-      months: [
-        { fullMonth: "January", abbreMonth: "JAN" },
-        { fullMonth: "February", abbreMonth: "FEB" },
-        { fullMonth: "March", abbreMonth: "MAR" },
-        { fullMonth: "April", abbreMonth: "APR" },
-        { fullMonth: "May", abbreMonth: "MAY" },
-        { fullMonth: "June", abbreMonth: "JUN" },
-        { fullMonth: "July", abbreMonth: "JUL" },
-        { fullMonth: "August", abbreMonth: "AUG" },
-        { fullMonth: "September", abbreMonth: "SEP" },
-        { fullMonth: "October", abbreMonth: "OCT" },
-        { fullMonth: "November", abbreMonth: "NOV" },
-        { fullMonth: "December", abbreMonth: "DEC" },
-      ],
-    };
+      display:new User(),
+      days: [],
+      months: ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"],
+      years: [],
+      classLists: ["อาจารย์", "บุคลากร"],
+    }
+  },
+  created() {
+    let userData = decode(localStorage.getItem("user"));
+    UserService.getUserData(userData)
+    .then(
+    response => {
+    if(response) {
+      this.profile = response;
+      this.day = this.profile.birthday_day;
+      this.month = this.profile.birthday_month;
+      this.year = this.profile.birthday_year;
+      this.classOf = this.profile.classOf;
+      this.phoneNumber = this.profile.phoneNumber;
+      this.connectDate = this.profile.birthday_day + " " + this.profile.birthday_month + " " + this.profile.birthday_year;
+
+      this.display.email = this.profile.email;
+      this.display.firstName = this.profile.firstName;
+      this.display.lastName = this.profile.lastName; 
+      bus.$emit('display',this.display);
+      }
+    })
+    .catch(
+      () => {
+        this.$router.push('/login');
+      }
+    )
+    for (var i = 1; i <= 31; i++) this.days.push(i);
+    for (var j = 1920; j <= 2020; j++) this.years.push(j);
+    for (var k = 1; k <= 34; k++) this.classLists.push("CPE " + k);
   },
   computed: {
-    loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
-    },
     selectedProfile() {
       let selected = "line_select";
       let deselected = "line";
-      if (this.selected_pro === true)
+      if (this.selected_pro === true) {
         return selected;
+      }
       return deselected;
     },
     selectedChangedPassword() {
       let selected = "line_select";
       let deselected = "line";
-      if (this.selected_change === true)
+      if (this.selected_change === true) {
         return selected;
+      }
       return deselected;
+    },
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
     }
   },
   mounted() {
@@ -669,17 +629,6 @@ export default {
       }
   },
   methods: {
-    editProfileSelected() {
-      this.editSelect = true;
-      this.day = this.profile.birthday_day;
-      this.month = this.profile.birthday_month;
-      this.year = this.profile.birthday_year;
-      this.classOf = this.profile.classOf;
-      this.phoneNumber = this.profile.phoneNumber;
-    },
-    cancel() {
-      this.editSelect = false;
-    },
     saveProfile() {
       this.profile.firstName = this.$refs["firstName"].value;
       this.profile.lastName = this.$refs["lastName"].value;
@@ -713,24 +662,14 @@ export default {
         })
       localStorage.removeItem("firstName");
       localStorage.setItem("firstName",this.profile.firstName);
+      alert('Save Profile Successful');
     },
-    getDayList() {
-      var dayList = [];
-      for (var i = 1; i <= 31; i++)
-        dayList.push(i);
-      return dayList;
-    },
-    getYearList() {
-      var yearList = [];
-      for (var i = 1920; i <= 2020; i++)
-        yearList.push(i);
-      return yearList;
-    },
-    classList() {
-      var classList = ["อาจารย์", "บุคคลากร"];
-      for (var i = 1; i <= 34; i++)
-        classList.push("CPE " + i);
-      return classList;
+    cancel() {
+      this.day = this.profile.birthday_day;
+      this.month = this.profile.birthday_month;
+      this.year = this.profile.birthday_year;
+      this.classOf = this.profile.classOf;
+      this.phoneNumber = this.profile.phoneNumber;
     },
     OnclickChange() {
       this.$emit("selectReturn", false);
@@ -747,40 +686,143 @@ export default {
 </script>
 
 <style scoped>
+::placeholder {
+  color: #312f71;
+  font-size: 1em;
+  font-family: "CloudBold";
+  opacity: 1;
+}
+.input-left {
+  margin-left: 10px;
+}
+.input-left-date {
+  margin-left: 10px;
+}
+#general-second-section {
+  margin-top: 0px;
+}
+#work-container {
+  padding: 15px;
+  margin-left: 12px;
+}
+#contact-container {
+  padding: 15px;
+  margin-right: 12px;
+}
+.general-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+#select-profile {
+  width: 8%;
+}
+
+#select-password {
+  width: 20%;
+}
+
+#select-none {
+  width: 67%;
+}
+.input-container {
+  padding-top: 15px;
+  padding-left: 25px;
+}
+.select-dropdown,
+.select-dropdown * {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+}
+.select-dropdown {
+  position: relative;
+  border-radius: 0px;
+}
+.select-dropdown select {
+  color: #312f71;
+  font-size: 1.8em;
+  letter-spacing: 1px;
+  font-family: "CloudBold";
+  max-width: 100%;
+  padding: 2px;
+  border: 1px solid #302e71;
+  background-color: #ffffff;
+}
+.select-dropdown select:active,
+.select-dropdown select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+#picture-container {
+  display: initial;
+}
+#input-section {
+  margin-left: 30px;
+}
+#first-bar {
+  padding-left: 40px;
+}
+#profile-section {
+  margin-top: 35px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: top;
+}
+.profilepic {
+  width: 159px;
+  border-radius: 50%;
+  border: #312f71 2px solid;
+}
+
 #button {
   float: right;
   margin-top: 25px;
 }
 
+.text {
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  background-color: transparent;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 32px;
+  padding-right: 32px;
+  font-size: 1.75em;
+  font-family: "CloudBold";
+}
+
 .white_button {
-  letter-spacing: 2.24px;
-  font-size: 28px;
+  letter-spacing: 2px;
   color: #312f71;
-  border: 3px solid #312f71;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 34px;
-  padding-right: 34px;
+  border: 2px solid #312f71;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 32px;
+  padding-right: 32px;
+  font-size: 1.75em;
   background-color: transparent;
   font-family: "CloudBold";
 }
 
 .pink_button {
-  letter-spacing: 2.24px;
-  font-size: 28px;
+  letter-spacing: 2px;
+  font-size: 1.75em;
   background-color: #f98394;
   color: #ffffff;
-  border: 3px solid #f98394;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-left: 34px;
-  padding-right: 34px;
+  border: 2px solid #f98394;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 32px;
+  padding-right: 32px;
   font-family: "CloudBold";
 }
 
 input[type="text"] {
   color: #312f71;
-  font-size: 25px;
+  font-size: 2em;
   letter-spacing: 2px;
   font-family: "CloudBold";
 }
@@ -793,15 +835,23 @@ input[type="text"]:focus {
 
 input[type="number"] {
   color: #312f71;
-  font-size: 25px;
+  font-size: 2em;
   letter-spacing: 2px;
   font-family: "CloudBold";
+  -moz-appearance: textfield;
 }
 
 input[type="number"]:focus {
   border: none;
   background-color: none;
   outline: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .input {
@@ -822,55 +872,209 @@ input[data-v-7ecbf6ee] {
   color: #312f71;
   letter-spacing: 1.92px;
   font-family: "CloudBold";
-  font-size: 24px;
+  font-size: 2.5em;
   margin: 0;
 }
 
 .inputText {
   color: #312f71;
-  letter-spacing: 1.6px;
+  letter-spacing: 1px;
   font-family: "CloudBold";
-  font-size: 20px;
+  font-size: 1.75em;
   margin: 0;
 }
 
 .box {
-  border: 3px solid #312f71;
+  border: 2px solid #312f71;
 }
 #myaccount {
   background-color: #ffffff;
-  padding-top: 65px;
-  padding-left: 108px;
-  padding-right: 130px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .title {
   color: #312f71;
-  letter-spacing: 6px;
+  letter-spacing: 3px;
   font-family: "CloudBold";
-  font-size: 60px;
+  font-size: 5em;
   margin: 0;
 }
 
 .bartext {
   color: #312f71;
-  letter-spacing: 2.2px;
+  letter-spacing: 2px;
   font-family: "CloudBold";
-  font-size: 22px;
+  font-size: 2em;
   margin: 0;
 }
 
 .line {
-  border: 1.5px solid #312f71;
+  border: 1px solid #312f71;
   background-color: #312f71;
   opacity: 0.3;
   margin-bottom: 3px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .line_select {
-  border: 5px solid #f98394;
+  border: 3px solid #f98394;
   background-color: #f98394;
   opacity: 1;
   margin: 0;
+}
+
+@media screen and (max-width: 1920px) {
+  #select-profile {
+    width: 9%;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  #select-profile {
+    width: 12%;
+  }
+  #profile-section {
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #first-bar {
+    padding-left: 25px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .input-container {
+    padding-top: 15px;
+    padding-left: 0px;
+  }
+  #input-section {
+    margin-left: 0px;
+  }
+  #first-bar {
+    padding-left: 10px;
+  }
+
+  #profile-section {
+    margin-top: 35px;
+    width: 100%;
+    display: block;
+    justify-content: center;
+    align-items: top;
+  }
+
+  .profilepic {
+    width: 150px;
+    margin-bottom: 30px;
+    /* display: none; */
+  }
+
+  #picture-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .select-dropdown select {
+    padding: 1px;
+    font-size: 1.5em;
+  }
+  .title {
+    text-align: center;
+  }
+  .input-left {
+    margin-left: 30px;
+  }
+  .input-left-date {
+    margin-left: 20px;
+  }
+  #general-second-section {
+    margin-top: 15px;
+  }
+  .profilepic {
+    width: 100px;
+    margin-bottom: 30px;
+    /* display: none; */
+  }
+  #select-profile {
+    width: 30%;
+  }
+  .general-container {
+    display: block;
+  }
+  #work-container {
+    padding: 15px;
+    margin-left: 0px;
+  }
+  #contact-container {
+    padding: 15px;
+    margin-right: 0px;
+    margin-bottom: 20px;
+  }
+  .white_button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .pink_button {
+    letter-spacing: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  #button {
+    margin-top: 0px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .input-left-date {
+    margin-left: 0px;
+  }
+  .select-dropdown select {
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .title {
+    font-size: 4em;
+  }
+  #select-profile {
+    width: 37%;
+  }
+  .inputHead {
+    font-size: 2em;
+  }
+
+  .inputText {
+    font-size: 1.5em;
+  }
+
+  input[type="text"] {
+    font-size: 1.75em;
+  }
+
+  input[type="number"] {
+    font-size: 1.75em;
+  }
+  .pink_button{
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 </style>

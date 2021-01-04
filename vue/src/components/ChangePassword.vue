@@ -1,58 +1,73 @@
 <template>
-  <div id="myaccount">
-    <h1 class="title">MY ACCOUNT</h1>
+  <div class="section">
+    <div class="page-container" id="myaccount">
+      <h1 class="title">MY ACCOUNT</h1>
 
-    <!-- Bar -->
-    <div style="margin-top:30px; width: 100%; display: grid; grid-template-columns: 15% 20% 65%"> 
-      <h2 @click="OnclickPro()" style="padding-left:40px;" class="bartext">Profile</h2>
-      <h2 class="bartext">Change Password</h2>
-    </div>
-    <!-- Bar -->
+      <!-- Bar -->
+      <div style="margin-top: 30px; width: 100%; display: flex">
+        <h2 style="cursor: pointer;" @click="OnclickPro()" id="first-bar" class="bartext">Profile</h2>
+        <h2 style="padding-left: 40px; cursor: default;" class="bartext">Change Password</h2>
+      </div>
+      <!-- Bar -->
 
-    <!-- Bar -->
-    <div style="margin-top:2px;"> 
-      <hr style="display: inline-block; width:13%;" class="line"/>
-      <hr style="display: inline-block; width:18%;" class="line_select"/>
-      <hr style="display: inline-block; width:67%;" class="line"/>
-    </div>
-    <!-- Bar -->
+      <!-- Bar -->
+      <div style="margin-top: 2px; display: flex; align-items: center">
+        <hr id="select-profile" class="line" />
+        <hr id="select-password" class="line_select" />
+        <hr id="select-none" class="line" />
+      </div>
+      <!-- Bar -->
 
-    <!-- Password -->
-    <div style="padding-top:180px; display: flex; justify-content: center; align-items: center;">
-        <div style="width: 50%; align-items: center; justify-content: center; display: grid; grid-template-columns: 40% 60%"> 
-          <h3 class="inputText">CURRENT PASSWORD</h3>
-          <input style="border-bottom: 2px solid #312F71; width:100%;" class="input" v-model="oldPassword" type="password" placeholder="Enter Current Password">
-        </div>
-    </div>
-    <!-- Password -->
-
-    <!-- Password -->
-    <div style="padding-top:50px; display: flex; justify-content: center; align-items: center;">
-        <div style="width: 50%; align-items: center; justify-content: center; display: grid; grid-template-columns: 40% 60%"> 
-          <h3 class="inputText" style="text-align:right; margin-right:35px;">NEW PASSWORD</h3>
-          <input style="border-bottom: 2px solid #312F71; width:100%;" class="input" v-model="newPassword" type="password" placeholder="Enter new Password">
-        </div>
-    </div>
-    <!-- Password -->
-
-    <!-- Password -->
-    <div style="padding-top:50px; display: flex; justify-content: center; align-items: center;">
-        <div style="width: 50%; align-items: center; justify-content: center; display: grid; grid-template-columns: 40% 60%"> 
-          <h3 class="inputText">CONFIRM PASSWORD</h3>
-          <input style="border-bottom: 2px solid #312F71; width:100%;" class="input" v-model="confirmPassword" type="password" placeholder="Confirm new Password">
-        </div>
-    </div>
-    <!-- Password -->
-          <!-- Button -->
-          <div id="button">
-
-          <!-- Save/Cancle -->
-          <div>
-            <button @click="checkPassword()" style="margin-top:80px; margin-right:320px;" class="pink_button"> SAVE CHANGE </button>
+      <div id="password-section">
+        <div>
+          <div class="password-container">
+            <h3 style="cursor: default;" class="inputText">CURRENT PASSWORD</h3>
+            <input
+              class="input input-line"
+              v-model="oldPassword"
+              type="password"
+              placeholder="Current Password"
+            />
           </div>
-    <!-- Button -->
-    </div>
 
+          <div class="password-container">
+            <h3 style="cursor: default;" class="inputText">NEW PASSWORD</h3>
+            <input
+              class="input input-line"
+              v-model="newPassword"
+              type="password"
+              placeholder="New Password"
+            />
+          </div>
+
+          <div class="password-container">
+            <h3 style="cursor: default;" class="inputText">CONFIRM PASSWORD</h3>
+            <input
+              class="input input-line"
+              v-model="confirmPassword"
+              type="password"
+              placeholder="Confirm new Password"
+            />
+          </div>
+
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 50% 50%;
+              justify-content: center;
+              align-items: center;
+            "
+          >
+            <span></span>
+            <div id="confirm-button">
+              <button @click="checkPassword()" class="pink_button" style="cursor: pointer;">
+                SAVE CHANGE
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -118,7 +133,8 @@ export default {
 				}
 			this.oldPassword = "";
 			this.newPassword = "";
-			this.confirmPassword= "";
+      this.confirmPassword= "";
+      alert('Change Password Successful');
     },
     validPassword: function(password) {
       this.password_length = password.length ;
@@ -148,147 +164,442 @@ export default {
 </script>
 
 <style scoped>
-
-  #button{
-    float: right;
-    margin-top:25px;
-  }
-
-  .white_button{
-    letter-spacing: 2.24px;
-    font-size:28px;
-    color:#312F71;
-    border: 3px solid #312F71;
-    padding-top:15px;
-    padding-bottom:15px;
-    padding-left:34px;
-    padding-right: 34px;
-    background-color: transparent;
-    font-family: "CloudBold";
-  }
-
-  .pink_button{
-    letter-spacing: 2.24px;
-    font-size:28px;
-    background-color:#f98394;
-    color: #FFFFFF;
-    border: 3px solid #f98394;
-    padding-top:15px;
-    padding-bottom:15px;
-    padding-left:34px;
-    padding-right: 34px;
-    font-family: "CloudBold";
-  }
-
-    ::placeholder  {
-    color: #312F71;
-    font-size: 20px;
-    font-family: "CloudBold";
-    letter-spacing: 1.6px;
-    opacity: 0.7;
-  }
-
-    input[type=text] {
-    color: #312F71;
-    font-size: 25px;
-    letter-spacing: 2px;
-    font-family: "CloudBold";
-    }
-
-    input[type=text]:focus {
-    border: none;
-    background-color: none;
-    outline: none;
-    }
-  
-  .input{
-    background: transparent;
-    border: none;
-
-    color: #312F71;
-    letter-spacing: 1.6px;
-    font-family: "CloudBold";
-    font-size:20px;
-    border: none;
-    /* border-bottom: 1px solid black; */
-  }
-
-  input[data-v-7ecbf6ee] {
-    margin: 0px;
-    padding:10px;
-    background: transparent;
-    border: none;
-    width:100%;
+#confirm-button{
+  display: initial;
+}
+input[type="text"] {
+  color: #312f71;
+  font-size: 2em;
+  font-family: "CloudLight";
 }
 
-  input[type=password]:focus {
+input[type="password"] {
+  color: #312f71;
+  font-size: 2em;
+  font-family: "CloudLight";
+}
+
+input[type="text"]:focus {
+  background-color: none;
+  outline: 0;
+}
+
+input[type="password"]:focus {
+  background-color: none;
+  outline: 0;
+}
+
+::placeholder {
+  color: #312f71;
+  font-size: 0.75em;
+  font-family: "CloudBold";
+  opacity: 0.6;
+}
+
+.password-container {
+  padding-top: 35px;
+  text-align: right;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-content: center;
+  align-items: center;
+}
+#password-section {
+  margin-top: 50px;
+}
+.input-line {
+  width: 300px;
+  margin-left: 15px;
+}
+.input-left {
+  margin-left: 10px;
+}
+.input-left-date {
+  margin-left: 10px;
+}
+#select-profile {
+  width: 8%;
+}
+#select-password {
+  width: 15%;
+}
+#select-none {
+  width: 72%;
+}
+.input-container {
+  padding-top: 15px;
+  padding-left: 25px;
+}
+.select-dropdown,
+.select-dropdown * {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+}
+.select-dropdown {
+  position: relative;
+  border-radius: 0px;
+}
+.select-dropdown select {
+  color: #312f71;
+  font-size: 1.8em;
+  letter-spacing: 1px;
+  font-family: "CloudBold";
+  max-width: 100%;
+  padding: 2px;
+  border: 1px solid #302e71;
+  background-color: #ffffff;
+}
+.select-dropdown select:active,
+.select-dropdown select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+#input-section {
+  margin-left: 30px;
+}
+#first-bar {
+  padding-left: 40px;
+}
+#profile-section {
+  margin-top: 35px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: top;
+}
+
+.text {
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  background-color: transparent;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 32px;
+  padding-right: 32px;
+  font-size: 1.75em;
+  font-family: "CloudBold";
+}
+
+.pink_button {
+  letter-spacing: 2px;
+  font-size: 1.75em;
+  background-color: #f98394;
+  color: #ffffff;
+  border: 2px solid #f98394;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 32px;
+  padding-right: 32px;
+  font-family: "CloudBold";
+  margin-top: 50px;
+  margin-left: 150px;
+}
+
+input[type="text"] {
+  color: #312f71;
+  font-size: 2em;
+  letter-spacing: 2px;
+  font-family: "CloudBold";
+}
+
+input[type="text"]:focus {
   border: none;
   background-color: none;
   outline: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #312f71;
+}
+
+input[data-v-7ecbf6ee] {
+  margin: 0px;
+  padding-left: 10px;
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+
+.inputHead {
+  color: #312f71;
+  letter-spacing: 1.92px;
+  font-family: "CloudBold";
+  font-size: 2.5em;
+  margin: 0;
+}
+
+.inputText {
+  color: #312f71;
+  letter-spacing: 1px;
+  font-family: "CloudBold";
+  font-size: 1.75em;
+  margin: 0;
+  margin-right: 15px;
+}
+
+.box {
+  border: 2px solid #312f71;
+}
+#myaccount {
+  background-color: #ffffff;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.title {
+  color: #312f71;
+  letter-spacing: 3px;
+  font-family: "CloudBold";
+  font-size: 5em;
+  margin: 0;
+}
+
+.bartext {
+  color: #312f71;
+  letter-spacing: 2px;
+  font-family: "CloudBold";
+  font-size: 2em;
+  margin: 0;
+}
+
+.line {
+  border: 1px solid #312f71;
+  background-color: #312f71;
+  opacity: 0.3;
+  margin-bottom: 3px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.line_select {
+  border: 3px solid #f98394;
+  background-color: #f98394;
+  opacity: 1;
+  margin: 0;
+}
+
+@media screen and (max-width: 1920px) {
+  #select-profile {
+    width: 9%;
+  }
+   #select-password {
+    width: 18%;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  #select-profile {
+    width: 12%;
+  }
+  #select-password {
+    width: 20%;
+  }
+  #profile-section {
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #password-section{
+    margin-top:35px;
+  }
+  #first-bar {
+    padding-left: 25px;
+  }
+  #select-password {
+    width: 19%;
+  }
+  .password-container{
+    grid-template-columns: 40% 50%;
+  }
+  .pink_button{
+    margin-left:105px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #select-password {
+    width: 34%;
+  }
+  #select-profile {
+    width: 15%;
+  }
+  .input-container {
+    padding-top: 15px;
+    padding-left: 0px;
+  }
+  #input-section {
+    margin-left: 0px;
+  }
+  #first-bar {
+    padding-left: 10px;
   }
 
-  input[type=password] {
-  font-size: 30px;
+  #profile-section {
+    margin-top: 35px;
+    width: 100%;
+    display: block;
+    justify-content: center;
+    align-items: top;
   }
-
-
-  .inputHead{
-    color: #312F71;
-    letter-spacing: 1.92px;
-    font-family: "CloudBold";
-    font-size:24px;
-    margin: 0;
+  .password-container{
+    grid-template-columns: 32% 50%;
   }
-
-  .inputText{
-    color: #312F71;
-    letter-spacing: 1.6px;
-    font-family: "CloudBold";
-    font-size:20px;
-    margin: 0;
+  .pink_button{
+    margin-left:90px;
   }
+}
 
-  .box{
-    border: 3px solid #312F71;
-  }
-  #myaccount{
-    background-color: #FFFFFF;
-    padding-top:65px;
-    padding-left: 108px;
-    padding-right:130px;
-
-    height: 100vh;
-    overflow-y:hidden ;
+@media screen and (max-width: 414px) {
+  .inputText {
   
+  margin-right: 0px;
+}
+  .password-container{
+    grid-template-columns: 50% 50%;
+  }
+  #password-section{
+    margin-top:25px;
+  }
+  #confirm-button{
+    display: flex;
+    justify-content: flex-end;
+  }
+  .input-line {
+    margin-left: 0px;
+    width: initial;
+  }
+  .password-container{
+    text-align: initial;
+  }
+  #select-profile {
+    width: 10%;
+  }
+  #select-password {
+    width: 75%;
+  }
+  #select-none{
+    width: 5%;
+  }
+  .select-dropdown select {
+    padding: 1px;
+    font-size: 1.5em;
+  }
+  .title {
+    text-align: center;
+  }
+  .input-left {
+    margin-left: 30px;
+  }
+  .input-left-date {
+    margin-left: 20px;
+  }
+  #select-profile {
+    width: 30%;
+  }
+  .general-container {
+    display: block;
+  }
+  #work-container {
+    padding: 15px;
+    margin-left: 0px;
+  }
+  #contact-container {
+    padding: 15px;
+    margin-right: 0px;
+    margin-bottom: 20px;
+  }
+  .white_button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
-  .title{
-    color: #312F71;
-    letter-spacing: 6px;
-    font-family: "CloudBold";
-    font-size:60px;
-    margin: 0;
+  .pink_button {
+    letter-spacing: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 0px;
+    margin-top:50px;
+  }
+  #button {
+    margin-top: 0px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  #select-password {
+    width: 65%;
+  }
+  #select-profile{
+    width: 30%;
+  }
+  #select-none{
+    width: 5%;
+  }
+  .input-left-date {
+    margin-left: 0px;
+  }
+  .select-dropdown select {
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  #select-password {
+    width: 65%;
+  }
+  #select-profile{
+    width: 35%;
+  }
+  #select-none{
+    width: 0%;
+  }
+  .title {
+    font-size: 4em;
+  }
+  #select-profile {
+    width: 37%;
+  }
+  .inputHead {
+    font-size: 2em;
   }
 
-  .bartext{
-    color: #312F71;
-    letter-spacing: 2.2px;
-    font-family: "CloudBold";
-    font-size:22px;
-    margin: 0;
+  .inputText {
+    font-size: 1.5em;
   }
 
-  .line{
-    border: 1.5px solid #312F71;
-    background-color: #312F71;
-    opacity: 0.3;
-    margin-bottom:3px;
+  input[type="text"] {
+    font-size: 1.75em;
   }
 
-  .line_select{
-    border: 5px solid #f98394;
-    background-color: #f98394;
-    opacity: 1;
-    margin:0;
+  input[type="number"] {
+    font-size: 1.75em;
   }
+
+  .pink_button {
+    letter-spacing: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
 </style>
