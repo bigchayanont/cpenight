@@ -114,7 +114,7 @@
                     font-size: 2em;
                     color: #ffffff;
                   "
-                  href="/souvenir"
+                  href="https://www.lazada.co.th/products/poker-card-i1658396589-s5927300183.html?spm=a2o4m.searchlist.list.7.7e4c5fc142RRwn&search=1"
                 >
                   <a>Shop</a>
                   <img
@@ -123,7 +123,7 @@
                 /></a>
 
                 <!-- Login -->
-                <div v-show="firstName" id="login_text">
+                <div v-show="!login" id="login_text">
                   <a @click="unCheck(checkedBox)"
                     style="
                       display: flex;
@@ -139,7 +139,7 @@
                 <!-- Login -->
 
                 <!-- Username -->
-                <div v-show="firstName" id="login_text">
+                <div v-show="login" id="login_text">
                   <a @click="unCheck(checkedBox)"
                     style="
                       display: flex;
@@ -147,14 +147,14 @@
                       align-items: center;
                       font-size: 2em;
                     "
-                    href="/userManagement"
+                    href="/profile"
                     class="btn transparent"
                     >{{firstName}}</a
                   >
                 </div>
                 <!-- Username -->
 
-                <a style="margin: 0px; padding: 0px" href="/userManagement">
+                <a style="margin: 0px; padding: 0px">
                   <div
                     @click="unCheck(checkedBox)"
                     id="changelag"
@@ -202,18 +202,22 @@ export default {
   name: "navbar",
   data() {
     return {
+      login: false,
       firstName: null,
       checkedBox: false,
     }
   },
   created() {
     try {
-      this.firstName = localStorage.getItem("firstName") + '.';
+      this.firstName = localStorage.getItem("firstName");
     }
     catch(e) {
-      this.firstName = null;
+      this.login = false;
     }
-    console.log(this.firstName);
+    if(this.firstName) {
+      this.login = true;
+      this.firstName = this.firstName + '.';
+    }
   },
   methods: {
     unCheck() {
