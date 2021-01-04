@@ -12,7 +12,7 @@
       <a href="/register">Register</a>
     </div>
     <div class="userManagement">
-      <a href="/userManagement">User Management</a>
+      <a href="/profile">User Management</a>
     </div>
     <div class="souvenir">
       <a href="/souvenir">Souvenir</a>

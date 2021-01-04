@@ -8,7 +8,7 @@ import Register2 from "@/components/Register2.vue"
 import Register3 from "@/components/Register3.vue";
 import Register4 from "@/components/Register4.vue";
 import Register5 from "@/components/Register5.vue";
-import userManagement from "../views/userManagement.vue";
+import profile from "../views/profile.vue";
 import MyAccount from "@/components/MyAccount.vue";
 import MyTicket from "@/components/MyTicket.vue";
 import souvenir from "../views/souvenir.vue";
@@ -59,9 +59,9 @@ const routes = [
     component: Register5
   },
   {
-    path: "/userManagement",
-    name: "userManagement",
-    component: userManagement
+    path: "/profile",
+    name: "profile",
+    component: profile
   },
   {
     path: "/myaccount",
