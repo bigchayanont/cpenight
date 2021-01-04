@@ -25,7 +25,7 @@
               <div>
                 <div id="header-section">
                   <div>
-                    <h1 class="title" style="margin: 0px">
+                    <h1 class="title" style="margin: 0px; cursor: default;">
                       Please tell us <br />
                       more about yourself.
                     </h1>
@@ -37,15 +37,15 @@
 
                 <div>
                   <!-- First Section-->
-                  <h2 class="question">Where do you work?</h2>
+                  <h2 style="cursor: default;" class="question">Where do you work?</h2>
                   <div>
                     <div class="input-section">
                       <!-- Input Section -->
                       <div class="input-space">
-                        <h1 class="inputText">ORGANIZATION (OPTIONAL)</h1>
+                        <h1 style="cursor: default" class="inputText">ORGANIZATION (OPTIONAL)</h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
-                            v-model="organ"
+                            v-model="user.organ"
                             style="margin: 0px; width: 100%"
                             class="input"
                             type="text"
@@ -57,10 +57,10 @@
                       <!-- Input Section -->
                       <!-- Input Section -->
                       <div>
-                        <h1 class="inputText">ROLE (OPTIONAL)</h1>
+                        <h1 style="cursor: default;" class="inputText">ROLE (OPTIONAL)</h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
-                            v-model="role"
+                            v-model="user.role"
                             style="margin: 0px; width: 100%"
                             class="input"
                             type="text"
@@ -72,14 +72,14 @@
                       <!-- Input Section -->
                     </div>
 
-                    <h2 class="question">What do you do?</h2>
+                    <h2 style="cursor: default;" class="question">What do you do?</h2>
                     <div class="input-single">
                       <!-- Input Section -->
                       <div class="input-space">
-                        <h1 class="inputText">FIELD OF WORK (OPTIONAL)</h1>
+                        <h1 style="cursor: default;" class="inputText">FIELD OF WORK (OPTIONAL)</h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
-                            v-model="field"
+                            v-model="user.field"
                             style="margin: 0px; width: 100%"
                             class="input"
                             type="text"
@@ -105,7 +105,7 @@
                   "
                 >
                   <div>
-                    <button id="backButton" @click="backPage()">
+                    <button style="cursor: pointer;" id="backButton" @click="backPage()">
                       <i
                         style="align: center; padding-right: 20px"
                         class="fa fa-arrow-left"
@@ -114,7 +114,7 @@
                     </button>
                   </div>
                   <div>
-                    <button id="nextButton" @click="nextPage()">
+                    <button style="cursor: pointer;" id="nextButton" @click="nextPage()">
                       FINISH
                     </button>
                   </div>
@@ -194,6 +194,9 @@
       }
     },
       mounted(){
+      this.user.organ = this.$store.state.userInfo.organ
+      this.user.field = this.$store.state.userInfo.field
+      this.user.role = this.$store.state.userInfo.role
       if (this.loggedIn) {
               alert('already logged in');
               this.$router.push('/');

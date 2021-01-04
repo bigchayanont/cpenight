@@ -25,7 +25,7 @@
               <div>
                 <div id="header-section">
                   <div>
-                    <h1 class="title" style="margin: 0px">
+                    <h1 class="title" style="margin: 0px; cursor: default;">
                       Please tell us <br />
                       more about yourself.
                     </h1>
@@ -37,9 +37,9 @@
 
                 <div>
                   <!-- Second Section-->
-                  <h2 class="question">Which CPE Class are you?</h2>
+                  <h2 style="cursor: default;" class="question">Which CPE Class are you?</h2>
                   <div style="padding-top: 5px">
-                    <h1 style="padding-bottom: 5px" class="inputText">
+                    <h1 style="padding-bottom: 5px; cursor: default;" class="inputText">
                       CLASS OF*
                     </h1>
                     <div
@@ -51,11 +51,11 @@
                     >
                       <div id="cpe-select">
                         <div class="select-dropdown">
-                          <select>
+                          <select v-model="user.classOf">
                             <option selected disabled>CPE</option>
                             <option
-                              v-for="classOf in classLists"
-                              v-bind:key="classOf"
+                              v-for="(classOf,index) in classLists"
+                              v-bind:key="index"
                             >
                               {{ classOf }}
                             </option>
@@ -66,12 +66,12 @@
                     </div>
                   </div>
                   <!-- First Section-->
-                  <h2 class="question">How can we contact you?</h2>
+                  <h2  style="cursor: default;" class="question">How can we contact you?</h2>
                   <div>
                     <div class="input-section">
                       <!-- Input Section -->
                       <div class="input-space">
-                        <h1 class="inputText">PHONE*</h1>
+                        <h1 style="cursor: default;" class="inputText">PHONE*</h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
                             style="margin: 0px; width: 100%"
@@ -79,7 +79,8 @@
                             type="number"
                             placeholder="Enter your phone number"
                             @input="updateValue"
-                            :value="phone"
+                            :value="user.phoneNumber"
+                            onkeydown="return event.keyCode !== 69 && event.keyCode !== 189"
                           />
                         </div>
                         <hr class="underline" />
@@ -87,10 +88,10 @@
                       <!-- Input Section -->
                       <!-- Input Section -->
                       <div>
-                        <h1 class="inputText">LINE (OPTIONAL)</h1>
+                        <h1 style="cursor: default;" class="inputText">LINE (OPTIONAL)</h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
-                            v-model="line"
+                            v-model="user.line"
                             style="margin: 0px; width: 100%"
                             class="input"
                             type="text"
@@ -105,10 +106,10 @@
                     <div class="input-single">
                       <!-- Input Section -->
                       <div class="input-space">
-                        <h1 class="inputText">FACEBOOK (OPTIONAL)</h1>
+                        <h1 style="cursor: default;" class="inputText">FACEBOOK (OPTIONAL)</h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
-                            v-model="facebook"
+                            v-model="user.facebookAccount"
                             style="margin: 0px; width: 100%"
                             class="input"
                             type="text"
@@ -134,7 +135,7 @@
                   "
                 >
                   <div>
-                    <button id="backButton" @click="backPage()">
+                    <button style="cursor: pointer;" id="backButton" @click="backPage()">
                       <i
                         style="align: center; padding-right: 20px"
                         class="fa fa-arrow-left"
@@ -143,7 +144,7 @@
                     </button>
                   </div>
                   <div>
-                    <button id="nextButton" @click="nextPage()">
+                    <button style="cursor: pointer;" id="nextButton" @click="nextPage()">
                       NEXT<i
                         style="align: center; padding-left: 20px"
                         class="fa fa-arrow-right"
@@ -181,8 +182,27 @@
     created() {
     for (var i = 1; i <= 34; i++) this.classLists.push("CPE " + i);
     },
+    mounted() {
+      if (this.user.classOf === "") {
+        this.user.classOf = "CPE"
+      } else {
+        this.user.classOf = this.$store.state.userInfo.classOf
+      }
+        this.user.phoneNumber = this.$store.state.userInfo.phoneNumber
+        this.user.line = this.$store.state.userInfo.line
+        this.user.facebookAccount = this.$store.state.userInfo.facebookAccount
+    },
     methods: {
       nextPage(){
+        if (this.user.classOf == "CPE") {
+            alert('Class of required');
+            console.log('Class of required');
+        }
+        else if (!this.user.phoneNumber) {
+            alert('phone number required');
+            console.log('phone number required');
+        } 
+        else{
         this.$store.state.userInfo.classOf = this.user.classOf;
         this.$store.state.userInfo.phoneNumber = this.user.phoneNumber;
         this.$store.state.userInfo.line = this.user.line;
@@ -204,11 +224,18 @@
         console.log(this.$store.state.userInfo.role);
         console.log(this.$store.state.userInfo.field);
         this.$emit("pageReturn",5)
+        }
       },
+      updateValue(event) {
+      const value = event.target.value;
+      if (String(value).length <= 10) {
+        this.user.phoneNumber = value;
+      }
+      this.$forceUpdate();
+    },
       backPage(){
-          
           this.$emit("pageReturn",3)
-      },
+      }
     }
   }
 </script>

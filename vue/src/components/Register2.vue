@@ -32,11 +32,12 @@
             </div>
             <div id="left-side" class="column" style="">
               <div>
-                <h1 class="title">REGISTER</h1>
+                <h1 style="cursor: default;" class="title">REGISTER</h1>
                 <!-- Input -->
                 <div class="box">
                   <img id="img-user" src="@/assets/icons8-male-user-64.png" />
                   <input
+                  autocomplete="off"
                     v-model="user.email"
                     class="input"
                     type="text"
@@ -49,6 +50,8 @@
                 <div class="box">
                   <img id="img-lock" src="@/assets/icons8-lock-52.png" />
                   <input
+                  style="margin-left:16px;"
+                  autocomplete="off"
                     v-model="user.password"
                     @input="updateValue"
                     class="input"
@@ -78,11 +81,12 @@
                       font-family: 'CloudBold';
                       color: #ffffff;
                       opacity: 0.7;
+                      cursor: default;
                     "
                   >
                     Password must meet the following requirements :
                   </h3>
-                  <div style="display: flex; align-items: center">
+                  <div style="display: flex; align-items: center; cursor: default;">
                     <img
                       v-show="warningColor1 == false"
                       class="password-icon"
@@ -102,7 +106,7 @@
                     </p>
                   </div>
 
-                  <div style="display: flex; align-items: center">
+                  <div style="display: flex; align-items: center; cursor: default;">
                     <img
                       v-show="warningColor2 == false"
                       class="password-icon"
@@ -124,7 +128,7 @@
                     </p>
                   </div>
 
-                  <div style="display: flex; align-items: center">
+                  <div style="display: flex; align-items: center; cursor: default;">
                     <img
                       v-show="warningColor3 == false"
                       class="password-icon"
@@ -144,7 +148,7 @@
                     </p>
                   </div>
 
-                  <div style="display: flex; align-items: center">
+                  <div style="display: flex; align-items: center; cursor: default;">
                     <img
                       v-show="warningColor4 == false"
                       class="password-icon"
@@ -160,7 +164,7 @@
                       :class="changeColor4()"
                     >
                       At least
-                      <span style="font-family: 'CloudBold'"
+                      <span style="font-family: 'CloudBold';"
                         >one special characters</span
                       >
                     </p>
@@ -170,12 +174,12 @@
                 <button
                   @click="checkRegister()"
                   id="nextButton"
-                  style="background-color: #f28093"
+                  style="background-color: #f28093; cursor: pointer;"
                 >
                   CONTINUE
                 </button>
                 <div id="register-section">
-                  <span class="descript-text" style="color: #ffffff"
+                  <span class="descript-text" style="color: #ffffff; cursor: default;"
                     >Already have an account ?</span
                   >
                   <a
@@ -213,6 +217,9 @@ export default {
           // alert('Register Success')
           }
       },
+    },
+    mounted() {
+        this.user.email = this.$store.state.userInfo.email
     },
     methods: {
        checkRegister() {

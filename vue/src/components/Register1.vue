@@ -32,15 +32,15 @@
             </div>
             <div id="left-side" class="column" style="">
               <div>
-                <h1 class="title">REGISTER</h1>
+                <h1 style="cursor: default;" class="title">REGISTER</h1>
                 <br />
                 <div>
                   <!-- <img class="img-login" src="@/assets/Google.png" /> -->
-                  <GoogleLogin :params="googleAuth.params" :renderParams="googleAuth.renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
+                  <GoogleLogin style="width:auto;" :params="googleAuth.params" :renderParams="googleAuth.renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
                   <br />
                   <img
                     class="img-login"
-                    style="margin-top: 15px"
+                    style="margin-top: 15px; cursor: pointer;"
                     src="@/assets/Facebook.png"
                   />
                   <!-- <facebook-login class="button" appId="facebookAuth.appID" @login="onLogin" @sdk-loaded="sdkLoaded"></facebook-login> -->
@@ -49,13 +49,13 @@
                 <br />
 
                 <p id="or-text">
-                  <span>OR</span>
+                  <span style="cursor: default;">OR</span>
                 </p>
 
-                <button  @click="onClick" id="loginButton">Sign up with Email</button>
+                <button  @click="onClick()" id="loginButton" style="cursor: pointer;">Sign up with Email</button>
 
                 <div id="register-section">
-                  <span class="descript-text" style="color: #ffffff"
+                  <span class="descript-text" style="color: #ffffff; cursor: default;"
                     >Already have an account ?</span
                   >
                   <a
@@ -87,8 +87,7 @@ export default {
           client_id: "",
         },
         renderParams: {
-            width: 250,
-            height: 50,
+            height: 44.5,
             longtitle: true
         }
       },

@@ -25,7 +25,7 @@
               <div>
                 <div id="header-section">
                   <div>
-                    <h1 class="title" style="margin: 0px">
+                    <h1 class="title" style="margin: 0px; cursor: default;">
                       Please tell us <br />
                       more about yourself.
                     </h1>
@@ -37,15 +37,15 @@
 
                 <div>
                   <!-- First Section-->
-                  <h2 class="question">What's your name?</h2>
+                  <h2 class="question" style="cursor: default;">What's your name?</h2>
                   <div>
                     <div class="input-section">
                       <!-- Input Section -->
                       <div class="input-space">
-                        <h1 class="inputText">FIRST NAME*</h1>
+                        <h1 style="cursor: default;" class="inputText">FIRST NAME*</h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
-                            v-model="user.firstname"
+                            v-model="user.firstName"
                             style="margin: 0px; width: 100%"
                             class="input"
                             type="text"
@@ -57,10 +57,10 @@
                       <!-- Input Section -->
                       <!-- Input Section -->
                       <div>
-                        <h1 class="inputText">LAST NAME*</h1>
+                        <h1 style="cursor: default;" class="inputText">LAST NAME*</h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
-                            v-model="user.lastname"
+                            v-model="user.lastName"
                             style="margin: 0px; width: 100%"
                             class="input"
                             type="text"
@@ -75,10 +75,10 @@
                     <div class="input-single">
                       <!-- Input Section -->
                       <div class="input-space">
-                        <h1 class="inputText">NICKNAME*</h1>
+                        <h1 style="cursor: default;" class="inputText">NICKNAME*</h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
-                            v-model="user.nickname"
+                            v-model="user.nickName"
                             style="margin: 0px; width: 100%"
                             class="input"
                             type="text"
@@ -92,16 +92,16 @@
                   </div>
 
                   <!-- Second Section-->
-                  <h2 class="question">When is your birthday?</h2>
-                  <h1 style="padding-bottom: 5px" class="inputText">
-                    DATE OF BIRTH
+                  <h2 style="cursor: default;" class="question">When is your birthday?</h2>
+                  <h1 style="padding-bottom: 5px; cursor: default;" class="inputText">
+                    DATE OF BIRTH*
                   </h1>
                   <div style="display: flex; padding-top: 5px">
                     <div id="day-select">
                       <div class="select-dropdown">
-                        <select>
-                          <option selected disabled>Day</option>
-                          <option v-for="day in days" v-bind:key="day">
+                        <select v-model="user.birthday_day">
+                          <option selected disabled>DAY</option>
+                          <option v-for="(day,index) in days" v-bind:key="index">
                             {{ day }}
                           </option>
                         </select>
@@ -111,10 +111,10 @@
 
                     <div id="month-select">
                       <div class="select-dropdown">
-                        <select>
-                          <option selected disabled>Month</option>
-                          <option v-for="month in months" v-bind:key="month">
-                            {{ month.value }}
+                        <select v-model="user.birthday_month">
+                          <option selected disabled>MONTH</option>
+                          <option v-for="(month,index) in months" v-bind:key="index">
+                            {{ month }}
                           </option>
                         </select>
                       </div>
@@ -123,9 +123,9 @@
 
                     <div id="year-select">
                       <div  class="select-dropdown">
-                        <select>
-                          <option selected disabled>Year</option>
-                          <option v-for="year in years" v-bind:key="year">
+                        <select v-model="user.birthday_year">
+                          <option selected disabled>YEAR</option>
+                          <option v-for="(year,index) in years" v-bind:key="index">
                             {{ year }}
                           </option>
                         </select>
@@ -155,16 +155,16 @@
                   "
                 >
                   <div>
-                    <button id="backButton" @click="backPage()">
+                    <button style="cursor: pointer;" id="backButton" @click="backPage()">
                       <i
-                        style="align: center; padding-right: 20px"
+                        style="align: center; padding-right: 20px;"
                         class="fa fa-arrow-left"
                       ></i
                       >BACK
                     </button>
                   </div>
                   <div>
-                    <button id="nextButton" @click="checkRegister1()">
+                    <button style="cursor: pointer;" id="nextButton" @click="checkRegister1()">
                       NEXT<i
                         style="align: center; padding-left: 20px"
                         class="fa fa-arrow-right"
@@ -193,27 +193,21 @@
       return {
       user: new User(),
       days: [],
-      months: [
-        { value: "January", text: "JAN" },
-        { value: "February", text: "FEB" },
-        { value: "March", text: "MAR" },
-        { value: "April", text: "APR" },
-        { value: "May", text: "MAY" },
-        { value: "June", text: "JUN" },
-        { value: "July", text: "JUL" },
-        { value: "August", text: "AUG" },
-        { value: "September", text: "SEP" },
-        { value: "October", text: "OCT" },
-        { value: "November", text: "NOV" },
-        { value: "December", text: "DEC" },
-      ],
+      months: ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"],
       years: [],
       }
-
     },
     created() {
     for (var i = 1; i <= 31; i++) this.days.push(i);
     for (var j = 1920; j <= 2020; j++) this.years.push(j);
+    this.user.birthday_day = "DAY";
+    this.user.birthday_month = "MONTH";
+    this.user.birthday_year = "YEAR";
+    },
+    mounted() {
+        this.user.firstName = this.$store.state.userInfo.firstName
+        this.user.lastName = this.$store.state.userInfo.lastName
+        this.user.nickName = this.$store.state.userInfo.nickName
     },
     methods: {
       checkRegister1() {
@@ -228,6 +222,18 @@
         else if (!this.user.nickName) {
             alert('Nickname required');
             console.log('Nickname required');
+        }
+        else if (this.user.birthday_day == "DAY") {
+            alert('birthday required');
+            console.log('birthday required');
+        }
+        else if (this.user.birthday_month == "MONTH") {
+            alert('birthday required');
+            console.log('birthday required');
+        }
+        else if (this.user.birthday_year == "YEAR") {
+            alert('birthday required');
+            console.log('birthday required');
         }
         else
         {
@@ -258,7 +264,6 @@
         }
       },
       backPage(){
-          this.$emit("registerData",this.user)
           this.$emit("pageReturn",2)
       },
     }
