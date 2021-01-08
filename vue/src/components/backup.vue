@@ -7,11 +7,20 @@
         <option value="Option 3">Option Number 3</option>
       </select>
     </div>
+    <img :src="check" alt="">
   </div>
 </template>
 
 <script>
+// const mkdirp = require('mkdirp')
 
+export default {
+  data() {
+    return {
+      check:"@/assets/user/profile.jpg",
+    }
+  },
+}
 </script>
 
 <style scoped>
