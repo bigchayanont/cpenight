@@ -17,8 +17,7 @@
         <hr id="select-none" class="line" />
       </div>
       <!-- Bar -->
-
-      <div id="password-section">
+      <div v-show="accountType === 'EMAIL'" id="password-section">
         <div>
           <div class="password-container">
             <h3 style="cursor: default;" class="inputText">CURRENT PASSWORD</h3>
@@ -60,9 +59,31 @@
           >
             <span></span>
             <div id="confirm-button">
-              <button @click="checkPassword()" class="pink_button" style="cursor: pointer;">
-                SAVE CHANGE
-              </button>
+              <button
+                @click="checkPassword()"
+                class="pink_button"
+                style="cursor: pointer;"
+              >SAVE CHANGE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-show="accountType === 'GOOGLE'">
+        <div class="section">
+          <div>
+            <h3 class="pass-text">You can't change your password.</h3>
+            <div class="section">
+              <img style="cursor: default;" class="img-login" src="@/assets/Google-3.png" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-show="accountType === 'FACEBOOK'">
+        <div class="section">
+          <div>
+            <h3 class="pass-text">You can't change your password.</h3>
+            <div class="section">
+              <img style="cursor: default;" class="img-login" src="@/assets/Facebook-3.png" />
             </div>
           </div>
         </div>
@@ -72,72 +93,70 @@
 </template>
 
 <script>
-import UserService from '../services/user.service';
+import UserService from "../services/user.service";
 import decode from "jwt-decode";
+import User from "../models/user";
 
 export default {
   created() {
-      let userData = decode(localStorage.getItem("user"));
-      this.user_id = userData.id;
+    let userData = decode(localStorage.getItem("user"));
+    this.user_id = userData.id;
+    this.accountType = this.$store.state.accountTypeCheck;
   },
-  data(){
-    return{
+  data() {
+    return {
+      user: new User(),
       user_id: null,
-      oldPassword:"",
-      newPassword:"",
-			confirmPassword:"",
-			password_length: 0,
-			contains_eight_characters: false,
-			contains_number: false,
-			contains_uppercase: false,
-			contains_special_character: false,
-			valid_password: false
-    }
-	},
-  methods:{
-    OnclickPro(){
-      this.$emit("selectReturn",true)
+      oldPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+      password_length: 0,
+      contains_eight_characters: false,
+      contains_number: false,
+      contains_uppercase: false,
+      contains_special_character: false,
+      valid_password: false,
+      accountType: ""
+    };
+  },
+  methods: {
+    OnclickPro() {
+      this.$emit("selectReturn", true);
     },
     checkPassword() {
-      if(!this.oldPassword)
-        {
-        alert('You must enter old password!');
-        }
-      else if(!this.newPassword)
-        {
-        alert('You must enter new password!');
-        }
-      else if(!this.confirmPassword)
-        {
-        alert('You must enter confirm password!');
-        }
-      else if(this.newPassword != this.confirmPassword)
-        {
-        alert('Password missed match!');
-        }
-      // else if(!this.validPassword(this.newPassword))
-      //   {
-      //   alert('Your new password is weak!');
-			// 	}
-			else
-				{
-				UserService.changePassword(this.user_id,this.oldPassword,this.newPassword).then(
-        response => {
-          if(response){
+      if (!this.oldPassword) {
+        alert("You must enter old password!");
+      } else if (!this.newPassword) {
+        alert("You must enter new password!");
+      } else if (!this.confirmPassword) {
+        alert("You must enter confirm password!");
+      } else if (this.newPassword != this.confirmPassword) {
+        alert("Password missed match!");
+      }
+      else if(!this.validPassword(this.newPassword))
+      {
+        alert('Your new password is weak!');
+      }
+      else {
+        UserService.changePassword(
+          this.user_id,
+          this.oldPassword,
+          this.newPassword
+        ).then(response => {
+          if (response) {
             console.log(response);
-          }
-          else{
+            alert("Change Password Successful");
+          } else {
             console.log("Not found!");
           }
-          })
-				}
-			this.oldPassword = "";
-			this.newPassword = "";
-      this.confirmPassword= "";
-      alert('Change Password Successful');
+        });
+      }
+      this.oldPassword = "";
+      this.newPassword = "";
+      this.confirmPassword = "";
     },
     validPassword: function(password) {
-      this.password_length = password.length ;
+      this.password_length = password.length;
       const format = /[^A-Za-z0-9]/;
       if (this.password_length > 8) {
         this.contains_eight_ocharacters = true;
@@ -147,24 +166,37 @@ export default {
       this.contains_number = /\d/.test(password);
       this.contains_uppercase = /[A-Z]/.test(password);
       this.contains_special_character = format.test(password);
-      
-      if (this.contains_eight_characters === true &&
-          this.contains_special_character === true &&
-          this.contains_uppercase === true &&
-          this.contains_number === true) {
-            return this.valid_password = true;
-      }
-      else {
-        return this.valid_password = false;
+
+      if (
+        this.contains_eight_characters === true &&
+        this.contains_special_character === true &&
+        this.contains_uppercase === true &&
+        this.contains_number === true
+      ) {
+        return (this.valid_password = true);
+      } else {
+        return (this.valid_password = false);
       }
     }
   }
-
-}
+};
 </script>
 
 <style scoped>
-#confirm-button{
+.pass-text {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-family: "CloudBold";
+  text-align: center;
+  color: #312f71;
+  font-size: 2em;
+  letter-spacing: 2px;
+}
+.img-login {
+  border: 2px solid #312f71;
+  width:400px;
+}
+#confirm-button {
   display: initial;
 }
 input[type="text"] {
@@ -396,7 +428,7 @@ input[data-v-7ecbf6ee] {
   #select-profile {
     width: 9%;
   }
-   #select-password {
+  #select-password {
     width: 18%;
   }
 }
@@ -414,8 +446,8 @@ input[data-v-7ecbf6ee] {
 }
 
 @media screen and (max-width: 1024px) {
-  #password-section{
-    margin-top:35px;
+  #password-section {
+    margin-top: 35px;
   }
   #first-bar {
     padding-left: 25px;
@@ -423,11 +455,11 @@ input[data-v-7ecbf6ee] {
   #select-password {
     width: 19%;
   }
-  .password-container{
+  .password-container {
     grid-template-columns: 40% 50%;
   }
-  .pink_button{
-    margin-left:105px;
+  .pink_button {
+    margin-left: 105px;
   }
 }
 
@@ -456,26 +488,32 @@ input[data-v-7ecbf6ee] {
     justify-content: center;
     align-items: top;
   }
-  .password-container{
+  .password-container {
     grid-template-columns: 32% 50%;
   }
-  .pink_button{
-    margin-left:90px;
+  .pink_button {
+    margin-left: 90px;
   }
 }
 
 @media screen and (max-width: 414px) {
-  .inputText {
-  
-  margin-right: 0px;
+  .pass-text {
+  font-size: 1.5em;
+  letter-spacing: 0.75px;
 }
-  .password-container{
+.img-login {
+  width:100%;
+}
+  .inputText {
+    margin-right: 0px;
+  }
+  .password-container {
     grid-template-columns: 50% 50%;
   }
-  #password-section{
-    margin-top:25px;
+  #password-section {
+    margin-top: 25px;
   }
-  #confirm-button{
+  #confirm-button {
     display: flex;
     justify-content: flex-end;
   }
@@ -483,7 +521,7 @@ input[data-v-7ecbf6ee] {
     margin-left: 0px;
     width: initial;
   }
-  .password-container{
+  .password-container {
     text-align: initial;
   }
   #select-profile {
@@ -492,7 +530,7 @@ input[data-v-7ecbf6ee] {
   #select-password {
     width: 75%;
   }
-  #select-none{
+  #select-none {
     width: 5%;
   }
   .select-dropdown select {
@@ -537,7 +575,7 @@ input[data-v-7ecbf6ee] {
     padding-left: 10px;
     padding-right: 10px;
     margin-left: 0px;
-    margin-top:50px;
+    margin-top: 50px;
   }
   #button {
     margin-top: 0px;
@@ -548,10 +586,10 @@ input[data-v-7ecbf6ee] {
   #select-password {
     width: 65%;
   }
-  #select-profile{
+  #select-profile {
     width: 30%;
   }
-  #select-none{
+  #select-none {
     width: 5%;
   }
   .input-left-date {
@@ -566,10 +604,10 @@ input[data-v-7ecbf6ee] {
   #select-password {
     width: 65%;
   }
-  #select-profile{
+  #select-profile {
     width: 35%;
   }
-  #select-none{
+  #select-none {
     width: 0%;
   }
   .title {
