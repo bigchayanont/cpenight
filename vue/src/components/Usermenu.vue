@@ -4,9 +4,9 @@
     <div id="menu-container" style="min-height: 100vh">
       <!-- Name / Email -->
       <div style="padding-left: 59px; padding-top: 40px">
-        <img class="profilepic" src="@/assets/user/profile.jpg" />
-        <h1 style="margin-top: 15px" class="nameSide">{{display.firstName}}</h1>
-        <h1 class="nameSide">{{display.lastName}}</h1>
+        <img class="profilepic" :src="image" />
+        <h1 style="margin-top: 15px; text-transform:capitalize;" class="nameSide">{{display.firstName}}</h1>
+        <h1 style="text-transform:capitalize;" class="nameSide">{{display.lastName}}</h1>
         <h3 style="margin-top: 5px" class="emailSide">
           {{display.email}}
         </h3>
@@ -27,7 +27,7 @@
         >
           <img
             class="icon"
-            style="width: 23px"
+            style="width: 23px;"
             src="@/assets/user/ticket-white.png"
           />
           <h2 style="color: #ffffff;" class="select">MY TICKET</h2>
@@ -126,7 +126,7 @@
           >
             <img
               class="icon"
-              style="width: 23px"
+              style="width: 23px; margin-top:-3px;"
               src="@/assets/user/home.png"
             />
             <h2 style="color: #ffffff" class="select">MAINPAGE</h2>
@@ -150,7 +150,7 @@
           >
             <img
               class="icon"
-              style="width: 23px"
+              style="width: 20px; margin-top:-2px; padding-right:13px;"
               src="@/assets/user/exit.png"
             />
             <h2 style="color: #ffffff" class="select">LOG OUT</h2>
@@ -166,19 +166,29 @@
 <script>
 import { bus } from '../main'
 import User from '../models/user';
+
 export default {
   data() {
     return {
       select1: false,
       select2: true,
+      image: "",
       display: new User(),
+      googleAuth: {
+        params: {
+          client_id: "691961416858-9n4gn62s613l3v6ubp3g562e5b6brp1b.apps.googleusercontent.com",
+        }
+      }
     };
   },
   created() {
     bus.$on('display', (data) => {
-      this.display = data
+      this.display = data;
+      if(this.display.accountType == "EMAIL")
+        this.image = require("@/assets/user/default-pic.jpg")
+      else
+        this.image = this.display.profilePic;
     });
-    
   },
   methods: {
     Onclick1() {
