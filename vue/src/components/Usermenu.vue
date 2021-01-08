@@ -113,24 +113,25 @@
       <div id="bottom">
         <!-- Mainpage -->
         <div>
-          <div
-            @click="backMain()"
-            style="
-              align-items: center;
-              width: 100%;
-              margin-left: 59px;
-              display: flex;
-              align-items: center;
-              cursor: pointer;
-            "
-          >
-            <img
-              class="icon"
-              style="width: 23px; margin-top:-3px;"
-              src="@/assets/user/home.png"
-            />
-            <h2 style="color: #ffffff" class="select">MAINPAGE</h2>
-          </div>
+          <router-link to="/">
+            <div
+              style="
+                align-items: center;
+                width: 100%;
+                margin-left: 59px;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+              "
+            >
+              <img
+                class="icon"
+                style="width: 23px; margin-top:-3px;"
+                src="@/assets/user/home.png"
+              />
+              <h2 style="color: #ffffff" class="select">MAINPAGE</h2>
+            </div>
+          </router-link>
         </div>
         <!-- Mainpage -->
 
@@ -184,10 +185,7 @@ export default {
   created() {
     bus.$on('display', (data) => {
       this.display = data;
-      if(this.display.accountType == "EMAIL")
-        this.image = require("@/assets/user/default-pic.jpg")
-      else
-        this.image = this.display.profilePic;
+      this.image = this.display.profilePic;
     });
   },
   methods: {

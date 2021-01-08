@@ -47,7 +47,7 @@
               </div>
 
               <div class="log-sign" style="--i: 0.6s">
-                <a
+                <router-link to="/"
                   @click="unCheck(checkedBox)"
                   style="
                     display: flex;
@@ -56,13 +56,14 @@
                     font-size: 2em;
                     color: #ffffff;
                   "
-                  href="/"
+
                 >
                   <a>Mainpage</a>
                   <img
                     style="margin-left: 8px; width: 21px"
                     src="@/assets/user/home.png"
-                /></a>
+                />
+                </router-link>
                 <div id="login_text">
                   <a
                     @click="unCheck(checkedBox); logOut()"
@@ -115,10 +116,7 @@ export default {
   created() {
     bus.$on('display', (data) => {
       this.display = data;
-      if(this.display.accountType == "EMAIL")
-        this.image = require("@/assets/user/default-pic.jpg")
-      else
-        this.image = this.display.profilePic;
+      this.image = this.display.profilePic;
     });
   },
   methods: {

@@ -140,7 +140,7 @@
 
                 <!-- Username -->
                 <div v-show="login" id="login_text">
-                  <a @click="unCheck(checkedBox)"
+                  <router-link to="/profile" @click="unCheck(checkedBox)"
                     style="
                       display: flex;
                       justify-content: center;
@@ -150,7 +150,7 @@
                     "
                     href="/profile"
                     class="btn transparent"
-                    >{{firstName}}</a
+                    >{{firstName}}</router-link
                   >
                 </div>
                 <!-- Username -->
