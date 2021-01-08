@@ -24,7 +24,28 @@
       <div id="profile-section">
         <!-- Profile Pic-->
         <div id="picture-container">
-          <img class="profilepic" src="@/assets/user/profile.jpg" />
+          <div>
+            <label for="image">
+              <div v-if="editSelect" id="profile-mask">
+                <!-- <input
+                  type="file"
+                  name="image"
+                  id="image"
+                  accept="image/*"
+                  @change="previewImage"
+                  style="display: none"
+                /> -->
+              </div>
+              <div style="position: relative">
+                <!-- <img style="cursor: pointer" v-if="editSelect" id="camera" src="@/assets/user/camera.png" /> -->
+                <div class="profilepic">
+                  <!-- <img style="cursor: pointer" :class="changeOpacity()" :src="preview" /> -->
+                  <!-- ลบอันล่างทิ้งถ้าจะใช้ -->
+                  <img style="cursor: pointer" :src="preview" />
+                </div>
+              </div>
+            </label>
+          </div>
         </div>
         <!-- Profile Pic-->
 
@@ -61,7 +82,7 @@
                         class="input input-left"
                         type="text"
                         ref="firstName"
-                        :value="profile.firstName"
+                        v-model="inputFirstName"
                       />
                     </div>
                     <div
@@ -93,7 +114,7 @@
                         class="input input-left"
                         type="text"
                         ref="lastName"
-                        :value="profile.lastName"
+                        v-model="inputLastName"
                       />
                     </div>
                     <div
@@ -125,7 +146,7 @@
                         class="input input-left"
                         type="text"
                         ref="nickName"
-                        :value="profile.nickName"
+                        v-model="inputNickName"
                       />
                     </div>
                   </div>
@@ -209,7 +230,7 @@
                       <div v-else id="cpe-select" class="input-left">
                         <div class="select-dropdown">
                           <select v-model="classOf">
-                            <option selected disabled>CPE {{ classOf }}</option>
+                            <option selected disabled>CPE</option>
                             <option
                               v-for="(classOf,index) in classLists"
                               v-bind:key="index"
@@ -271,7 +292,7 @@
                       class="input"
                       type="number"
                       ref="phoneNumber"
-                      @input="updateValue"
+                      @input="updateValuePhone"
                       onkeydown="return event.keyCode !== 69 && event.keyCode !== 189"
                       :value="phoneNumber"
                     />
@@ -317,7 +338,7 @@
                       class="input"
                       ref="line"
                       type="text"
-                      :value="profile.line"
+                      v-model="inputLine"
                     />
                   </div>
                 </div>
@@ -361,7 +382,7 @@
                       class="input"
                       ref="facebookAccount"
                       type="text"
-                      :value="profile.facebookAccount"
+                      v-model="inputFacebook"
                     />
                   </div>
                 </div>
@@ -409,7 +430,7 @@
                       class="input"
                       ref="organ"
                       type="text"
-                      :value="profile.organ"
+                      v-model="inputOrgan"
                     />
                   </div>
                 </div>
@@ -453,7 +474,7 @@
                       class="input"
                       ref="role"
                       type="text"
-                      :value="profile.role"
+                      v-model="inputRole"
                     />
                   </div>
                 </div>
@@ -497,7 +518,7 @@
                       class="input"
                       ref="field"
                       type="text"
-                      :value="profile.field"
+                      v-model="inputField"
                     />
                   </div>
                 </div>
@@ -551,6 +572,7 @@ import User from '../models/user';
 import decode from "jwt-decode";
 import UserService from '../services/user.service';
 import {bus} from '../main'
+// const mkdirp = require('mkdirp')
 
 export default {
   data() {
@@ -561,16 +583,30 @@ export default {
       editSelect: false,
       classOf: "",
       phoneNumber: "",
+      inputLine:"",
+      inputFirstName:"",
+      inputLastName:"",
+      inputNickName:"",
+      inputFacebook:"",
+      inputOrgan:"",
+      inputRole:"",
+      inputField:"",
       connectDate: "",
       day: "",
       month: "",
       year: "",
       profile: new User(),
-      display:new User(),
+      display: new User(),
       days: [],
       months: ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"],
       years: [],
       classLists: ["อาจารย์", "บุคลากร"],
+      preview: "",
+      tempImage: "",
+      image: null,
+      preview_list: [],
+      image_list: [],
+      show: false,
     }
   },
   created() {
@@ -585,13 +621,34 @@ export default {
       this.year = this.profile.birthday_year;
       this.classOf = this.profile.classOf;
       this.phoneNumber = this.profile.phoneNumber;
+      this.inputFirstName = this.profile.firstName;
+      this.inputLastName = this.profile.lastName;
+      this.inputNickName = this.profile.nickName;
+      this.inputLine = this.profile.line;
+      this.inputFacebook = this.profile.facebookAccount;
+      this.inputOrgan = this.profile.organ;
+      this.inputRole = this.profile.role;
+      this.inputField = this.profile.field;
       this.connectDate = this.profile.birthday_day + " " + this.profile.birthday_month + " " + this.profile.birthday_year;
-
       this.display.email = this.profile.email;
+      this.display.accountType = this.profile.accountType;
+      this.display.profilePic = this.profilePic;
       this.display.firstName = this.profile.firstName;
-      this.display.lastName = this.profile.lastName; 
+      this.display.lastName = this.profile.lastName;
+      this.$store.state.accountTypeCheck = this.profile.accountType;
+      this.display.profilePic = this.profile.profilePic;
+      if(this.profile.accountType == "EMAIL")
+        {
+        this.preview = require("@/assets/user/default-pic.jpg")
+        this.tempImage = require("@/assets/user/default-pic.jpg")
+        }
+      else
+        {
+        this.preview = this.profile.profilePic;
+        this.tempImage = this.profile.profilePic;  
+        }
       bus.$emit('display',this.display);
-      }
+    }
     })
     .catch(
       () => {
@@ -599,10 +656,11 @@ export default {
       }
     )
     for (var i = 1; i <= 31; i++) this.days.push(i);
-    for (var j = 1920; j <= 2020; j++) this.years.push(j);
+    for (var j = 2020; j >= 1920; j--) this.years.push(j);
     for (var k = 1; k <= 34; k++) this.classLists.push("CPE " + k);
   },
   computed: {
+  
     selectedProfile() {
       let selected = "line_select";
       let deselected = "line";
@@ -629,20 +687,62 @@ export default {
       }
   },
   methods: {
+    previewImage: function (event) {
+      var input = event.target;
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = (e) => {
+          this.tempImage = this.preview;
+          this.preview = e.target.result;
+        };
+        this.image = input.files[0];
+        reader.readAsDataURL(input.files[0]);
+        // mkdirp.sync('/assets/profilePicture/' + this.profile.id);
+      }
+    },
+    previewMultiImage: function (event) {
+      var input = event.target;
+      var count = input.files.length;
+      var index = 0;
+      if (input.files) {
+        while (count--) {
+          var reader = new FileReader();
+          reader.onload = (e) => {
+            this.preview_list.push(e.target.result);
+          };
+          this.image_list.push(input.files[index]);
+          reader.readAsDataURL(input.files[index]);
+          index++;
+        }
+      }
+    },
+    // reset: function () {
+    //   this.image = null;
+    //   this.preview = null;
+    //   this.image_list = [];
+    //   this.preview_list = [];
+    // },
+    changeOpacity() {
+      let change = "profilechange"
+      if (this.editSelect === true){
+        return change;
+      }
+    },
     saveProfile() {
-      this.profile.firstName = this.$refs["firstName"].value;
-      this.profile.lastName = this.$refs["lastName"].value;
-      this.profile.nickName = this.$refs["nickName"].value;
+      this.tempImage = this.preview
+      this.profile.firstName = this.inputFirstName;
+      this.profile.lastName = this.inputLastName;
+      this.profile.nickName = this.inputNickName;
       this.profile.birthday_day = this.day;
       this.profile.birthday_month = this.month;
       this.profile.birthday_year = this.year;
       this.profile.classOf = this.classOf;
       this.profile.phoneNumber = this.$refs["phoneNumber"].value;
-      this.profile.line = this.$refs["line"].value;
-      this.profile.facebookAccount = this.$refs["facebookAccount"].value;
-      this.profile.organ = this.$refs["organ"].value;
-      this.profile.role = this.$refs["role"].value;
-      this.profile.field = this.$refs["field"].value;
+      this.profile.line = this.inputLine;
+      this.profile.facebookAccount = this.inputFacebook;
+      this.profile.organ = this.inputOrgan;
+      this.profile.role = this.inputRole;
+      this.profile.field = this.inputField;
       this.connectDate =
         this.profile.birthday_day +
         " " +
@@ -670,22 +770,47 @@ export default {
       this.year = this.profile.birthday_year;
       this.classOf = this.profile.classOf;
       this.phoneNumber = this.profile.phoneNumber;
+      this.preview = this.tempImage;
+      this.inputFirstName = this.profile.firstName;
+      this.inputLastName = this.profile.lastName;
+      this.inputNickName = this.profile.nickName;
+      this.inputLine = this.profile.line;
+      this.inputFacebook = this.profile.facebookAccount;
+      this.inputOrgan = this.profile.organ;
+      this.inputRole = this.profile.role;
+      this.inputField = this.profile.field;
     },
     OnclickChange() {
       this.$emit("selectReturn", false);
     },
-    updateValue(event) {
+    updateValuePhone(event) {
       const value = event.target.value;
       if (String(value).length <= 10) {
         this.phoneNumber = value;
       }
       this.$forceUpdate();
-    }
+    },
   }
 }
 </script>
 
 <style scoped>
+#camera {
+  z-index: 1000;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  border: #312f71 2px solid;
+}
+.profilechange {
+  opacity: 0.7;
+}
+#profile-mask {
+  display: none;
+}
 ::placeholder {
   color: #312f71;
   font-size: 1em;
@@ -772,9 +897,17 @@ export default {
   align-items: top;
 }
 .profilepic {
+  position: relative;
   width: 159px;
+  height: 159px;
+  overflow: hidden;
   border-radius: 50%;
   border: #312f71 2px solid;
+}
+
+.profilepic img {
+  width: 100%;
+  height: auto;
 }
 
 #button {
@@ -879,7 +1012,8 @@ input[data-v-7ecbf6ee] {
 .inputText {
   color: #312f71;
   letter-spacing: 1px;
-  font-family: "CloudBold";
+  font-family: "CloudLight";
+  -webkit-text-stroke: 0.7px #312f71;
   font-size: 1.75em;
   margin: 0;
 }
@@ -970,6 +1104,7 @@ input[data-v-7ecbf6ee] {
 
   .profilepic {
     width: 150px;
+    height:150px;
     margin-bottom: 30px;
     /* display: none; */
   }
@@ -1000,6 +1135,7 @@ input[data-v-7ecbf6ee] {
   }
   .profilepic {
     width: 100px;
+    height:100px;
     margin-bottom: 30px;
     /* display: none; */
   }
