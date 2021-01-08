@@ -9,8 +9,8 @@ const app = express();
 const secretKey = require("./app/config/auth.config").secret;
 
 var corsOptions = {
-  origin: "http://localhost:8081",
-  credentials: true
+  origin: "http://10.26.100.190",
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
