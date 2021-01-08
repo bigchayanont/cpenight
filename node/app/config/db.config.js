@@ -13,7 +13,7 @@
 // };
 
 module.exports = {
-  HOST: process.env.DB_URL || "localhost",
+  HOST: "10.26.100.190" || "localhost",
   USER: "testuser",
   PASSWORD: "P@ssw0rd",
   DB: "user",
