@@ -15,11 +15,14 @@ exports.signup = (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-
+  let password = "";
+  if (req.body.accountType === "EMAIL") {
+    password = bcrypt.hashSync(req.body.password, 8);
+  }
   // Save User to Database
   User.create({
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8),
+    password: password,
     accountType: req.body.accountType,
     authId: req.body.authId,
     profilePic: req.body.profilePic,
@@ -38,24 +41,6 @@ exports.signup = (req, res) => {
     field: req.body.field,
   })
     .then((user) => {
-      // if (req.body.roles) {
-      //   Role.findAll({
-      //     where: {
-      //       name: {
-      //         [Op.or]: req.body.roles,
-      //       },
-      //     },
-      //   }).then((roles) => {
-      //     user.setRoles(roles).then(() => {
-      //       res.send({ message: "User registered successfully!" });
-      //     });
-      //   });
-      // } else {
-      // user role = 1
-      // user.setRoles([1]).then(() => {
-      //   res.send({ message: "User registered successfully!" });
-      // });
-      // }
       res.send({ message: "User registered successfully!" });
     })
     .catch((err) => {
@@ -73,17 +58,18 @@ exports.signin = (req, res) => {
       if (!user) {
         return res.status(404).send({ message: "User Not found." });
       }
+      if (user.accountType === "EMAIL") {
+        var passwordIsValid = bcrypt.compareSync(
+          req.body.password,
+          user.password
+        );
 
-      var passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
-      );
-
-      if (!passwordIsValid) {
-        return res.status(401).send({
-          accessToken: null,
-          message: "Invalid Password!",
-        });
+        if (!passwordIsValid) {
+          return res.status(401).send({
+            accessToken: null,
+            message: "Invalid Password!",
+          });
+        }
       }
 
       const payload = {
@@ -103,8 +89,7 @@ exports.signin = (req, res) => {
       //     authorities.push("ROLE_" + roles[i].name.toUpperCase());
       //   }
 
-      res.cookie("user", token, { httpOnly: true, maxAge: 900000})
-      console.log(req.headers)
+      res.cookie("user", token, { httpOnly: true, maxAge: 900000 });
 
       res.status(200).send({
         token,
@@ -138,20 +123,16 @@ exports.signin = (req, res) => {
     });
 };
 
-
-exports.checkEmailExists = (req,res) => {
-  User.findOne({ 
+exports.checkEmailExists = (req, res) => {
+  User.findOne({
     where: {
       email: req.body.email,
     },
-  })
-  .then((user) => {
-    if(user) {
-      res.status(404).send({message: 'Email duplicate'});
+  }).then((user) => {
+    if (user) {
+      res.status(404).send({ message: "Email duplicate" });
+    } else {
+      res.status(200).send({ message: "Email is not duplicated" });
     }
-    else
-    {
-      res.status(200).send({ message:"Email is not duplicated"})
-    }
-  })
-}
+  });
+};
