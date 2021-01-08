@@ -115,6 +115,7 @@
                     color: #ffffff;
                   "
                   href="https://www.lazada.co.th/products/poker-card-i1658396589-s5927300183.html?spm=a2o4m.searchlist.list.7.7e4c5fc142RRwn&search=1"
+                  target="_blank"
                 >
                   <a>Shop</a>
                   <img
@@ -124,16 +125,15 @@
 
                 <!-- Login -->
                 <div v-show="!login" id="login_text">
-                  <a @click="unCheck(checkedBox)"
+                  <router-link to="/login" @click="unCheck(checkedBox)"
                     style="
                       display: flex;
                       justify-content: center;
                       align-items: center;
                       font-size: 2em;
                     "
-                    href="/login"
                     class="btn transparent"
-                    >Log In</a
+                    >Log In</router-link
                   >
                 </div>
                 <!-- Login -->
@@ -146,6 +146,7 @@
                       justify-content: center;
                       align-items: center;
                       font-size: 2em;
+                      text-transform:capitalize;
                     "
                     href="/profile"
                     class="btn transparent"
@@ -156,7 +157,7 @@
 
                 <a style="margin: 0px; padding: 0px">
                   <div
-                    @click="unCheck(checkedBox)"
+                    @click="unCheck(checkedBox),changeLang()"
                     id="changelag"
                     style="
                       display: flex;
@@ -164,6 +165,7 @@
                       align-items: center;
                       font-size: 2em;
                       color: #ffffff;
+                      cursor:pointer;
                     "
                   >
                     <span>EN</span>
@@ -222,6 +224,9 @@ export default {
   methods: {
     unCheck() {
       this.checkedBox = false;
+    },
+    changeLang(){
+      alert("This feature is under development");
     }
   }
 }
