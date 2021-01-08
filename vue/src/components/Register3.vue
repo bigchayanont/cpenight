@@ -37,12 +37,16 @@
 
                 <div>
                   <!-- First Section-->
-                  <h2 class="question" style="cursor: default;">What's your name?</h2>
+                  <h2 class="question" style="cursor: default;">
+                    What's your name?
+                  </h2>
                   <div>
                     <div class="input-section">
                       <!-- Input Section -->
                       <div class="input-space">
-                        <h1 style="cursor: default;" class="inputText">FIRST NAME*</h1>
+                        <h1 style="cursor: default;" class="inputText">
+                          FIRST NAME*
+                        </h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
                             v-model="user.firstName"
@@ -57,7 +61,9 @@
                       <!-- Input Section -->
                       <!-- Input Section -->
                       <div>
-                        <h1 style="cursor: default;" class="inputText">LAST NAME*</h1>
+                        <h1 style="cursor: default;" class="inputText">
+                          LAST NAME*
+                        </h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
                             v-model="user.lastName"
@@ -75,7 +81,9 @@
                     <div class="input-single">
                       <!-- Input Section -->
                       <div class="input-space">
-                        <h1 style="cursor: default;" class="inputText">NICKNAME*</h1>
+                        <h1 style="cursor: default;" class="inputText">
+                          NICKNAME*
+                        </h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
                             v-model="user.nickName"
@@ -92,8 +100,13 @@
                   </div>
 
                   <!-- Second Section-->
-                  <h2 style="cursor: default;" class="question">When is your birthday?</h2>
-                  <h1 style="padding-bottom: 5px; cursor: default;" class="inputText">
+                  <h2 style="cursor: default;" class="question">
+                    When is your birthday?
+                  </h2>
+                  <h1
+                    style="padding-bottom: 5px; cursor: default;"
+                    class="inputText"
+                  >
                     DATE OF BIRTH*
                   </h1>
                   <div style="display: flex; padding-top: 5px">
@@ -101,7 +114,10 @@
                       <div class="select-dropdown">
                         <select v-model="user.birthday_day">
                           <option selected disabled>DAY</option>
-                          <option v-for="(day,index) in days" v-bind:key="index">
+                          <option
+                            v-for="(day, index) in days"
+                            v-bind:key="index"
+                          >
                             {{ day }}
                           </option>
                         </select>
@@ -113,7 +129,10 @@
                       <div class="select-dropdown">
                         <select v-model="user.birthday_month">
                           <option selected disabled>MONTH</option>
-                          <option v-for="(month,index) in months" v-bind:key="index">
+                          <option
+                            v-for="(month, index) in months"
+                            v-bind:key="index"
+                          >
                             {{ month }}
                           </option>
                         </select>
@@ -122,10 +141,13 @@
                     </div>
 
                     <div id="year-select">
-                      <div  class="select-dropdown">
+                      <div class="select-dropdown">
                         <select v-model="user.birthday_year">
                           <option selected disabled>YEAR</option>
-                          <option v-for="(year,index) in years" v-bind:key="index">
+                          <option
+                            v-for="(year, index) in years"
+                            v-bind:key="index"
+                          >
                             {{ year }}
                           </option>
                         </select>
@@ -155,7 +177,11 @@
                   "
                 >
                   <div>
-                    <button style="cursor: pointer;" id="backButton" @click="backPage()">
+                    <button
+                      style="cursor: pointer;"
+                      id="backButton"
+                      @click="backPage()"
+                    >
                       <i
                         style="align: center; padding-right: 20px;"
                         class="fa fa-arrow-left"
@@ -164,7 +190,11 @@
                     </button>
                   </div>
                   <div>
-                    <button style="cursor: pointer;" id="nextButton" @click="checkRegister1()">
+                    <button
+                      style="cursor: pointer;"
+                      id="nextButton"
+                      @click="checkRegister1()"
+                    >
                       NEXT<i
                         style="align: center; padding-left: 20px"
                         class="fa fa-arrow-right"
@@ -182,96 +212,116 @@
 </template>
 
 <script>
-  import User from '../models/user';
-  import Vue from 'vue'
-  import vSelect from 'vue-select'
-  Vue.component('v-select', vSelect)
-  import 'vue-select/dist/vue-select.css'
+import User from "../models/user";
+import Vue from "vue";
+import vSelect from "vue-select";
+Vue.component("v-select", vSelect);
+import "vue-select/dist/vue-select.css";
 
-  export default {
-    data() {
-      return {
+export default {
+  data() {
+    return {
       user: new User(),
       days: [],
-      months: ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"],
+      months: [
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP",
+        "OCT",
+        "NOV",
+        "DEC",
+      ],
       years: [],
+    };
+  },
+  created() {
+    for (var i = 1; i <= 31; i++) this.days.push(i);
+    for (var j = 2020; j >= 1920; j--) this.years.push(j);
+    if (!this.$store.state.userInfo.birthday_day) {
+      this.user.birthday_day = "DAY";
+    } else {
+      this.user.birthday_day = this.$store.state.userInfo.birthday_day;
+    }
+    if (!this.$store.state.userInfo.birthday_month) {
+      this.user.birthday_month = "MONTH";
+    } else {
+      this.user.birthday_month = this.$store.state.userInfo.birthday_month;
+    }
+    if (!this.$store.state.userInfo.birthday_year) {
+      this.user.birthday_year = "YEAR";
+    } else {
+      this.user.birthday_year = this.$store.state.userInfo.birthday_year;
+    }
+  },
+  mounted() {
+    this.user.firstName = this.$store.state.userInfo.firstName;
+    this.user.lastName = this.$store.state.userInfo.lastName;
+    this.user.nickName = this.$store.state.userInfo.nickName;
+  },
+  methods: {
+    checkRegister1() {
+      if (!this.user.firstName) {
+        alert("Firstname required");
+        console.log("Firstname required");
+      } else if (!this.user.lastName) {
+        alert("Lastname required");
+        console.log("Lastname required");
+      } else if (!this.user.nickName) {
+        alert("Nickname required");
+        console.log("Nickname required");
+      } else if (this.user.birthday_day == "DAY") {
+        alert("birthday required");
+        console.log("birthday required");
+      } else if (this.user.birthday_month == "MONTH") {
+        alert("birthday required");
+        console.log("birthday required");
+      } else if (this.user.birthday_year == "YEAR") {
+        alert("birthday required");
+        console.log("birthday required");
+      } else {
+        this.$store.state.userInfo.firstName = this.user.firstName;
+        this.$store.state.userInfo.lastName = this.user.lastName;
+        this.$store.state.userInfo.nickName = this.user.nickName;
+        this.$store.state.userInfo.birthday_day = this.user.birthday_day;
+        this.$store.state.userInfo.birthday_month = this.user.birthday_month;
+        this.$store.state.userInfo.birthday_year = this.user.birthday_year;
+        console.log("Register3:");
+        console.log("email : " + this.$store.state.userInfo.email);
+        console.log("password : " + this.$store.state.userInfo.password);
+        console.log("accountType : " + this.$store.state.userInfo.accountType);
+        console.log("authId : " + this.$store.state.userInfo.authId);
+        console.log("profilePic : " + this.$store.state.userInfo.profilePic);
+        console.log("firstName : " + this.$store.state.userInfo.firstName);
+        console.log("lastName : " + this.$store.state.userInfo.lastName);
+        console.log("nickName : " + this.$store.state.userInfo.nickName);
+        console.log("birthday_day : " + this.$store.state.userInfo.birthday_day);
+        console.log("birthday_month : " + this.$store.state.userInfo.birthday_month);
+        console.log("birthday_year : " + this.$store.state.userInfo.birthday_year);
+        console.log("classOf : " + this.$store.state.userInfo.classOf);
+        console.log("phoneNumber : " + this.$store.state.userInfo.phoneNumber);
+        console.log("line : " + this.$store.state.userInfo.line);
+        console.log("facebookAccount : " + this.$store.state.userInfo.facebookAccount);
+        console.log("organ : " + this.$store.state.userInfo.organ);
+        console.log("role : " + this.$store.state.userInfo.role);
+        console.log("field : " + this.$store.state.userInfo.field);
+        this.$emit("pageReturn", 4);
       }
     },
-    created() {
-    for (var i = 1; i <= 31; i++) this.days.push(i);
-    for (var j = 1920; j <= 2020; j++) this.years.push(j);
-    this.user.birthday_day = "DAY";
-    this.user.birthday_month = "MONTH";
-    this.user.birthday_year = "YEAR";
-    },
-    mounted() {
-        this.user.firstName = this.$store.state.userInfo.firstName
-        this.user.lastName = this.$store.state.userInfo.lastName
-        this.user.nickName = this.$store.state.userInfo.nickName
-    },
-    methods: {
-      checkRegister1() {
-        if (!this.user.firstName) {
-            alert('Firstname required');
-            console.log('Firstname required');
-        } 
-        else if (!this.user.lastName) {
-            alert('Lastname required');
-            console.log('Lastname required');
-        } 
-        else if (!this.user.nickName) {
-            alert('Nickname required');
-            console.log('Nickname required');
-        }
-        else if (this.user.birthday_day == "DAY") {
-            alert('birthday required');
-            console.log('birthday required');
-        }
-        else if (this.user.birthday_month == "MONTH") {
-            alert('birthday required');
-            console.log('birthday required');
-        }
-        else if (this.user.birthday_year == "YEAR") {
-            alert('birthday required');
-            console.log('birthday required');
-        }
-        else
-        {
-          this.$store.state.userInfo.firstName = this.user.firstName;
-          this.$store.state.userInfo.lastName = this.user.lastName;
-          this.$store.state.userInfo.nickName = this.user.nickName;
-          this.$store.state.userInfo.birthday_day = this.user.birthday_day;
-          this.$store.state.userInfo.birthday_month = this.user.birthday_month;
-          this.$store.state.userInfo.birthday_year = this.user.birthday_year;
-          console.log("Register3:");
-          console.log(this.$store.state.userInfo.email);
-          console.log(this.$store.state.userInfo.password);
-          console.log(this.$store.state.userInfo.firstName);
-          console.log(this.$store.state.userInfo.lastName);
-          console.log(this.$store.state.userInfo.nickName);
-          console.log(this.$store.state.userInfo.birthday_day);
-          console.log(this.$store.state.userInfo.birthday_month);
-          console.log(this.$store.state.userInfo.birthday_year);
-          console.log(this.$store.state.userInfo.cpe);
-          console.log(this.$store.state.userInfo.phoneNumber);
-          console.log(this.$store.state.userInfo.line);
-          console.log(this.$store.state.userInfo.facebookAccount);
-          console.log(this.$store.state.userInfo.organ);
-          console.log(this.$store.state.userInfo.role);
-          console.log(this.$store.state.userInfo.field);
-
-          this.$emit("pageReturn",4)
-        }
-      },
-      backPage(){
-          this.$emit("pageReturn",2)
-      },
+    backPage() {
+      this.$emit("pageReturn", 2);
     }
   }
+}
 </script>
 
 <style scoped>
-  * {
+* {
   z-index: 1;
 }
 .select-dropdown,

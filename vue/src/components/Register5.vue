@@ -37,12 +37,16 @@
 
                 <div>
                   <!-- First Section-->
-                  <h2 style="cursor: default;" class="question">Where do you work?</h2>
+                  <h2 style="cursor: default;" class="question">
+                    Where do you work?
+                  </h2>
                   <div>
                     <div class="input-section">
                       <!-- Input Section -->
                       <div class="input-space">
-                        <h1 style="cursor: default" class="inputText">ORGANIZATION (OPTIONAL)</h1>
+                        <h1 style="cursor: default" class="inputText">
+                          ORGANIZATION (OPTIONAL)
+                        </h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
                             v-model="user.organ"
@@ -57,7 +61,9 @@
                       <!-- Input Section -->
                       <!-- Input Section -->
                       <div>
-                        <h1 style="cursor: default;" class="inputText">ROLE (OPTIONAL)</h1>
+                        <h1 style="cursor: default;" class="inputText">
+                          ROLE (OPTIONAL)
+                        </h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
                             v-model="user.role"
@@ -72,11 +78,15 @@
                       <!-- Input Section -->
                     </div>
 
-                    <h2 style="cursor: default;" class="question">What do you do?</h2>
+                    <h2 style="cursor: default;" class="question">
+                      What do you do?
+                    </h2>
                     <div class="input-single">
                       <!-- Input Section -->
                       <div class="input-space">
-                        <h1 style="cursor: default;" class="inputText">FIELD OF WORK (OPTIONAL)</h1>
+                        <h1 style="cursor: default;" class="inputText">
+                          FIELD OF WORK (OPTIONAL)
+                        </h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
                             v-model="user.field"
@@ -105,7 +115,11 @@
                   "
                 >
                   <div>
-                    <button style="cursor: pointer;" id="backButton" @click="backPage()">
+                    <button
+                      style="cursor: pointer;"
+                      id="backButton"
+                      @click="backPage()"
+                    >
                       <i
                         style="align: center; padding-right: 20px"
                         class="fa fa-arrow-left"
@@ -114,7 +128,11 @@
                     </button>
                   </div>
                   <div>
-                    <button style="cursor: pointer;" id="nextButton" @click="nextPage()">
+                    <button
+                      style="cursor: pointer;"
+                      id="nextButton"
+                      @click="nextPage()"
+                    >
                       FINISH
                     </button>
                   </div>
@@ -129,80 +147,77 @@
 </template>
 
 <script>
+import User from "../models/user";
+export default {
+  name: "Register5",
+  components: {},
+  data() {
+    return {
+      user: new User(),
+      loading: false,
+      message: "",
+    };
+  },
+  methods: {
+    nextPage() {
+      this.$store.state.userInfo.organ = this.user.organ;
+      this.$store.state.userInfo.role = this.user.role;
+      this.$store.state.userInfo.field = this.user.field;
+      this.message = "";
+      this.submitted = true;
+      // this.$validator.validate().then(isValid => {
+      //   if (isValid) {
+      //     this.$store.dispatch('auth/register', this.user).then(
+      //       data => {
+      //         this.message = data.message;
+      //         this.successful = true;
+      //       },
+      //       error => {
+      //         this.message =
+      //           (error.response && error.response.data) ||
+      //           error.message ||
+      //           error.toString();
+      //         this.successful = false;
+      //       }
+      //     );
+      //   }
+      // });
+      this.$store.dispatch("auth/register", this.$store.state.userInfo).then(
+        (data) => {
+          this.message = data.message;
+          this.successful = true;
+          alert("register success");
+          this.$router.push("/login");
+        },
+        (error) => {
+          this.message =
+            (error.response && error.response.data) ||
+            error.message ||
+            error.toString();
+          this.successful = false;
+        }
+      );
+    },
+    backPage() {
+      this.$emit("pageReturn", 4);
+    },
+  },
 
-  import User from '../models/user';
-  export default {
-    name: "Register5",
-    components:{
-    },
-    data() {
-      return {
-        user: new User(),
-        loading: false,
-        message: ''      
-      }
-    },
-    methods: {
-      nextPage(){
-        this.$store.state.userInfo.organ = this.user.organ;
-        this.$store.state.userInfo.role = this.user.role;
-        this.$store.state.userInfo.field = this.user.field;
-        this.$store.state.userInfo.accountType = "EMAIL";
-        this.message = '';
-        this.submitted = true;
-        // this.$validator.validate().then(isValid => {
-        //   if (isValid) {
-        //     this.$store.dispatch('auth/register', this.user).then(
-        //       data => {
-        //         this.message = data.message;
-        //         this.successful = true;
-        //       },
-        //       error => {
-        //         this.message =
-        //           (error.response && error.response.data) ||
-        //           error.message ||
-        //           error.toString();
-        //         this.successful = false;
-        //       }
-        //     );
-        //   }
-        // });
-            this.$store.dispatch('auth/register', this.$store.state.userInfo).then(
-              data => {
-                this.message = data.message;
-                this.successful = true;
-                alert('register success');
-                this.$router.push('/login');
-              },
-              error => {
-                this.message =
-                  (error.response && error.response.data) ||
-                  error.message ||
-                  error.toString();
-                this.successful = false;
-              }
-            );
-      },
-      backPage(){
-          this.$emit("pageReturn",4)
-      }
-    },
-
-    computed: {
+  computed: {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
-      }
     },
-      mounted(){
-      this.user.organ = this.$store.state.userInfo.organ
-      this.user.field = this.$store.state.userInfo.field
-      this.user.role = this.$store.state.userInfo.role
-      if (this.loggedIn) {
-              alert('already logged in');
-              this.$router.push('/');
-      }
+  },
+  mounted() {
+    this.user.organ = this.$store.state.userInfo.organ;
+    this.user.field = this.$store.state.userInfo.field;
+    this.user.role = this.$store.state.userInfo.role;
+    if (this.loggedIn) {
+      alert("already logged in");
+      this.$router.push("/");
     }
-  }
+  },
+};
 </script>
 
 <style scoped>
@@ -517,8 +532,8 @@ html {
     width: 55px;
     padding-left: 10px;
   }
-  .title{
-    font-size:2.5em;
+  .title {
+    font-size: 2.5em;
   }
 
   #img-user {
