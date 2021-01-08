@@ -16,7 +16,7 @@ module.exports = {
   HOST: process.env.DB_URL || "localhost",
   USER: "testuser",
   PASSWORD: "P@ssw0rd",
-  DB: "testuser",
+  DB: "user",
   dialect: "mysql",
   pool: {
     max: 5,
