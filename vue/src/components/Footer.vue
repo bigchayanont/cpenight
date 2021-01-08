@@ -124,7 +124,7 @@
           <!-- Cpe Logo -->
           <div id="cpe-section">
             <div style="display: flex; justify-content: center">
-              <img id="cpelogo" src="@/assets/main/CPE_Logo.png" />
+              <img @click="clickCPE()" style="cursor:pointer;" id="cpelogo" src="@/assets/main/CPE_Logo.png" />
             </div>
             <p
               style="margin-bottom:0px; margin-top:0px; font-family:'CloudLight; color:#FFFFFF; font-size:2em; letter-spacing: 2.2px; line-height:1.5em; width:100%;"
@@ -157,7 +157,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    clickCPE(){
+      window.open('https://www.cpe.kmutt.ac.th/th/index','_blank' );    
+    }
+  },
+};
 </script>
 
 <style scoped>
