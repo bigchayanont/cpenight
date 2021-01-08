@@ -1,108 +1,268 @@
 <template>
-  <div id="souvenir">
-      <a style="font-size:30px; padding-left:30px;" href="/">Back to main</a>
-      <div class="row" style="padding-top:40px; padding-left:200px; padding-right:200px; display: grid; grid-template-columns: 50% 50%">
-          <img style="padding-top:20px; padding-left:400px; width:150px;" src="@/assets/TestCatalog/fe71ebd7d4515a716c013c0d363e7f49.jpg">
-          <div style="text-align:left;">
-          <h1>{{item_data.item_name}}</h1>
-          <p>฿ 250.00</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pharetra vel turpis nunc eget lorem dolor sed viverra.</p>
-          <div style="display: inline-block;">
-              <label for="myCheck">Size:</label>
-              <input type="checkbox" value="SS" v-model="item_selected.item_size" id="myCheck">
-              <input type="checkbox" value="S" v-model="item_selected.item_size" id="myCheck">
-              <input type="checkbox" value="M" v-model="item_selected.item_size" id="myCheck">
-              <input type="checkbox" value="L" v-model="item_selected.item_size" id="myCheck">
-              <input type="checkbox" value="XL" v-model="item_selected.item_size" id="myCheck">
-          </div>
-          <div style="margin-left:20px; display: inline-block;">
-              <label for="myCheck">Color:</label>
-              <input type="checkbox" id="myCheck">
-              <input type="checkbox" id="myCheck">
-          </div>
-          <div style="margin-left:20px; display: inline-block;">
-              <div id="field1">Quantity :
-                <button type="button" id="sub" class="sub">-</button>
-                <input type="number" id="1" value="1" min="1" max="3" />
-                <button type="button" id="add" class="add">+</button>
-            </div>
-          </div>
+  <div id="Usermenu">
+    <!---- Menu Bar ---->
+    <div id="menu-container" style="min-height: 100vh">
+      <!-- Name / Email -->
+      <div style="padding-left: 59px; padding-top: 40px">
+        <img class="profilepic" src="@/assets/user/profile.jpg" />
+        <h1 style="margin-top: 15px" class="nameSide">{{display.firstName}}</h1>
+        <h1 class="nameSide">{{display.lastName}}</h1>
+        <h3 style="margin-top: 5px" class="emailSide">
+          {{display.email}}
+        </h3>
       </div>
+      <!-- Name / Email -->
+
+      <!-- unSelect -->
+      <div style="cursor: pointer;" v-show="select1 == false" @click="Onclick1()">
+        <div
+          style="
+            align-items: center;
+            width: 100%;
+            margin-left: 59px;
+            margin-top: 35px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <img
+            class="icon"
+            style="width: 23px"
+            src="@/assets/user/ticket-white.png"
+          />
+          <h2 style="color: #ffffff;" class="select">MY TICKET</h2>
+        </div>
       </div>
-      <div class="row" style="padding-top:40px; padding-left:200px; padding-right:200px;">
-          <h1 style="margin-bottom:40px; text-align:center;">Other Product</h1>
-          <div style="display: flex; justify-content: center; align-items: center;}">
-              <div style="margin-left:20px; display: inline-block;">
-                <img style="width:120px;" src="@/assets/TestCatalog/unnamed.jpg">
-                <p>Item1</p>
-                <p>฿ 500.00</p>
-              </div>
-              <div style="margin-left:100px; display: inline-block;">
-                <img style="width:120px;" src="@/assets/TestCatalog/mlt3ud.png">
-                <p>Item1</p>
-                <p>฿ 500.00</p>
-              </div>
-              <div style="margin-left:100px; display: inline-block;">
-                <img style="width:120px;" src="@/assets/TestCatalog/d9z04r.png">
-                <p>Item1</p>
-                <p>฿ 500.00</p>
-              </div>
-              <div style="margin-left:100px; display: inline-block;">
-                <img style="width:120px;" src="@/assets/TestCatalog/1A1A435FFBB845CD9929EDCD0ADCBF14.jpg">
-                <p>Item1</p>
-                <p>฿ 500.00</p>
-              </div>
+      <!-- unSelect -->
+
+      <!-- Select -->
+      <div v-show="select1 == true" style="border-left: 8px solid #f28093; cursor: default;">
+        <div
+          style="
+            align-items: center;
+            width: 100%;
+            margin-left: 51px;
+            margin-top: 35px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <img
+            class="icon"
+            style="width: 23px"
+            src="@/assets/user/ticket-pink.png"
+          />
+          <h2 style="color: #f28093" class="select">MY TICKET</h2>
+          <img
+            class="leaves"
+            style="padding-left: 20px; width: 35px"
+            src="@/assets/user/TitleLeaves_Pink.png"
+          />
+        </div>
+      </div>
+      <!-- Select -->
+
+      <!-- unSelect -->
+      <div style="cursor: pointer;" v-show="select2 == false" @click="Onclick2()">
+        <div
+          style="
+            align-items: center;
+            width: 100%;
+            margin-left: 59px;
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <img
+            class="icon"
+            style="width: 23px"
+            src="@/assets/user/profile.white.png"
+          />
+          <h2 style="color: #ffffff" class="select">MY ACCOUNT</h2>
+        </div>
+      </div>
+      <!-- unSelect -->
+
+      <!-- Select -->
+      <div v-show="select2 == true" style="border-left: 8px solid #f28093; cursor: default;">
+        <div
+          style="
+            align-items: center;
+            width: 100%;
+            margin-left: 51px;
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+          "
+        >
+          <img
+            class="icon"
+            style="width: 23px"
+            src="@/assets/user/profile-pink.png"
+          />
+          <h2 style="color: #f28093" class="select">MY ACCOUNT</h2>
+          <img
+            class="leaves"
+            style="padding-left: 20px; width: 35px"
+            src="@/assets/user/TitleLeaves_Pink.png"
+          />
+        </div>
+      </div>
+      <!-- Select -->
+      <div id="bottom">
+        <!-- Mainpage -->
+        <div>
+          <div
+            @click="backMain()"
+            style="
+              align-items: center;
+              width: 100%;
+              margin-left: 59px;
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+            "
+          >
+            <img
+              class="icon"
+              style="width: 23px"
+              src="@/assets/user/home.png"
+            />
+            <h2 style="color: #ffffff" class="select">MAINPAGE</h2>
           </div>
+        </div>
+        <!-- Mainpage -->
+
+        <!-- Logout -->
+        <div>
+          <div
+            @click="logOut()"
+            style="
+              align-items: center;
+              width: 100%;
+              margin-left: 59px;
+              margin-top: 25px;
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+            "
+          >
+            <img
+              class="icon"
+              style="width: 23px"
+              src="@/assets/user/exit.png"
+            />
+            <h2 style="color: #ffffff" class="select">LOG OUT</h2>
+          </div>
+        </div>
+        <!-- Logout -->
       </div>
+    </div>
+    <!---- Menu Bar ---->
   </div>
 </template>
 
 <script>
+import { bus } from '../main'
+import User from '../models/user';
 export default {
-    name:"souvenir",
-    data() {
-      return {
-        item_data: {
-          item_id:"PSS011",
-          item_name:"Screen Shirt",
-          item_price:"฿100.00",
-          item_color:["Red","Blue"],
-          item_description:"Screen Shirt Blue Size S",
-          item_image:"",
-        },
-        item_selected:{
-          item_id:"",
-          item_size:[],
-          item_color:""
-        },
-        /* checkData: {
-          tickLimit: 1,
-          ticks: [],
-          boxes: [
-            { value: 'first', checked: false, disabled: false },
-            { value: 'second', checked: false, disabled: false },
-            { value: 'third', checked: false, disabled: false },
-            { value: 'fourth', checked: false, disabled: false },
-            { value: 'fifth', checked: false, disabled: false },
-          ],
-        }, */
-      }
-    },
-    methods: {
-      /* updateBoxes() {
-      // update the number of ticks...
-      this.ticks = this.boxes.filter(box => box.checked);
-
-      // re-enable checkboxes if back under the limit...
-      if (this.ticks.length < this.tickLimit) {
-        this.boxes.forEach(box => {
-          if (box.checked == false) box.disabled = false;
-        });
-      } */
-    }
+  data() {
+    return {
+      select1: false,
+      select2: true,
+      display: new User(),
+    };
+  },
+  created() {
+    bus.$on('display', (data) => {
+      this.display = data
+    });
     
+  },
+  methods: {
+    Onclick1() {
+      this.select1 = true;
+      this.select2 = false;
+      this.$emit("pageReturn", false);
+    },
+    Onclick2() {
+      this.select1 = false;
+      this.select2 = true;
+      this.$emit("pageReturn", true);
+    },
+    backMain() {
+      window.location.href = "/";
+    },
+    logOut() {
+      this.$store.dispatch("auth/logout");
+      this.$router.push("/");
+      alert('Logged Out Successful')
+    }
+  }
 }
 </script>
 
 <style scoped>
+.icon {
+  padding-right: 10px;
+}
+
+.leaves {
+  display: initial;
+}
+
+#Usermenu {
+  box-shadow: 15px 0 15px -2px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+#menu-container {
+  background-color: #312f71;
+}
+
+.profilepic {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+}
+
+.nameSide {
+  font-family: "CloudBold";
+  font-size: 2.5em;
+  letter-spacing: 2.24px;
+  color: #ffffff;
+  margin: 0px 0px;
+}
+
+.emailSide {
+  color: #f8b8b2;
+  font-family: "CloudLight";
+  font-size: 1.25em;
+  letter-spacing: 0.98px;
+  margin: 0px 0px;
+}
+
+.select {
+  font-size: 2em;
+  letter-spacing: 1px;
+  margin: 0px;
+  padding-top: 3px;
+  font-family: "CloudBold";
+}
+
+#bottom {
+  margin-top: 300px;
+}
+
+@media screen and (max-width: 1360px) {
+  .leaves {
+  display: none;
+}
+}
+@media screen and (max-width: 1024px) {
+  #Usermenu {
+    display: none;
+  }
+}
 </style>
