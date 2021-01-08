@@ -50,6 +50,7 @@
                   <div id="facebook-login">
                     <facebook-login
                       class="button"
+                      style="display:none;"
                       appId="facebookAuth.appId"
                       @login="onLogin"
                       @logout="onLogout"
@@ -58,11 +59,11 @@
                     ></facebook-login>
                   </div>
 
-                  <!-- <img
+                  <img
                     class="img-login"
                     style="margin-top: 15px; cursor: pointer;"
                     src="@/assets/Facebook.png"
-                  />-->
+                  />
                   <br />
                 </div>
                 <br />
@@ -82,11 +83,11 @@
                     class="descript-text"
                     style="color: #ffffff; cursor: default;"
                   >Already have an account ?</span>
-                  <a
+                  <router-link to="/login"
                     class="descript-text"
                     style="margin-left: 10px; color: #f28093"
-                    href="/login"
-                  >Login</a>
+                    >Login</router-link
+                  >
                 </div>
               </div>
             </div>
