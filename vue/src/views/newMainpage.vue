@@ -321,7 +321,7 @@
                   margin-right: auto;
                   border: 0;
                 "
-                src="https://www.google.com/maps/embed/v1/place?q=Calvary%20Club&key=AIzaSyB2Uyif86LQPyvZSLwvM3fzfWQSvH-bycg"
+                src="https://www.google.com/maps/embed/v1/place?q=Calvary%20Club&key=AIzaSyCs6ijB-66qxGjocpAkPDknfkXt0B1fQxc"
                 allowfullscreen
               ></iframe>
               <img
@@ -634,7 +634,7 @@
             vel turpis nunc eget lorem dolor sed viverra.
           </p>
           <div class="button_container">
-            <button id="shopButton">
+            <button id="shopButton" @click="clickShop()">
               GO TO SHOP<i
                 style="align: center; padding-left: 20px"
                 class="fa fa-arrow-right"
@@ -934,7 +934,7 @@
 
             <!-- Question Box -->
             <div
-              @click="Ans6 = !Ans6"
+              @click="Ans5 = !Ans5"
               class="about"
               style="
                 margin-bottom: 35px;
@@ -956,7 +956,7 @@
                 <i
                   style="font-size: 40px"
                   class="fa fa-angle-right"
-                  :class="arrowLeft4"
+                  :class="arrowLeft5"
                 ></i>
                 <h3 class="textQuestion" style="margin-left: 20px">
                   ในงานมีอะไรบ้าง ?
@@ -968,7 +968,7 @@
             <!-- Answer Box -->
             <transition name="slide">
               <div
-                v-if="Ans6"
+                v-if="Ans5"
                 class="about"
                 style="
                   margin-bottom: 35px;
@@ -1002,7 +1002,7 @@
 
             <!-- Question Box -->
             <div
-              @click="Ans5 = !Ans5"
+              @click="Ans6 = !Ans6"
               class="about"
               style="
                 margin-bottom: 35px;
@@ -1036,7 +1036,7 @@
             <!-- Answer Box -->
             <transition name="slide">
               <div
-                v-if="Ans5"
+                v-if="Ans6"
                 class="about"
                 style="
                   margin-bottom: 35px;
@@ -1109,11 +1109,11 @@
         </div>
         <!-- Logo -->
         <div id="sponsor_box">
-          <img style="width: 80px" src="@/assets/main/asquare.png" />
-          <img style="width: 130px" src="@/assets/main/innosoft_logo.svg" />
-          <img style="width: 80px" src="@/assets/main/new-logo-kmutt1.png" />
-          <img
-            style="width: 120px"
+          <img @click="clickspon1()" style="width: 80px; cursor:pointer;" src="@/assets/main/asquare.png" />
+          <img @click="clickspon2()" style="width: 130px; cursor:pointer;" src="@/assets/main/innosoft_logo.svg" />
+          <img @click="clickspon3()" style="width: 80px; cursor:pointer;" src="@/assets/main/new-logo-kmutt1.png" />
+          <img @click="clickspon4()"
+            style="width: 120px; cursor:pointer;"
             src="@/assets/main/857f1d2429af9eb87f8c7cb0fcbd0cb7.png"
           />
         </div>
@@ -1133,6 +1133,30 @@ export default {
   components: {
     Navbar,
     Footer,
+  },
+  methods: {
+    clickShop(){
+      window.open(
+  'https://www.lazada.co.th/shop/adidasthailand?spm=a2o4m.officialstores.1001.dstorelist_2_1.29214770BUCMVL&pos=2&acm=20180501004&scm=1007.18128.100341.100200300000000',
+  '_blank'
+);
+    },
+    clickspon1(){
+      window.open('http://www.asquarebangkok.com/',
+        '_blank');
+    },
+    clickspon2(){
+      window.open('http://www.innosoft.kmutt.ac.th/',
+        '_blank' );
+    },
+    clickspon3(){
+      window.open('https://www.kmutt.ac.th/',
+        '_blank' );
+    },
+    clickspon4(){
+      window.open('https://th.uncyclopedia.info/wiki/%E0%B9%84%E0%B8%A3%E0%B9%89%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%A5%E0%B8%B1%E0%B8%A2:%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%A5%E0%B8%B1%E0%B8%A2%E0%B9%80%E0%B8%97%E0%B8%84%E0%B9%82%E0%B8%99%E0%B9%82%E0%B8%A5%E0%B8%A2%E0%B8%B5%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%88%E0%B8%AD%E0%B8%A1%E0%B9%80%E0%B8%81%E0%B8%A5%E0%B9%89%E0%B8%B2%E0%B8%98%E0%B8%99%E0%B8%9A%E0%B8%B8%E0%B8%A3%E0%B8%B5#.E0.B8.A7.E0.B8.B4.E0.B8.A8.E0.B8.A7.E0.B8.81.E0.B8.A3.E0.B8.A3.E0.B8.A1.E0.B8.84.E0.B8.AD.E0.B8.A1.E0.B8.9E.E0.B8.B4.E0.B8.A7.E0.B9.80.E0.B8.95.E0.B8.AD.E0.B8.A3.E0.B9.8C_.28Copy_and_Paste_Engineering.29',
+        '_blank' );
+    }
   },
   data() {
     return {
