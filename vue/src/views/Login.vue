@@ -1,5 +1,6 @@
 <template>
-  <div class="two-background">
+  <div> 
+    <div v-if="page === 1" class="two-background">
     <vue-particles
       color="#dedede"
       :particleOpacity="0.3"
@@ -22,11 +23,11 @@
         <div class="section">
           <div>
             <div style="display: flex; align-items: center">
-              <a href="/" style="text-decoration: none" id="backToMain"
+              <a @click="backMain()" style="text-decoration: none; cursor: pointer;" id="backToMain"
                 >&lt; Main Page</a
               >
-              <img
-                style="padding-left: 10px; width: 23px"
+              <img @click="backMain()"
+                style="padding-left: 10px; width: 23px; margin-top: -3.5px; cursor: pointer;"
                 src="@/assets/user/home.png"
               />
             </div>
@@ -71,14 +72,20 @@
                 </p>
 
                 <div>
+                  <GoogleLogin
+                    style="width:auto; padding:0px; border:none; height:45px;"
+                    :params="googleAuth.params"
+                    :onSuccess="googleOnSuccess"
+                    :onFailure="googleOnFailure"
+                  >
                   <img style="cursor: pointer;" class="img-login" src="@/assets/Google-3.png" />
+                  </GoogleLogin>
                   <br />
                   <img
                     class="img-login"
                     style="margin-top: 15px; cursor: pointer;"
                     src="@/assets/Facebook-3.png"
                   />
-
                   <br />
                 </div>
 
@@ -86,11 +93,11 @@
                   <span class="descript-text" style="color: #ffffff; cursor: default;"
                     >Don't have an account yet ?</span
                   >
-                  <a
+                  <router-link to="/register"
                     class="descript-text"
                     style="margin-left: 10px; color: #f28093"
-                    href="/register"
-                    >Register</a
+                    
+                    >Register</router-link
                   >
                 </div>
               </div>
@@ -100,63 +107,96 @@
       </div>
     </div>
   </div>
+  <div id="forgetPass" v-if="page === 2">
+      <ForgetPass @pageReturn="pageReturn"/>
+  </div>
+  </div>
 </template>
 
 <script>
 import User from '../models/user';
+import ForgetPass from "@/components/forgetPass.vue";
+import GoogleLogin from "vue-google-login";
 
 export default {
-    name:"login_page",
-    data() {
-      return {
-        user: new User(),
-        loading: false,
-        message: ''
-      };
-    },
-    computed: {
-      loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
-      }
-    },
-      created() {
-      if (this.loggedIn) {
-        this.$router.push('/');
-      }
-
-    },
-    methods: {
-      forgetCheck(){
-        alert('กดทำเหี้ยไรไอสัส ยังไม่ได้ทำเย็ดแม่!');
-      },
-      checkInput(){
-      this.loading = true;
-      // this.$validator.validateAll().then(isValid => {
-      //   if (!isValid) {
-      //     this.loading = false;
-      //     return;
-      //   }
-
-        if (this.user.email && this.user.password) {
-          this.$store.dispatch('auth/login', this.user).then(
-            () => {
-              this.$router.push('/');
-              alert('Login Success');
-              // console.log(this.$store.state.auth.status.loggedIn);
-              // console.log(localStorage.getItem("user"));
-            },
-            error => {
-              this.loading = false;
-              this.message =
-                (error.response && error.response.data) ||
-                error.message ||
-                error.toString();
-                alert('Email or password not correct');
-            }
-          );
+  name:"login_page",
+  components: {
+    ForgetPass,
+    GoogleLogin
+  },
+  data() {
+    return {
+      user: new User(),
+      loading: false,
+      message: '',
+      page: 1,
+      googleAuth: {
+        params: {
+          client_id: "691961416858-9n4gn62s613l3v6ubp3g562e5b6brp1b.apps.googleusercontent.com",
         }
       }
-    },    
+    }
+  },
+  computed: {
+    loggedIn() {
+    return this.$store.state.auth.status.loggedIn;
+    }
+  },
+    created() {
+    if (this.loggedIn) {
+      this.$router.push('/');
+    }
+  },
+  methods: {
+    pageReturn(value){
+      this.page = value;
+    },
+    forgetCheck(){
+      this.page = 2;
+    },
+    checkInput() {
+    this.loading = true;
+    if (this.user.email && this.user.password) {
+      this.$store.dispatch('auth/login', this.user).then(
+        () => {
+          this.$router.push('/');
+          alert('Login Success');
+        },
+        error => {
+          this.loading = false;
+          this.message =
+            (error.response && error.response.data) ||
+            error.message ||
+            error.toString();
+            alert('Email or password not correct');
+        })
+      }
+    },
+    googleOnSuccess(googleUser) {
+      var userProfile = googleUser.getBasicProfile();
+      this.user.email = userProfile.getEmail();
+      this.loading = true;
+      this.$store.dispatch('auth/login', this.user).then(
+        () => {
+          this.$router.push('/');
+          alert('Login Success');
+        },
+        error => {
+          this.loading = false;
+          this.message =
+            (error.response && error.response.data) ||
+            error.message ||
+            error.toString();
+          alert('User did not register yet');
+        })
+    },
+    googleOnFailure() {
+      alert("Google Sign In Failed");
+    },
+    backMain(){
+      window.location.href="/"
+    }
+  }  
 }
 </script>
 
