@@ -183,7 +183,8 @@
     for (var i = 1; i <= 34; i++) this.classLists.push("CPE " + i);
     },
     mounted() {
-      if (this.user.classOf === "") {
+      console.log(this.user.classOf)
+      if (!this.$store.state.userInfo.classOf) {
         this.user.classOf = "CPE"
       } else {
         this.user.classOf = this.$store.state.userInfo.classOf
@@ -208,21 +209,24 @@
         this.$store.state.userInfo.line = this.user.line;
         this.$store.state.userInfo.facebookAccount = this.user.facebookAccount;
         console.log("Register4:");
-        console.log(this.$store.state.userInfo.email);
-        console.log(this.$store.state.userInfo.password);
-        console.log(this.$store.state.userInfo.firstName);
-        console.log(this.$store.state.userInfo.lastName);
-        console.log(this.$store.state.userInfo.nickName);
-        console.log(this.$store.state.userInfo.birthday_day);
-        console.log(this.$store.state.userInfo.birthday_month);
-        console.log(this.$store.state.userInfo.birthday_year);
-        console.log(this.$store.state.userInfo.classOf);
-        console.log(this.$store.state.userInfo.phoneNumber);
-        console.log(this.$store.state.userInfo.line);
-        console.log(this.$store.state.userInfo.facebookAccount);
-        console.log(this.$store.state.userInfo.organ);
-        console.log(this.$store.state.userInfo.role);
-        console.log(this.$store.state.userInfo.field);
+        console.log("email : " + this.$store.state.userInfo.email);
+        console.log("password : " + this.$store.state.userInfo.password);
+        console.log("accountType : " + this.$store.state.userInfo.accountType);
+        console.log("authId : " + this.$store.state.userInfo.authId);
+        console.log("profilePic : " + this.$store.state.userInfo.profilePic);
+        console.log("firstName : " + this.$store.state.userInfo.firstName);
+        console.log("lastName : " + this.$store.state.userInfo.lastName);
+        console.log("nickName : " + this.$store.state.userInfo.nickName);
+        console.log("birthday_day : " + this.$store.state.userInfo.birthday_day);
+        console.log("birthday_month : " + this.$store.state.userInfo.birthday_month);
+        console.log("birthday_year : " + this.$store.state.userInfo.birthday_year);
+        console.log("classOf : " + this.$store.state.userInfo.classOf);
+        console.log("phoneNumber : " + this.$store.state.userInfo.phoneNumber);
+        console.log("line : " + this.$store.state.userInfo.line);
+        console.log("facebookAccount : " + this.$store.state.userInfo.facebookAccount);
+        console.log("organ : " + this.$store.state.userInfo.organ);
+        console.log("role : " + this.$store.state.userInfo.role);
+        console.log("field : " + this.$store.state.userInfo.field);
         this.$emit("pageReturn",5)
         }
       },
