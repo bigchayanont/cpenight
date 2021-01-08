@@ -11,7 +11,7 @@
               href="#mainpage"
               v-smooth-scroll="{ duration: 1000, updateHistory: false }"
             >
-              <img style="border-radius: 50%" src="@/assets/user/profile.jpg" />
+              <img style="border-radius: 50%" :src="image" />
             </div>
 
             <div class="nav-btn">
@@ -101,6 +101,7 @@
 <script>
 import Vue from "vue";
 import vueSmoothScroll from "vue2-smooth-scroll";
+import { bus } from '../main'
 
 Vue.use(vueSmoothScroll);
 export default {
@@ -108,7 +109,17 @@ export default {
   data() {
     return {
       checkedBox: false,
+      image: ""
     };
+  },
+  created() {
+    bus.$on('display', (data) => {
+      this.display = data;
+      if(this.display.accountType == "EMAIL")
+        this.image = require("@/assets/user/default-pic.jpg")
+      else
+        this.image = this.display.profilePic;
+    });
   },
   methods: {
     CheckMyTicket() {
