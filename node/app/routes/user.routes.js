@@ -1,10 +1,7 @@
-const { authJwt, auth } = require("../middleware");
+iconst { authJwt, auth } = require("../middleware");
 const controller = require("../controllers/user.controller");
 
-
 module.exports = function (app) {
-
-
   // app.get("/api/test/all", controller.allAccess);
 
   // not going to use
@@ -24,9 +21,9 @@ module.exports = function (app) {
 
   app.get("/api/user", auth, controller.userInfo);
 
-  app.post("/api/profile",auth,controller.userBoard);
+  app.post("/api/profile", auth, controller.userBoard);
 
-  app.post("/api/edit",auth,controller.editData)
+  app.post("/api/edit", auth, controller.editData);
 
-  app.post("/api/changePassword",auth,controller.changePassword)
+  app.post("/api/changePassword", auth, controller.changePassword);
 };
