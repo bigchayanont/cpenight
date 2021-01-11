@@ -98,7 +98,7 @@
       <div id="bottom">
         <!-- Mainpage -->
         <div>
-          <router-link to="/">
+          <router-link style="text-decoration:none;" to="/">
             <div
               style="
                 align-items: center;
