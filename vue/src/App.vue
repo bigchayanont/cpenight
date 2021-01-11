@@ -20,6 +20,10 @@ html {
   overflow-x: hidden;
 }
 
+.router-link-active{
+  text-decoration:none;
+}
+
 .section {
   display: flex;
   justify-content: center;
