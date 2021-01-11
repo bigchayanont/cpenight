@@ -646,6 +646,7 @@ export default {
         { */
         this.preview = require("@/assets/user/default-pic.jpg");
         this.display.profilePic = require("@/assets/user/default-pic.jpg");
+        this.tempImage = require("@/assets/user/default-pic.jpg");
        /*  } */
       bus.$emit('display',this.display);
     }
