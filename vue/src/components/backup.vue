@@ -14,7 +14,7 @@
     <h1>Test3</h1>
     <img src="@/assets/user/profile.jpg" />
     <h1>Test4</h1>
-    <img src="/img/profile.jpg" />
+    <img :src="check1" />
     <h1>Test5</h1>
     <img src="/images/profile.jpg" />
   </div>
@@ -26,7 +26,8 @@
 export default {
   data() {
     return {
-      check: "@/assets/user/profile.jpg"
+      check: "@/assets/user/profile.jpg",
+      check1: "/img/profile.jpg"
     };
   }
 };

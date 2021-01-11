@@ -43,7 +43,6 @@
                   <!-- ลบอันล่างทิ้งถ้าจะใช้ -->
                   <img style="cursor: pointer" :src="preview" />
                 </div>
-                <img style="cursor: pointer" :src="check" />
               </div>
             </label>
           </div>
@@ -578,8 +577,6 @@ import {bus} from '../main'
 export default {
   data() {
     return {
-      img: require("@/assets/user/profile.jpg"),
-      check:"@/assets/user/profile.jpg",
       selected_pro: true,
       selected_change: false,
       editSelect: false,
@@ -640,16 +637,16 @@ export default {
       this.$store.state.accountTypeCheck = this.profile.accountType;
       this.display.profilePic = this.profile.profilePic;
       
-      if (this.profile.accountType == 'GOOGLE')
+      /* if (this.profile.accountType == 'GOOGLE')
         {
         this.preview = this.profile.profilePic;
         this.display.profilePic = this.profile.profilePic;
         }
       else
-        {
+        { */
         this.preview = require("@/assets/user/default-pic.jpg");
         this.display.profilePic = require("@/assets/user/default-pic.jpg");
-        }
+       /*  } */
       bus.$emit('display',this.display);
     }
     })
