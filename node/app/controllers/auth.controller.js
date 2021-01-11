@@ -70,8 +70,13 @@ exports.signin = (req, res) => {
             message: "Invalid Password!",
           });
         }
+      } else {
+        if (req.body.authId != user.authId)
+          return res.status(401).send({
+            accessToken: null,
+            message: "Invalid Password!",
+          });
       }
-
       const payload = {
         id: user.id,
         email: user.email,
