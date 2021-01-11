@@ -5,11 +5,12 @@
       <!-- Name / Email -->
       <div style="padding-left: 59px; padding-top: 40px">
         <img class="profilepic" :src="image" />
-        <h1 style="margin-top: 15px; text-transform:capitalize;" class="nameSide">{{display.firstName}}</h1>
-        <h1 style="text-transform:capitalize;" class="nameSide">{{display.lastName}}</h1>
-        <h3 style="margin-top: 5px" class="emailSide">
-          {{display.email}}
-        </h3>
+        <h1
+          style="margin-top: 15px; text-transform:capitalize;"
+          class="nameSide"
+        >{{ display.firstName }}</h1>
+        <h1 style="text-transform:capitalize;" class="nameSide">{{ display.lastName }}</h1>
+        <h3 style="margin-top: 5px" class="emailSide">{{ display.email }}</h3>
       </div>
       <!-- Name / Email -->
 
@@ -25,11 +26,7 @@
             align-items: center;
           "
         >
-          <img
-            class="icon"
-            style="width: 23px;"
-            src="@/assets/user/ticket-white.png"
-          />
+          <img class="icon" style="width: 23px;" src="@/assets/user/ticket-white.png" />
           <h2 style="color: #ffffff;" class="select">MY TICKET</h2>
         </div>
       </div>
@@ -47,11 +44,7 @@
             align-items: center;
           "
         >
-          <img
-            class="icon"
-            style="width: 23px"
-            src="@/assets/user/ticket-pink.png"
-          />
+          <img class="icon" style="width: 23px" src="@/assets/user/ticket-pink.png" />
           <h2 style="color: #f28093" class="select">MY TICKET</h2>
           <img
             class="leaves"
@@ -74,11 +67,7 @@
             align-items: center;
           "
         >
-          <img
-            class="icon"
-            style="width: 23px"
-            src="@/assets/user/profile.white.png"
-          />
+          <img class="icon" style="width: 23px" src="@/assets/user/profile.white.png" />
           <h2 style="color: #ffffff" class="select">MY ACCOUNT</h2>
         </div>
       </div>
@@ -96,11 +85,7 @@
             align-items: center;
           "
         >
-          <img
-            class="icon"
-            style="width: 23px"
-            src="@/assets/user/profile-pink.png"
-          />
+          <img class="icon" style="width: 23px" src="@/assets/user/profile-pink.png" />
           <h2 style="color: #f28093" class="select">MY ACCOUNT</h2>
           <img
             class="leaves"
@@ -124,11 +109,7 @@
                 cursor: pointer;
               "
             >
-              <img
-                class="icon"
-                style="width: 23px; margin-top:-3px;"
-                src="@/assets/user/home.png"
-              />
+              <img class="icon" style="width: 23px; margin-top:-3px;" src="@/assets/user/home.png" />
               <h2 style="color: #ffffff" class="select">MAINPAGE</h2>
             </div>
           </router-link>
@@ -165,8 +146,8 @@
 </template>
 
 <script>
-import { bus } from '../main'
-import User from '../models/user';
+import { bus } from "../main";
+import User from "../models/user";
 
 export default {
   data() {
@@ -177,13 +158,14 @@ export default {
       display: new User(),
       googleAuth: {
         params: {
-          client_id: "691961416858-9n4gn62s613l3v6ubp3g562e5b6brp1b.apps.googleusercontent.com",
+          client_id:
+            "691961416858-9n4gn62s613l3v6ubp3g562e5b6brp1b.apps.googleusercontent.com"
         }
       }
     };
   },
   created() {
-    bus.$on('display', (data) => {
+    bus.$on("display", data => {
       this.display = data;
       this.image = this.display.profilePic;
     });
@@ -205,10 +187,10 @@ export default {
     logOut() {
       this.$store.dispatch("auth/logout");
       this.$router.push("/");
-      alert('Logged Out Successful')
+      alert("Logged Out Successful");
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -265,8 +247,8 @@ export default {
 
 @media screen and (max-width: 1360px) {
   .leaves {
-  display: none;
-}
+    display: none;
+  }
 }
 @media screen and (max-width: 1024px) {
   #Usermenu {
