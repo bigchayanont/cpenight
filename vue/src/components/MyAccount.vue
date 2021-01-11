@@ -750,8 +750,9 @@ export default {
         this.profile.birthday_month +
         " " +
         this.profile.birthday_year;
-
-      this.editSelect = false; 
+      this.display.firstName = this.inputFirstName;
+      this.display.lastName = this.inputLastName;
+      this.editSelect = false;
       UserService.editData(this.profile).then(
         response => {
           if(response){
