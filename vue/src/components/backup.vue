@@ -7,7 +7,16 @@
         <option value="Option 3">Option Number 3</option>
       </select>
     </div>
-    <img :src="check" alt="">
+    <h1>Test1</h1>
+    <img :src="check" alt />
+    <h1>Test2</h1>
+    <img src="@/assets/user/profile.jpg" />
+    <h1>Test3</h1>
+    <img src="@/assets/user/profile.jpg" />
+    <h1>Test4</h1>
+    <img src="/img/profile.jpg" />
+    <h1>Test5</h1>
+    <img src="/images/profile.jpg" />
   </div>
 </template>
 
@@ -17,10 +26,10 @@
 export default {
   data() {
     return {
-      check:"@/assets/user/profile.jpg",
-    }
-  },
-}
+      check: "@/assets/user/profile.jpg"
+    };
+  }
+};
 </script>
 
 <style scoped>
@@ -61,7 +70,7 @@ export default {
   width: 0;
   height: 0;
   margin-top: -2px;
-  border-top: 5px solid #FFFFFF;
+  border-top: 5px solid #ffffff;
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
 }
