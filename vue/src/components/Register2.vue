@@ -67,6 +67,7 @@
                   <input
                     v-model="user.confirmPassword"
                     class="input"
+                    style="margin-left:3px;"
                     type="password"
                     placeholder="Confirm Password"
                   />
