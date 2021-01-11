@@ -634,12 +634,22 @@ export default {
       this.connectDate = this.profile.birthday_day + " " + this.profile.birthday_month + " " + this.profile.birthday_year;
       this.display.email = this.profile.email;
       this.display.accountType = this.profile.accountType;
-      this.display.profilePic = this.profilePic;
+      
       this.display.firstName = this.profile.firstName;
       this.display.lastName = this.profile.lastName;
       this.$store.state.accountTypeCheck = this.profile.accountType;
       this.display.profilePic = this.profile.profilePic;
-      this.preview = this.profile.profilePic;
+      
+      if (this.profile.accountType == 'GOOGLE')
+        {
+        this.preview = this.profile.profilePic;
+        this.display.profilePic = this.profile.profilePic;
+        }
+      else
+        {
+        this.preview = "@/assets/user/default-pic.jpg";
+        this.display.profilePic = "@/assets/user/default-pic.jpg";
+        }
       bus.$emit('display',this.display);
     }
     })
