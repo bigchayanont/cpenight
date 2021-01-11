@@ -1,7 +1,7 @@
 import axios from "axios";
-import decode from "jwt-decode"
+import decode from "jwt-decode";
 
-const API_URL = "http://10.26.100.190/api/auth/";
+const API_URL = "http://10.26.100.190:8080/api/auth/";
 
 class AuthService {
   login(user) {
@@ -12,7 +12,7 @@ class AuthService {
       })
       .then((response) => {
         if (response.data.token) {
-          localStorage.setItem("user",response.data.token, { expires: 1 });
+          localStorage.setItem("user", response.data.token, { expires: 1 });
           let payload = decode(response.data.token);
           localStorage.setItem("firstName", payload.firstName);
         }
@@ -49,16 +49,14 @@ class AuthService {
       .post(API_URL + "checkEmailExists", {
         email: email,
       })
-      .then(
-        response => {
-        console.log("response " + response)
+      .then((response) => {
+        console.log("response " + response);
         return response.data;
       })
       .catch(() => {
         // console.log("err" + err)
-        return "err"
-      })
-    
+        return "err";
+      });
   }
 }
 
