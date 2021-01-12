@@ -67,7 +67,7 @@
                         grid-template-columns: 40% 60%;
                       "
                     >
-                      <h3 style="cursor: default;" class="inputText">FIRST NAME</h3>
+                      <h3 style="cursor: default;" class="inputText">FIRST NAME {{profile.profilePic}}</h3>
                       <input
                         v-if="editSelect == false"
                         style="width: 85%"
@@ -647,8 +647,10 @@ export default {
         this.preview = require("@/assets/user/default-pic.jpg");
         this.display.profilePic = require("@/assets/user/default-pic.jpg");
         this.tempImage = require("@/assets/user/default-pic.jpg");
+    
        /*  } */
       bus.$emit('display',this.display);
+      console.log(this.profile.profilePic);
     }
     })
     .catch(
