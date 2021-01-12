@@ -68,6 +68,7 @@
                       "
                     >
                       <h3 style="cursor: default;" class="inputText">FIRST NAME {{profile.profilePic}}</h3>
+                      <img :src="profile.profilePic" style="width:100px;height:100px;" />
                       <input
                         v-if="editSelect == false"
                         style="width: 85%"
@@ -650,7 +651,6 @@ export default {
     
        /*  } */
       bus.$emit('display',this.display);
-      console.log(this.profile.profilePic);
     }
     })
     .catch(
