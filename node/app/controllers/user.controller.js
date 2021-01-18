@@ -151,14 +151,14 @@ exports.uploadPic = (req, res) => {
 }
 
 exports.displayPic = (req,res) => {
-    user.findById(req.body.id, (err, usr) => {
+    user.findById(req.params.id), (err, usr) => {
       if(err) console.log('cant find id usr');
       var pathUsr = {
         path: usr._id,
         file: usr.fileLocate
       }
       res.sendFile(__dirname + '/data/uploads/' + pathUsr.path + '/' + pathUsr.file);
-    });
+    };
 }
 
 const storage = multer.diskStorage({
