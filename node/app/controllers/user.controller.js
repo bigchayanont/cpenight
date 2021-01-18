@@ -4,6 +4,7 @@ const db = require("../models");
 const User = db.user;
 const { validationResult } = require("express-validator");
 const multer = require('multer');
+const fs = require('fs')
 var bcrypt = require("bcryptjs");
 
 // exports.allAccess = (req, res) => {
