@@ -85,7 +85,7 @@ exports.signin = (req, res) => {
 
       var token = jwt.sign(payload, config.secret, {
         expiresIn: 86400, // 24 hours
-        // expiresIn: 5,
+       // expiresIn: 5,
       });
 
       // var authorities = [];
