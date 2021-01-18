@@ -215,6 +215,7 @@ export default {
     if(data.exp < new Date().getTime()/1000) {
       localStorage.removeItem("user");
       localStorage.removeItem("firstName")
+      this.$store.dispatch("auth/logout");
     }
     try {
       this.firstName = localStorage.getItem("firstName");
