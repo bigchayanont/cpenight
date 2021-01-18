@@ -149,6 +149,19 @@ exports.uploadPic = (req, res) => {
     }
     else{
       console.log('username UPLOAD IMG --> ' + JSON.stringify(req.body.id));
+
+      User.update({
+          profilePic: './data/uploads/' + req.body.id
+        },
+        {
+          where: {
+            id: req.body.id,
+          },
+        }
+      )
+        .then((user) => {
+          res.send({ message: "edit password success" });
+        })
     }
     });
 }
