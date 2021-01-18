@@ -138,7 +138,7 @@ exports.changePassword = (req, res) => {
 };
 
 exports.uploadPic = (req, res) => {
-  fs.mkdir(__dirname + '/data/uploads/' + req.body.id, (err) => {
+  fs.mkdir('/data/uploads/' + req.body.id, (err) => {
     console.log('mkdir err -->' + err);
   }); 
 
@@ -147,7 +147,9 @@ exports.uploadPic = (req, res) => {
       console.log('error by uploading IMG');
       console.log(err);
     }
-    console.log('username UPLOAD IMG --> ' + JSON.stringify(req.body.id));
+    else{
+      console.log('username UPLOAD IMG --> ' + JSON.stringify(req.body.id));
+    }
     });
 }
 
