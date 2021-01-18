@@ -10,5 +10,5 @@ module.exports = function (app) {
 
   app.post("/api/changePassword", auth, controller.changePassword);
 
-  //app.post("/api/upload");
+  app.post("/api/uploadPic/img",auth, controller.uploadPic);
 };

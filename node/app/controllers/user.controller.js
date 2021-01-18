@@ -3,6 +3,7 @@ const secretKey = require("../config/auth.config").secret;
 const db = require("../models");
 const User = db.user;
 const { validationResult } = require("express-validator");
+const multer = require('multer');
 var bcrypt = require("bcryptjs");
 
 // exports.allAccess = (req, res) => {
@@ -134,3 +135,46 @@ exports.changePassword = (req, res) => {
       });
   });
 };
+
+exports.uploadPic = (req, res) => {
+  fs.mkdir(__dirname + '/data/uploads/' + req.body.id, (err) => {
+    console.log('mkdir err -->' + err);
+  }); 
+
+  upload(req, res, (err) =>{
+    if(err){
+      console.log('error by uploading IMG');
+      console.log(err);
+    }
+    console.log('username UPLOAD IMG --> ' + JSON.stringify(req.body.firstName));
+    });
+}
+
+exports.displayPic = (req,res) => {
+    user.findById(req.body.id, (err, usr) => {
+      if(err) console.log('cant find id usr');
+      var pathUsr = {
+        path: usr._id,
+        file: usr.fileLocate
+      }
+      res.sendFile(__dirname + '/data/uploads/' + pathUsr.path + '/' + pathUsr.file);
+    });
+}
+
+const storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    // callback(fs.mkdir('/data/uploads/' + request.user._id));
+    user.findByIdAndUpdate(req.body.id,
+      {fileLocate : req.body.id + '-' + file.originalname},
+      () => {
+      console.log('upload image form usr --> ' + req.body.firstName);
+    });
+    callback(null, __dirname + '/data/uploads/' + req.body.id); //will automate catagory
+  },
+  filename: function (req, file, callback) {
+    console.log(file);
+    callback(null, req.body.id + '-' + file.originalname);
+    }
+  });
+  // Function to upload images
+const upload = multer({storage: storage}).single('uploadedImages');
