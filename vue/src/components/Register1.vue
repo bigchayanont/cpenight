@@ -127,7 +127,7 @@ export default {
   methods: {
     onClick() {
       this.$store.state.userInfo.accountType = "EMAIL";
-      this.$store.state.userInfo.profilePic = "@/assets/user/default-pic.jpg";
+      this.$store.state.userInfo.profilePic = "default";
       this.$emit("pageReturn", 2);
     },
     backMain() {
@@ -138,7 +138,6 @@ export default {
         this.personalID = user.id;
         this.email = user.email;
         this.name = user.name;
-        // this.picture = user.picture.data.url;
         console.log(this.email);
         console.log(this.name);
       });
@@ -165,6 +164,7 @@ export default {
           this.$store.state.userInfo.accountType = "GOOGLE";
           this.$store.state.userInfo.authId = userProfile.getId();
           this.$store.state.userInfo.profilePic = userProfile.getImageUrl();
+          this.$store.state.userInfo.firstName = userProfile.getGivenName();
           console.log("Register1:");
           console.log("email : " + this.$store.state.userInfo.email);
           console.log("password : " + this.$store.state.userInfo.password);

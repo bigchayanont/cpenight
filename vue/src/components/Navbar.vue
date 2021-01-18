@@ -198,6 +198,7 @@
 <script>
 import Vue from "vue";
 import vueSmoothScroll from "vue2-smooth-scroll";
+import decode from "jwt-decode";
 Vue.use(vueSmoothScroll);
 
 export default {
@@ -210,6 +211,11 @@ export default {
     }
   },
   created() {
+    let data = decode(localStorage.getItem("user"));
+    if(data.exp < new Date().getTime()/1000) {
+      localStorage.removeItem("user");
+      localStorage.removeItem("firstName")
+    }
     try {
       this.firstName = localStorage.getItem("firstName");
     }

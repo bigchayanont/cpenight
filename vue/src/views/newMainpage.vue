@@ -29,7 +29,7 @@
           <h3 id="first-date">20 MARCH 2021</h3>
           <p id="first-place">The Cavalry Club 19:00 - 23:00 น.</p>
           <div>
-            <button id="nextButton">
+            <button @click="clickTicket()" id="nextButton">
               BUY TICKET NOW<i
                 style="align: center; padding-left: 20px"
                 class="fa fa-arrow-right"
@@ -255,8 +255,10 @@
                 </h4>
               </div>
               <div id="about-place">
-                <h4
-                  style="font-family:'CloudLight; color:#FFFFFF; margin:0px; letter-spacing: 2px; font-size:2em; "
+                <a
+                  target="_blank"
+                  style="font-family:'CloudLight; color:#FFFFFF; margin:0px; letter-spacing: 2px; font-size:2em; cursor:pointer; text-decoration: none;"
+                  href="https://www.facebook.com/TheCavalryClub/"
                 >
                   <img
                     id="img-date-pin"
@@ -269,7 +271,7 @@
                     "
                     src="@/assets/main/Dark_floral_Night_party_2021-25.png"
                   />The Cavalry Club
-                </h4>
+                </a>
               </div>
             </div>
           </div>
@@ -572,7 +574,7 @@
                 padding-top: 40px;
               "
             >
-              <button id="ticketButton">
+              <button @click="clickTicket()" id="ticketButton">
                 GET TICKET<i
                   style="align: center; padding-left: 20px"
                   class="fa fa-arrow-right"
@@ -1140,6 +1142,10 @@ export default {
   'https://www.lazada.co.th/shop/adidasthailand?spm=a2o4m.officialstores.1001.dstorelist_2_1.29214770BUCMVL&pos=2&acm=20180501004&scm=1007.18128.100341.100200300000000',
   '_blank'
 );
+    },
+    clickTicket(){
+      window.open('https://www.eventpop.me/e/5037/unzipevent',
+        '_blank');
     },
     clickspon1(){
       window.open('http://www.asquarebangkok.com/',

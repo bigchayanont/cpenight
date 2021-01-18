@@ -9,6 +9,7 @@ class AuthService {
       .post(API_URL + "signin", {
         email: user.email,
         password: user.password,
+        authId: user.authId
       })
       .then((response) => {
         if (response.data.token) {
@@ -29,6 +30,8 @@ class AuthService {
       password: user.password,
       firstName: user.firstName,
       accountType: user.accountType,
+      authId: user.authId,
+      profilePic: user.profilePic,
       lastName: user.lastName,
       nickName: user.nickName,
       birthday_day: user.birthday_day,

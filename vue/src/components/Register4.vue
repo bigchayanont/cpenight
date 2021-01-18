@@ -175,7 +175,7 @@
     data() {
       return {
         user: new User(),  
-        classLists: [],    
+        classLists: ["อาจารย์", "บุคลากร"],    
       }
 
     },

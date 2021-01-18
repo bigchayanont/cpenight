@@ -67,8 +67,7 @@
                         grid-template-columns: 40% 60%;
                       "
                     >
-                      <h3 style="cursor: default;" class="inputText">FIRST NAME {{profile.profilePic}}</h3>
-                      <img :src="profile.profilePic" style="width:100px;height:100px;" />
+                      <h3 style="cursor: default;" class="inputText">FIRST NAME</h3>
                       <input
                         v-if="editSelect == false"
                         style="width: 85%"
@@ -632,24 +631,19 @@ export default {
       this.connectDate = this.profile.birthday_day + " " + this.profile.birthday_month + " " + this.profile.birthday_year;
       this.display.email = this.profile.email;
       this.display.accountType = this.profile.accountType;
-      
       this.display.firstName = this.profile.firstName;
       this.display.lastName = this.profile.lastName;
       this.$store.state.accountTypeCheck = this.profile.accountType;
-      this.display.profilePic = this.profile.profilePic;
-      
-      /* if (this.profile.accountType == 'GOOGLE')
-        {
-        this.preview = this.profile.profilePic;
-        this.display.profilePic = this.profile.profilePic;
-        }
-      else
-        { */
+      if (this.profile.accountType == 'EMAIL' && this.profile.profilePic == "default") {
         this.preview = require("@/assets/user/default-pic.jpg");
-        this.display.profilePic = require("@/assets/user/default-pic.jpg");
         this.tempImage = require("@/assets/user/default-pic.jpg");
-    
-       /*  } */
+        this.display.profilePic = require("@/assets/user/default-pic.jpg");
+      }
+      else {
+        this.preview = this.profile.profilePic;
+        this.tempImage = this.profile.profilePic;
+        this.display.profilePic = this.profile.profilePic;
+      }
       bus.$emit('display',this.display);
     }
     })
