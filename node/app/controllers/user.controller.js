@@ -147,7 +147,7 @@ exports.uploadPic = (req, res) => {
       console.log('error by uploading IMG');
       console.log(err);
     }
-    console.log('username UPLOAD IMG --> ' + JSON.stringify(req.body.firstName));
+    console.log('username UPLOAD IMG --> ' + JSON.stringify(req.body.id));
     });
 }
 
