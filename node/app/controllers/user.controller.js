@@ -170,10 +170,10 @@ const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     // callback(fs.mkdir('/data/uploads/' + request.user._id));
       User.update({
-	      profilePic : req.body.id + '-' + file.originalname
+	      profilePic : req.query.id + '-' + file.originalname
       },
       {
-        where: {id: req.body.id},
+        where: {id: req.query.id},
       })
       .then(() => {
         console.log('upload image form usr --> ' + req.body.firstName);
@@ -181,11 +181,11 @@ const storage = multer.diskStorage({
       .catch((err) => {  
         console.log('upload failed' + err)
       }),
-    callback(null, __dirname + '/data/uploads/' + req.body.id); //will automate catagory
+    callback(null, __dirname + '/data/uploads/' + req.query.id); //will automate catagory
   },
   filename: function (req, file, callback) {
     console.log(file);
-    callback(null, req.body.id + '-' + file.originalname);
+    callback(null, req.query.id + '-' + file.originalname);
     }
   });
   // Function to upload images
