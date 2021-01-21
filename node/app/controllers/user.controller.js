@@ -138,10 +138,10 @@ exports.changePassword = (req, res) => {
 };
 
 exports.uploadPic = (req, res) => {
-  fs.mkdir('./data/uploads/' + req.params.id,{ recursive: true }, (err) => {
+  fs.mkdir('./data/uploads/' + req.query.id,{ recursive: true }, (err) => {
     console.log('mkdir err -->' + err);
   }); 
-  console.log("id: ",req.params.id)
+  console.log("id: ",req.query.id);
 
   upload(req, res, (err) =>{
     if(err){
