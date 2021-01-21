@@ -138,9 +138,10 @@ exports.changePassword = (req, res) => {
 };
 
 exports.uploadPic = (req, res) => {
-  fs.mkdir('./data/uploads/' + req.body.id,{ recursive: true }, (err) => {
+  fs.mkdir('./data/uploads/' + req.params.id,{ recursive: true }, (err) => {
     console.log('mkdir err -->' + err);
   }); 
+  console.log("id: ",req.params.id)
 
   upload(req, res, (err) =>{
     if(err){
@@ -149,25 +150,12 @@ exports.uploadPic = (req, res) => {
     }
     else{
       console.log('username UPLOAD IMG --> ' + JSON.stringify(req.body.id));
-
-      /* User.update({
-          profilePic: './data/uploads/' + req.body.id
-        },
-        {
-          where: {
-            id: req.body.id,
-          },
-        }
-      )
-        .then((user) => {
-          res.send({ message: "profile picture successfully changed!" });
-        }) */
     }
     });
 }
 
 /*display pic to the user */
-exports.displayPic = (req,res) => {
+  exports.displayPic = (req,res) => {
     User.findById(req.params.id), (err, usr) => {
       if(err) console.log('cant find id usr');
       var pathUsr = {
