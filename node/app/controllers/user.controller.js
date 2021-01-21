@@ -167,7 +167,7 @@ exports.uploadPic = (req, res) => {
 }
 
 exports.displayPic = (req,res) => {
-    user.findById(req.params.id), (err, usr) => {
+    User.findById(req.params.id), (err, usr) => {
       if(err) console.log('cant find id usr');
       var pathUsr = {
         path: usr._id,
@@ -180,11 +180,22 @@ exports.displayPic = (req,res) => {
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     // callback(fs.mkdir('/data/uploads/' + request.user._id));
-    user.findByIdAndUpdate(req.body.id,
-      {fileLocate : req.body.id + '-' + file.originalname},
-      () => {
-      console.log('upload image form usr --> ' + req.body.firstName);
+    User.Update(
+      {
+	profilePic : req.body.id + '-' + file.originalname
+      },
+      {
+	where:{
+	id: req.body.id,
+        },
+      }
+   )
+   .then(() => {
+     console.log('upload image form usr --> ' + req.body.firstName);
     });
+   .catch((err) => {
+     console.log('upload failed' + err)
+   }
     callback(null, __dirname + '/data/uploads/' + req.body.id); //will automate catagory
   },
   filename: function (req, file, callback) {
