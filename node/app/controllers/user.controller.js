@@ -181,7 +181,7 @@ exports.displayPic = (req,res) => {
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     // callback(fs.mkdir('/data/uploads/' + request.user._id));
-      User.Update({
+      User.update({
 	      profilePic : req.body.id + '-' + file.originalname
       },
       {
