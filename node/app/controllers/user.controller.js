@@ -150,7 +150,7 @@ exports.uploadPic = (req, res) => {
     else{
       console.log('username UPLOAD IMG --> ' + JSON.stringify(req.body.id));
 
-      User.update({
+      /* User.update({
           profilePic: './data/uploads/' + req.body.id
         },
         {
@@ -160,12 +160,13 @@ exports.uploadPic = (req, res) => {
         }
       )
         .then((user) => {
-          res.send({ message: "edit password success" });
-        })
+          res.send({ message: "profile picture successfully changed!" });
+        }) */
     }
     });
 }
 
+/*display pic to the user */
 exports.displayPic = (req,res) => {
     User.findById(req.params.id), (err, usr) => {
       if(err) console.log('cant find id usr');
@@ -173,29 +174,25 @@ exports.displayPic = (req,res) => {
         path: usr._id,
         file: usr.fileLocate
       }
-      res.sendFile(__dirname + '/data/uploads/' + pathUsr.path + '/' + pathUsr.file);
+      res.sendFile('./data/uploads/' + pathUsr.path + '/' + pathUsr.file);
     };
 }
 
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     // callback(fs.mkdir('/data/uploads/' + request.user._id));
-    User.Update(
-      {
-	profilePic : req.body.id + '-' + file.originalname
+      User.Update({
+	      profilePic : req.body.id + '-' + file.originalname
       },
       {
-	where:{
-	id: req.body.id,
-        },
-      }
-   )
-   .then(() => {
-     console.log('upload image form usr --> ' + req.body.firstName);
-    });
-   .catch((err) => {
-     console.log('upload failed' + err)
-   }
+        where: {id: req.body.id},
+      })
+      .then(() => {
+        console.log('upload image form usr --> ' + req.body.firstName);
+      })
+      .catch((err) => {  
+        console.log('upload failed' + err)
+      }),
     callback(null, __dirname + '/data/uploads/' + req.body.id); //will automate catagory
   },
   filename: function (req, file, callback) {
