@@ -146,9 +146,11 @@ exports.uploadPic = (req, res) => {
     if(err){
       console.log('error by uploading IMG');
       console.log(err);
+      res.send({ message: "upload image success" })
     }
     else{
       console.log('id UPLOAD IMG --> ' + req.query.id);
+      res.status(500).send({ message: err.message });
     }
     });
 }
