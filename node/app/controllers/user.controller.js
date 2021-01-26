@@ -184,7 +184,7 @@ const storage = multer.diskStorage({
     callback(null, './data/uploads/' + req.query.id); //will automate catagory
   },
   filename: function (req, file, callback) {
-    console.log(file);
+    // console.log(file);
     callback(null, req.query.id + '-' + file.originalname);
     }
   });
