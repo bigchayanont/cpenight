@@ -180,7 +180,7 @@ const storage = multer.diskStorage({
       .catch((err) => {  
         console.log('upload failed' + err)
       }),
-    callback(null, '../data/uploads/' + req.query.id); //will automate catagory
+    callback(null, __dirname + '../data/uploads/' + req.query.id); //will automate catagory
   },
   filename: function (req, file, callback) {
     console.log(file);
