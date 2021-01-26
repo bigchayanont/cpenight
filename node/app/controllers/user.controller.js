@@ -139,7 +139,7 @@ exports.changePassword = (req, res) => {
 exports.uploadPic = (req, res) => {
   fs.mkdir('./data/uploads/' + req.query.id,{ recursive: true }, (err) => {
     console.log('mkdir err -->' + err);
-  }); 
+  });
   console.log("id: ",req.query.id);
 
   upload(req, res, (err) =>{
@@ -180,7 +180,7 @@ const storage = multer.diskStorage({
       .catch((err) => {  
         console.log('upload failed' + err)
       }),
-    callback(null, __dirname + '/data/uploads/' + req.query.id); //will automate catagory
+    callback(null, __basedir + '/data/uploads/' + req.query.id); //will automate catagory
   },
   filename: function (req, file, callback) {
     console.log(file);
