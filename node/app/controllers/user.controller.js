@@ -148,7 +148,7 @@ exports.uploadPic = (req, res) => {
       console.log(err);
     }
     else{
-      console.log('username UPLOAD IMG --> ' + JSON.stringify(req.body.id));
+      console.log('id UPLOAD IMG --> ' + req.query.id);
     }
     });
 }
@@ -175,7 +175,7 @@ const storage = multer.diskStorage({
         where: {id: req.query.id},
       })
       .then(() => {
-        console.log('upload image form usr --> ' + req.body.id);
+        console.log('upload image form usr --> ' + req.query.id);
       })
       .catch((err) => {  
         console.log('upload failed' + err)
