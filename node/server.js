@@ -8,6 +8,8 @@ const app = express();
 // options
 const secretKey = require("./app/config/auth.config").secret;
 
+const imgRoute = __dirname
+
 var corsOptions = {
   origin: "*",
   credentials: false,
