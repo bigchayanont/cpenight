@@ -175,7 +175,7 @@ const storage = multer.diskStorage({
         where: {id: req.query.id},
       })
       .then(() => {
-        console.log('upload image form usr --> ' + req.body.user);
+        console.log('upload image form usr --> ' + req.body.id);
       })
       .catch((err) => {  
         console.log('upload failed' + err)
