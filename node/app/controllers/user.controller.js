@@ -118,8 +118,7 @@ exports.changePassword = (req, res) => {
       });
     }
 
-    User.update(
-      {
+    User.update({
         password: bcrypt.hashSync(req.body.newPassword, 8),
       },
       {
@@ -176,7 +175,7 @@ const storage = multer.diskStorage({
         where: {id: req.query.id},
       })
       .then(() => {
-        console.log('upload image form usr --> ' + req.body.firstName);
+        console.log('upload image form usr --> ' + req.body.user);
       })
       .catch((err) => {  
         console.log('upload failed' + err)
