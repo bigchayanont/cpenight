@@ -170,7 +170,7 @@ exports.uploadPic = (req, res) => {
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     // callback(fs.mkdir('/data/uploads/' + request.user._id));
-      fs.readdir('./data/uploads/' + req.query.id,{ recursive: true }, (err, files) => {
+      fs.readdir('../../../data/uploads/' + req.query.id,{ recursive: true }, (err, files) => {
         if (err) throw err;
         for (const file of files) {
         fs.unlink(path.join('../../../data/uploads/' + req.query.id, file), err => {
