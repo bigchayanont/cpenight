@@ -23,7 +23,7 @@
                     <a
                       href="#mainpage"
                       v-smooth-scroll="{ duration: 1000, updateHistory: false }"
-                      >Home</a
+                      >{{$t('navbar.home')}}</a
                     >
                   </li>
 
@@ -39,7 +39,7 @@
                         offset: -100,
                         updateHistory: false,
                       }"
-                      >About</a
+                      >{{$t('navbar.about')}}</a
                     >
                   </li>
                   <li
@@ -54,7 +54,7 @@
                         offset: -150,
                         updateHistory: false,
                       }"
-                      >Ticket</a
+                      >{{$t('navbar.ticket')}}</a
                     >
                   </li>
 
@@ -70,7 +70,7 @@
                         offset: -150,
                         updateHistory: false,
                       }"
-                      >Souvenir</a
+                      >{{$t('navbar.souvenir')}}</a
                     >
                   </li>
 
@@ -86,7 +86,7 @@
                         offset: 20,
                         updateHistory: false,
                       }"
-                      >FAQs</a
+                      >{{$t('navbar.faqs')}}</a
                     >
                   </li>
 
@@ -98,7 +98,7 @@
                     <a
                       href="#footer_section"
                       v-smooth-scroll="{ duration: 1000, updateHistory: false }"
-                      >Contact</a
+                      >{{$t('navbar.contact')}}</a
                     >
                   </li>
                 </ul>
@@ -117,7 +117,7 @@
                   href="https://www.lazada.co.th/products/poker-card-i1658396589-s5927300183.html?spm=a2o4m.searchlist.list.7.7e4c5fc142RRwn&search=1"
                   target="_blank"
                 >
-                  <a>Shop</a>
+                  <a>{{$t('navbar.shop')}}</a>
                   <img
                     style="margin-left: 8px; width: 21px"
                     src="@/assets/Navbar/Icon_Shop.png"
@@ -133,7 +133,7 @@
                       font-size: 2em;
                     "
                     class="btn transparent"
-                    >Log In</router-link
+                    >{{$t('navbar.loginThai')}}</router-link
                   >
                 </div>
                 <!-- Login -->
@@ -157,7 +157,7 @@
 
                 <a style="margin: 0px; padding: 0px">
                   <div
-                    @click="unCheck(checkedBox),changeLang()"
+                    @click="unCheck(checkedBox),switchLocal()"
                     id="changelag"
                     style="
                       display: flex;
@@ -168,9 +168,9 @@
                       cursor:pointer;
                     "
                   >
-                    <span>EN</span>
+                    <span >EN</span>
                     <span style="margin-left: 6px; margin-right: 6px">|</span>
-                    <span>TH</span>
+                    <span >TH</span>
                   </div>
                 </a>
               </div>
@@ -234,6 +234,19 @@ export default {
     },
     changeLang(){
       alert("This feature is under development");
+    },
+    switchLocal() {
+      let lang = localStorage.getItem("lang");
+      if (lang == "en") {
+        this.$i18n.locale = "th";
+        localStorage.removeItem("lang");
+        localStorage.setItem("lang","th");
+        }
+      else {
+        this.$i18n.locale = "en";
+        localStorage.removeItem("lang");
+        localStorage.setItem("lang","en");
+        }
     }
   }
 }

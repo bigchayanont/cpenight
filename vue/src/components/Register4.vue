@@ -26,8 +26,8 @@
                 <div id="header-section">
                   <div>
                     <h1 class="title" style="margin: 0px; cursor: default;">
-                      Please tell us <br />
-                      more about yourself.
+                      {{$t('registerSection.tellusyourself1')}} <br />
+                      {{$t('registerSection.tellusyourself2')}}
                     </h1>
                   </div>
                   <div>
@@ -37,10 +37,10 @@
 
                 <div>
                   <!-- Second Section-->
-                  <h2 style="cursor: default;" class="question">Which CPE Class are you?</h2>
+                  <h2 style="cursor: default;" class="question">{{$t('registerInformation.whichcpe')}}</h2>
                   <div style="padding-top: 5px">
                     <h1 style="padding-bottom: 5px; cursor: default;" class="inputText">
-                      CLASS OF*
+                      {{$t('myAccount.cpe')}}*
                     </h1>
                     <div
                       style="
@@ -66,12 +66,12 @@
                     </div>
                   </div>
                   <!-- First Section-->
-                  <h2  style="cursor: default;" class="question">How can we contact you?</h2>
+                  <h2  style="cursor: default;" class="question">{{$t('registerInformation.howcontact')}}</h2>
                   <div>
                     <div class="input-section">
                       <!-- Input Section -->
                       <div class="input-space">
-                        <h1 style="cursor: default;" class="inputText">PHONE*</h1>
+                        <h1 style="cursor: default;" class="inputText">{{$t('myAccount.phone')}}*</h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
                             style="margin: 0px; width: 100%"
@@ -88,7 +88,7 @@
                       <!-- Input Section -->
                       <!-- Input Section -->
                       <div>
-                        <h1 style="cursor: default;" class="inputText">LINE (OPTIONAL)</h1>
+                        <h1 style="cursor: default;" class="inputText">{{$t('myAccount.line')}} ({{$t('registerInformation.optional')}})</h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
                             v-model="user.line"
@@ -106,7 +106,7 @@
                     <div class="input-single">
                       <!-- Input Section -->
                       <div class="input-space">
-                        <h1 style="cursor: default;" class="inputText">FACEBOOK (OPTIONAL)</h1>
+                        <h1 style="cursor: default;" class="inputText">{{$t('myAccount.facebook')}} ({{$t('registerInformation.optional')}})</h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
                             v-model="user.facebookAccount"
@@ -135,17 +135,17 @@
                   "
                 >
                   <div>
-                    <button style="cursor: pointer;" id="backButton" @click="backPage()">
+                    <button class = "text grow-on-hover" style="cursor: pointer;" id="backButton" @click="backPage()">
                       <i
                         style="align: center; padding-right: 20px"
                         class="fa fa-arrow-left"
                       ></i
-                      >BACK
+                      >{{$t('registerSection.back')}}
                     </button>
                   </div>
                   <div>
-                    <button style="cursor: pointer;" id="nextButton" @click="nextPage()">
-                      NEXT<i
+                    <button class = "text grow-on-hover" style="cursor: pointer;" id="nextButton" @click="nextPage()">
+                      {{$t('registerSection.next')}}<i
                         style="align: center; padding-left: 20px"
                         class="fa fa-arrow-right"
                       ></i>

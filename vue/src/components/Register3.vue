@@ -26,8 +26,8 @@
                 <div id="header-section">
                   <div>
                     <h1 class="title" style="margin: 0px; cursor: default;">
-                      Please tell us <br />
-                      more about yourself.
+                      {{$t('registerSection.tellusyourself1')}} <br />
+                      {{$t('registerSection.tellusyourself2')}}
                     </h1>
                   </div>
                   <div>
@@ -38,14 +38,14 @@
                 <div>
                   <!-- First Section-->
                   <h2 class="question" style="cursor: default;">
-                    What's your name?
+                    {{$t('registerInformation.whatyourfirst')}}
                   </h2>
                   <div>
                     <div class="input-section">
                       <!-- Input Section -->
                       <div class="input-space">
                         <h1 style="cursor: default;" class="inputText">
-                          FIRST NAME*
+                          {{$t('myAccount.firstname')}}*
                         </h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
@@ -62,7 +62,7 @@
                       <!-- Input Section -->
                       <div>
                         <h1 style="cursor: default;" class="inputText">
-                          LAST NAME*
+                          {{$t('myAccount.lastname')}}*
                         </h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
@@ -82,7 +82,7 @@
                       <!-- Input Section -->
                       <div class="input-space">
                         <h1 style="cursor: default;" class="inputText">
-                          NICKNAME*
+                          {{$t('myAccount.nickname')}}*
                         </h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
@@ -101,13 +101,13 @@
 
                   <!-- Second Section-->
                   <h2 style="cursor: default;" class="question">
-                    When is your birthday?
+                    {{$t('registerInformation.whenyourbirth')}}
                   </h2>
                   <h1
                     style="padding-bottom: 5px; cursor: default;"
                     class="inputText"
                   >
-                    DATE OF BIRTH*
+                    {{$t('myAccount.birthDate')}}*
                   </h1>
                   <div style="display: flex; padding-top: 5px">
                     <div id="day-select">
@@ -180,22 +180,24 @@
                     <button
                       style="cursor: pointer;"
                       id="backButton"
+                      class="grow-on-hover"
                       @click="backPage()"
                     >
                       <i
                         style="align: center; padding-right: 20px;"
                         class="fa fa-arrow-left"
                       ></i
-                      >BACK
+                      >{{$t('registerSection.back')}}
                     </button>
                   </div>
                   <div>
                     <button
                       style="cursor: pointer;"
+                      class="grow-on-hover"
                       id="nextButton"
                       @click="checkRegister1()"
                     >
-                      NEXT<i
+                      {{$t('registerSection.next')}}<i
                         style="align: center; padding-left: 20px"
                         class="fa fa-arrow-right"
                       ></i>
@@ -324,7 +326,7 @@ export default {
 * {
   z-index: 1;
 }
-.select-dropdown,
+/* .select-dropdown,
 .select-dropdown * {
   margin: 0;
   padding: 0;
@@ -354,17 +356,38 @@ export default {
   box-shadow: none;
 }
 .select-dropdown:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 8px;
-  width: 0;
-  height: 0;
-  margin-top: -2px;
-  border-top: 5px solid #ffffff;
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
+
+} */
+
+.select-dropdown,
+.select-dropdown * {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
 }
+.select-dropdown {
+  position: relative;
+  background-color: #302e71;
+  border-radius: 0px;
+  padding-right:5px;
+}
+.select-dropdown select {
+  color: white;
+  font-size: 1.75em;
+  font-family: "CloudLight";
+  width: 100%;
+  padding: 8px 10px 8px 10px;
+  border: none;
+  background-color: #302e71;
+}
+.select-dropdown select:active,
+.select-dropdown select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
 .input-space {
   padding-right: 33px;
 }

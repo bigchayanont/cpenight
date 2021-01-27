@@ -27,7 +27,7 @@
           "
         >
           <img class="icon" style="width: 23px;" src="@/assets/user/ticket-white.png" />
-          <h2 style="color: #ffffff;" class="select">MY TICKET</h2>
+          <h2 style="color: #ffffff; text-transform: uppercase;" class="select">{{$t('myAccount.myTicket')}}</h2>
         </div>
       </div>
       <!-- unSelect -->
@@ -45,7 +45,7 @@
           "
         >
           <img class="icon" style="width: 23px" src="@/assets/user/ticket-pink.png" />
-          <h2 style="color: #f28093" class="select">MY TICKET</h2>
+          <h2 style="color: #f28093; text-transform: uppercase;" class="select">{{$t('myAccount.myTicket')}}</h2>
           <img
             class="leaves"
             style="padding-left: 20px; width: 35px"
@@ -68,7 +68,7 @@
           "
         >
           <img class="icon" style="width: 23px" src="@/assets/user/profile.white.png" />
-          <h2 style="color: #ffffff" class="select">MY ACCOUNT</h2>
+          <h2 style="color: #ffffff; text-transform: uppercase;" class="select">{{$t('myAccount.myAccount')}}</h2>
         </div>
       </div>
       <!-- unSelect -->
@@ -86,7 +86,7 @@
           "
         >
           <img class="icon" style="width: 23px" src="@/assets/user/profile-pink.png" />
-          <h2 style="color: #f28093" class="select">MY ACCOUNT</h2>
+          <h2 style="color: #f28093; text-transform: uppercase;" class="select">{{$t('myAccount.myAccount')}}</h2>
           <img
             class="leaves"
             style="padding-left: 20px; width: 35px"
@@ -110,7 +110,7 @@
               "
             >
               <img class="icon" style="width: 23px; margin-top:-3px;" src="@/assets/user/home.png" />
-              <h2 style="color: #ffffff" class="select">MAINPAGE</h2>
+              <h2 style="color: #ffffff; text-transform: uppercase;" class="select">{{$t('myAccount.mainpage')}}</h2>
             </div>
           </router-link>
         </div>
@@ -135,7 +135,7 @@
               style="width: 20px; margin-top:-2px; padding-right:13px;"
               src="@/assets/user/exit.png"
             />
-            <h2 style="color: #ffffff" class="select">LOG OUT</h2>
+            <h2 style="color: #ffffff; text-transform: uppercase;" class="select">{{$t('myAccount.logout')}}</h2>
           </div>
         </div>
         <!-- Logout -->
@@ -172,9 +172,10 @@ export default {
   },
   methods: {
     Onclick1() {
-      this.select1 = true;
-      this.select2 = false;
-      this.$emit("pageReturn", false);
+      alert("Coming soon....")
+      // this.select1 = true;
+      // this.select2 = false;
+      // this.$emit("pageReturn", false);
     },
     Onclick2() {
       this.select1 = false;

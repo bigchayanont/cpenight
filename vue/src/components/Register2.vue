@@ -23,7 +23,7 @@
           <div>
             <div style="display: flex; align-items: center">
               <a @click="back()" style="text-decoration: none; cursor: pointer;" id="backToMain"
-                >&lt; Back</a
+                >&lt; {{$t('general.back')}}</a
               >
               <img @click="back()"
                 style="padding-left: 10px; width: 23px; margin-top: -3.5px; cursor: pointer;"
@@ -32,7 +32,7 @@
             </div>
             <div id="left-side" class="column" style="">
               <div>
-                <h1 style="cursor: default;" class="title">REGISTER</h1>
+                <h1 style="cursor: default;" class="title">{{$t('general.registerTitle')}}</h1>
                 <!-- Input -->
                 <div class="box">
                   <img id="img-user" src="@/assets/icons8-male-user-64.png" />
@@ -85,7 +85,7 @@
                       cursor: default;
                     "
                   >
-                    Password must meet the following requirements :
+                    {{$t('registerSection.passwordRequire')}}
                   </h3>
                   <div style="display: flex; align-items: center; cursor: default;">
                     <img
@@ -102,8 +102,8 @@
                       style="font-family: 'CloudLight'"
                       :class="changeColor1()"
                     >
-                      Be at least
-                      <span style="font-family: 'CloudBold'">8 characters</span>
+                      {{$t('registerSection.atleastEight1')}}
+                      <span style="font-family: 'CloudBold'">{{$t('registerSection.atleastEight2')}}</span>
                     </p>
                   </div>
 
@@ -122,9 +122,9 @@
                       style="font-family: 'CloudLight'"
                       :class="changeColor2()"
                     >
-                      At least
+                      {{$t('registerSection.alleastupper1')}}
                       <span style="font-family: 'CloudBold'"
-                        >one uppercase</span
+                        >{{$t('registerSection.alleastupper2')}}</span
                       >
                     </p>
                   </div>
@@ -144,8 +144,8 @@
                       style="font-family: 'CloudLight'"
                       :class="changeColor3()"
                     >
-                      At least
-                      <span style="font-family: 'CloudBold'">one number</span>
+                      {{$t('registerSection.atleastnum1')}}
+                      <span style="font-family: 'CloudBold'">{{$t('registerSection.atleastnum2')}}</span>
                     </p>
                   </div>
 
@@ -164,9 +164,9 @@
                       style="font-family: 'CloudLight'"
                       :class="changeColor4()"
                     >
-                      At least
+                      {{$t('registerSection.atleastspecial1')}}
                       <span style="font-family: 'CloudBold';"
-                        >one special characters</span
+                        >{{$t('registerSection.atleastspecial2')}}</span
                       >
                     </p>
                   </div>
@@ -175,19 +175,20 @@
                 <button
                   @click="checkRegister()"
                   id="nextButton"
+                  class="grow-on-hover"
                   style="background-color: #f28093; cursor: pointer;"
                 >
-                  CONTINUE
+                  {{$t('registerSection.continueText')}}
                 </button>
                 <div id="register-section">
                   <span class="descript-text" style="color: #ffffff; cursor: default;"
-                    >Already have an account ?</span
+                    >{{$t('loginRegister.haveAccount')}}</span
                   >
                   <a
                     class="descript-text"
                     style="margin-left: 10px; color: #f28093"
                     href="/login"
-                    >Login</a
+                    >{{$t('general.loginThai')}}</a
                   >
                 </div>
               </div>

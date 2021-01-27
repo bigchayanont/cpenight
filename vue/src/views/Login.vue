@@ -26,7 +26,7 @@
                   @click="backMain()"
                   style="text-decoration: none; cursor: pointer;"
                   id="backToMain"
-                >&lt; Main Page</a>
+                >&lt; {{$t('general.backtomain')}}</a>
                 <img
                   @click="backMain()"
                   style="padding-left: 10px; width: 23px; margin-top: -3.5px; cursor: pointer;"
@@ -35,7 +35,7 @@
               </div>
               <div id="left-side" class="column" style>
                 <div>
-                  <h1 style="cursor: default;" class="title">LOGIN</h1>
+                  <h1 style="cursor: default;" :class=checkLang >{{$t('general.loginThai')}}</h1>
                   <!-- Input -->
                   <div class="box">
                     <img id="img-user" src="@/assets/icons8-male-user-64.png" />
@@ -64,13 +64,13 @@
 
                   <hr class="underline" />
 
-                  <p @click="forgetCheck()" id="forgot" style="cursor: pointer;">Forgot password ?</p>
+                  <p @click="forgetCheck()" id="forgot" style="cursor: pointer;">{{$t('loginRegister.forgotPass')}}</p>
                   <br />
-                  <button @click="checkInput()" id="loginButton" style="cursor: pointer;">LOG IN</button>
+                  <button class="grow-on-hover" @click="checkInput()" id="loginButton" style="cursor: pointer;">{{$t('general.loginThai')}}</button>
                   <br />
 
                   <p id="or-text">
-                    <span style="cursor: default;">OR</span>
+                    <span style="cursor: default;">{{$t('general.orText')}}</span>
                   </p>
 
                   <div>
@@ -80,11 +80,11 @@
                       :onSuccess="googleOnSuccess"
                       :onFailure="googleOnFailure"
                     >
-                      <img style="cursor: pointer;" class="img-login" src="@/assets/Google-3.png" />
+                      <img style="cursor: pointer;" class="grow-on-hover img-login" src="@/assets/Google-3.png" />
                     </GoogleLogin>
                     <br />
                     <img
-                      class="img-login"
+                      class="grow-on-hover img-login"
                       style="margin-top: 15px; cursor: pointer;"
                       src="@/assets/Facebook-3.png"
                     />
@@ -95,12 +95,12 @@
                     <span
                       class="descript-text"
                       style="color: #ffffff; cursor: default;"
-                    >Don't have an account yet ?</span>
+                    >{{$t('loginRegister.dontHaveAccount')}}</span>
                     <router-link
                       to="/register"
                       class="descript-text"
                       style="margin-left: 10px; color: #f28093"
-                    >Register</router-link>
+                    >{{$t('loginRegister.registerText')}}</router-link>
                   </div>
                 </div>
               </div>
@@ -143,7 +143,18 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
-    }
+    },
+    checkLang() {
+        if(localStorage.getItem("lang") === "th")
+          {
+          return "titleThai";
+          }
+        else
+          {
+          return "title";
+          }
+      },
+
   },
   created() {
     if (this.loggedIn) {
@@ -365,6 +376,20 @@ html {
   padding-bottom: 10px;
   font-size: 8em;
   font-family: "CloudBold";
+  letter-spacing: 11.6px;
+  color: #ffffff;
+  opacity: 1;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  z-index: 2;
+}
+
+.titleThai {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 10px;
+  font-size: 7em;
+font-family: "CloudBold";
   letter-spacing: 11.6px;
   color: #ffffff;
   opacity: 1;

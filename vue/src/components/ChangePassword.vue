@@ -1,26 +1,46 @@
 <template>
   <div class="section">
     <div class="page-container" id="myaccount">
-      <h1 class="title">MY ACCOUNT</h1>
+      <h1 class="title" style="text-transform: uppercase;">{{$t('myAccount.myAccount')}}</h1>
 
       <!-- Bar -->
-      <div style="margin-top: 30px; width: 100%; display: flex">
-        <h2 style="cursor: pointer;" @click="OnclickPro()" id="first-bar" class="bartext">Profile</h2>
-        <h2 style="padding-left: 40px; cursor: default;" class="bartext">Change Password</h2>
-      </div>
+      <!-- <div style="margin-top: 30px; width: 100%; display: flex">
+        <h2 style="cursor: pointer;" @click="OnclickPro()" id="first-bar" class="bartext">{{$t('myAccount.profile')}}</h2>
+        <h2 style="padding-left: 40px; cursor: default;" class="bartext">{{$t('editPassword.changePass')}}</h2>
+      </div> -->
       <!-- Bar -->
 
       <!-- Bar -->
-      <div style="margin-top: 2px; display: flex; align-items: center">
+      <!-- <div style="margin-top: 2px; display: flex; align-items: center">
         <hr id="select-profile" class="line" />
         <hr id="select-password" class="line_select" />
         <hr id="select-none" class="line" />
-      </div>
+      </div> -->
       <!-- Bar -->
+
+      <!--New-->
+      <div style="display:flex; margin-top: 30px;">
+        <div @click="OnclickPro()" style=" display:block; justify-content:center; align-items:center;">
+          <h2 style="cursor: pointer; padding-left:15px; padding-right:15px;" id="first-bar" class="bartext">{{$t('myAccount.profile')}}</h2>
+          <!-- <hr id="select-profile" class="line_select" /> -->
+        </div>
+
+        <div style="display:block; z-index:3; justify-content:center; align-items:center;">
+          <h2 style="text-align:center; padding-left:15px; padding-right:15px; cursor: pointer;" class="bartext">
+          {{$t('editPassword.changePass')}}
+        </h2>
+          <hr id="select-profile" class="line_select" />
+        </div>
+      </div>
+
+      <div style="z-index:1;">
+        <hr style="width:100%; margin-top:-5px;" id="select-password" class="line" />
+      </div>
+
       <div v-show="accountType === 'EMAIL'" id="password-section">
         <div>
           <div class="password-container">
-            <h3 style="cursor: default;" class="inputText">CURRENT PASSWORD</h3>
+            <h3 style="cursor: default;" class="inputText">{{$t('editPassword.currentPass')}}</h3>
             <input
               class="input input-line"
               v-model="oldPassword"
@@ -30,7 +50,7 @@
           </div>
 
           <div class="password-container">
-            <h3 style="cursor: default;" class="inputText">NEW PASSWORD</h3>
+            <h3 style="cursor: default;" class="inputText">{{$t('editPassword.newPassword')}}</h3>
             <input
               class="input input-line"
               v-model="newPassword"
@@ -40,7 +60,7 @@
           </div>
 
           <div class="password-container">
-            <h3 style="cursor: default;" class="inputText">CONFIRM PASSWORD</h3>
+            <h3 style="cursor: default;" class="inputText">{{$t('editPassword.confirmPassword')}}</h3>
             <input
               class="input input-line"
               v-model="confirmPassword"
@@ -61,9 +81,9 @@
             <div id="confirm-button">
               <button
                 @click="checkPassword()"
-                class="pink_button"
+                class="pink_button grow-on-hover"
                 style="cursor: pointer;"
-              >SAVE CHANGE</button>
+              >{{$t('myAccount.saveprofile')}}</button>
             </div>
           </div>
         </div>
@@ -71,7 +91,7 @@
       <div v-show="accountType === 'GOOGLE'">
         <div class="section">
           <div>
-            <h3 class="pass-text">You can't change your password.</h3>
+            <h3 class="pass-text">{{$t('accountType.cantChangePass')}}</h3>
             <div class="section">
               <img style="cursor: default;" class="img-login" src="@/assets/Google-3.png" />
             </div>
@@ -81,7 +101,7 @@
       <div v-show="accountType === 'FACEBOOK'">
         <div class="section">
           <div>
-            <h3 class="pass-text">You can't change your password.</h3>
+            <h3 class="pass-text">{{$t('accountType.cantChangePass')}}</h3>
             <div class="section">
               <img style="cursor: default;" class="img-login" src="@/assets/Facebook-3.png" />
             </div>
@@ -249,11 +269,14 @@ input[type="password"]:focus {
 .input-left-date {
   margin-left: 10px;
 }
+
 #select-profile {
-  width: 8%;
+  z-index:2;
 }
+
 #select-password {
-  width: 15%;
+  margin-top:2.5px;
+  z-index:1;
 }
 #select-none {
   width: 72%;
@@ -293,7 +316,7 @@ input[type="password"]:focus {
   margin-left: 30px;
 }
 #first-bar {
-  padding-left: 40px;
+  padding-left: 30px;
 }
 #profile-section {
   margin-top: 35px;
@@ -425,21 +448,21 @@ input[data-v-7ecbf6ee] {
 }
 
 @media screen and (max-width: 1920px) {
-  #select-profile {
+  /* #select-profile {
     width: 9%;
   }
   #select-password {
     width: 18%;
-  }
+  } */
 }
 
 @media screen and (max-width: 1440px) {
-  #select-profile {
+  /* #select-profile {
     width: 12%;
   }
   #select-password {
     width: 20%;
-  }
+  } */
   #profile-section {
     justify-content: space-between;
   }
@@ -452,9 +475,9 @@ input[data-v-7ecbf6ee] {
   #first-bar {
     padding-left: 25px;
   }
-  #select-password {
+  /* #select-password {
     width: 19%;
-  }
+  } */
   .password-container {
     grid-template-columns: 40% 50%;
   }
@@ -464,12 +487,12 @@ input[data-v-7ecbf6ee] {
 }
 
 @media screen and (max-width: 768px) {
-  #select-password {
+  /* #select-password {
     width: 34%;
   }
   #select-profile {
     width: 15%;
-  }
+  } */
   .input-container {
     padding-top: 15px;
     padding-left: 0px;
@@ -524,12 +547,12 @@ input[data-v-7ecbf6ee] {
   .password-container {
     text-align: initial;
   }
-  #select-profile {
+  /* #select-profile {
     width: 10%;
   }
   #select-password {
     width: 75%;
-  }
+  } */
   #select-none {
     width: 5%;
   }
@@ -546,9 +569,9 @@ input[data-v-7ecbf6ee] {
   .input-left-date {
     margin-left: 20px;
   }
-  #select-profile {
+  /* #select-profile {
     width: 30%;
-  }
+  } */
   .general-container {
     display: block;
   }
@@ -583,12 +606,12 @@ input[data-v-7ecbf6ee] {
 }
 
 @media screen and (max-width: 375px) {
-  #select-password {
+  /* #select-password {
     width: 65%;
   }
   #select-profile {
     width: 30%;
-  }
+  } */
   #select-none {
     width: 5%;
   }
@@ -601,21 +624,21 @@ input[data-v-7ecbf6ee] {
 }
 
 @media screen and (max-width: 360px) {
-  #select-password {
+  /* #select-password {
     width: 65%;
   }
   #select-profile {
     width: 35%;
-  }
+  } */
   #select-none {
     width: 0%;
   }
   .title {
     font-size: 4em;
   }
-  #select-profile {
+  /* #select-profile {
     width: 37%;
-  }
+  } */
   .inputHead {
     font-size: 2em;
   }

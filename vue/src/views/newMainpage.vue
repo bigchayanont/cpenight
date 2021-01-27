@@ -26,11 +26,11 @@
         <h3 id="nighttomeet">Night to meet you<span id="year">2021</span></h3>
         <h3 id="first-welcome">ยินดีที่ได้กลับมาพบกัน...</h3>
         <div>
-          <h3 id="first-date">20 MARCH 2021</h3>
-          <p id="first-place">The Cavalry Club 19:00 - 23:00 น.</p>
+          <h3 id="first-date">{{$t('mainPage.firstDate') }}</h3>
+          <p id="first-place">{{$t('mainPage.Time') }}</p>
           <div>
-            <button @click="clickTicket()" id="nextButton">
-              BUY TICKET NOW<i
+            <button class="grow-on-hover" @click="clickTicket()" id="nextButton">
+              {{$t('mainPage.buyTicket')}}<i
                 style="align: center; padding-left: 20px"
                 class="fa fa-arrow-right"
               ></i>
@@ -58,7 +58,7 @@
               padding-bottom: 30px;
             "
           >
-          COUNTDOWN
+          {{$t('mainPage.countDown') }}
           </h3>
           <div
             style="display: flex; justify-content: center; align-items: center"
@@ -88,7 +88,7 @@
                   opacity: 0.5;
                 "
               >
-                DAYS
+                {{$t('mainPage.Day') }}
               </h4>
             </div>
             <h4 class="countdown_colon">:</h4>
@@ -117,7 +117,7 @@
                   opacity: 0.5;
                 "
               >
-                HOURS
+                {{$t('mainPage.Hours') }}
               </h4>
             </div>
             <h4 class="countdown_colon">:</h4>
@@ -146,7 +146,7 @@
                   opacity: 0.5;
                 "
               >
-                MINS
+                {{$t('mainPage.Mins') }}
               </h4>
             </div>
             <h4 class="countdown_colon">:</h4>
@@ -175,7 +175,7 @@
                   opacity: 0.5;
                 "
               >
-                SECS
+                {{$t('mainPage.Secs') }}
               </h4>
             </div>
           </div>
@@ -222,17 +222,10 @@
             </div>
           </div>
           <p id="aboutdetail">
-            CPE NIGHT 2021
-            เป็นงานที่จัดขึ้นเพื่อให้นักศึกษาภาควิชาวิศวกรรมคอมพิวเตอร์ อาจารย์
-            และบุคลากร ได้มาพบปะ สังสรรค์
-            และสร้างปฏิสัมพันธ์อันดีภายในภาควิชาวิศวกรรมคอมพิวเตอร์
-            นอกจากนี้ยังเป็นงานที่จะให้
-            ทุกคนได้รำลึกถึงช่วงเวลาที่ได้อยู่ด้วยกัน และได้รู้จักกันที่ CPE
+            {{$t('mainPage.aboutDes1') }}
           </p>
           <p id="aboutdetail">
-            โดยรูปแบบงานในปีนี้อาจจะไม่ได้หรูหราเหมือนปีที่ผ่าน ๆ มา
-            เนื่องจากวัตถุประสงค์ของมุ่งเน้นไปที่อยากให้ทุกคนได้กลับมาเจอกันมากกว่า
-            จึงไม่จำเป็นต้องกังวลเรื่องการแต่งตัว
+            {{$t('mainPage.aboutDes2') }}
           </p>
           <!-- Element -->
           <div id="date-section">
@@ -251,7 +244,7 @@
                       fill: #fff;
                     "
                     src="@/assets/main/icons8-calendar-80.png"
-                  />20 MARCH 2021
+                  />{{$t('mainPage.Date') }}
                 </h4>
               </div>
               <div id="about-place">
@@ -285,7 +278,7 @@
       <div class="section">
         <div id="schedule_section" class="page-container">
           <div style="padding: 50px 40px 80px 40px">
-            <h4 id="schedultitle">Schedule</h4>
+            <h4 id="schedultitle">{{$t('mainPage.Schedule')}}</h4>
             <div>
               <div class="schedule-table">
                 <!-- Time -->
@@ -295,18 +288,16 @@
                   <img src="@/assets/main/main-23.png" />
                 </div>
                 <h4>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed
-                  diam nonummy nibh euismod tincidunt ut laoreet dolore magna
-                  aliquam erat
+                  {{$t('mainPage.Schedule1')}}
                 </h4>
 
                 <h3>19 : 00 - 19 : 30</h3>
-                <h4>Lorem ipsum dolor sit</h4>
+                <h4>{{$t('mainPage.Schedule2')}}</h4>
 
                 <h3>19 : 00 - 19 : 30</h3>
-                <h4>Lorem ipsum dolor sit</h4>
+                <h4>{{$t('mainPage.Schedule3')}}</h4>
                 <h3 style="grid-column: span 2">19 : 00 - 19 : 30</h3>
-                <h4>Lorem ipsum dolor sit</h4>
+                <h4>{{$t('mainPage.Schedule4')}}</h4>
                 <!-- Element -->
 
                 <!-- Content -->
@@ -350,7 +341,7 @@
                   "
                   id="schedultitle"
                 >
-                  รถไฟฟ้า BTS
+                  {{$t('mainPage.Bts')}}
                 </h4>
                 <img id="bts-icon" src="@/assets/main/BTS-Logo.png" />
               </div>
@@ -375,7 +366,7 @@
                   style="margin-top: 2px; display: inline-block"
                   id="schedultitle"
                 >
-                  รถประจำทาง Bus
+                  {{$t('mainPage.Bus')}}
                 </h4>
                 <div id="busroad" style="width: 700px">
                   <img style="width: 100%" src="@/assets/main/carroad.png" />
@@ -422,9 +413,7 @@
                 padding-top: 20px;
               "
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Pharetra vel turpis nunc eget lorem dolor sed viverra.
+              {{$t('mainPage.ticketDes')}}
             </p>
 
             <!-- Ticket Types -->
@@ -439,8 +428,8 @@
                   grid-template-columns: 50% 50%;
                 "
               >
-                <h4 class="ticket-title">TICKET TYPE</h4>
-                <h4 class="ticket-title" style="text-align: right">PRICE</h4>
+                <h4 class="ticket-title">{{$t('mainPage.ticketType')}}</h4>
+                <h4 class="ticket-title" style="text-align: right">{{$t('mainPage.Price')}}</h4>
               </div>
               <hr
                 style="
@@ -473,7 +462,7 @@
                       color: #ffffff;
                     "
                   >
-                    Lorem ipsum
+                    {{$t('mainPage.Ticket1')}}
                   </h4>
                   <h4
                     style="
@@ -486,7 +475,7 @@
                       color: #ffffff;
                     "
                   >
-                    Sed do eiusmod tempor incididunt
+                    {{$t('mainPage.ticket1Des')}}
                   </h4>
                 </div>
                 <h4
@@ -536,7 +525,7 @@
                       color: #ffffff;
                     "
                   >
-                    Lorem ipsum
+                    {{$t('mainPage.Ticket2')}}
                   </h4>
                   <h4
                     style="
@@ -549,7 +538,7 @@
                       color: #ffffff;
                     "
                   >
-                    Sed do eiusmod tempor incididunt
+                    {{$t('mainPage.ticket2Des')}}
                   </h4>
                 </div>
                 <h4
@@ -574,8 +563,8 @@
                 padding-top: 40px;
               "
             >
-              <button @click="clickTicket()" id="ticketButton">
-                GET TICKET<i
+              <button @click="clickTicket()" id="ticketButton" class = "text grow-on-hover">
+                {{$t('mainPage.getTicket')}}<i
                   style="align: center; padding-left: 20px"
                   class="fa fa-arrow-right"
                 ></i>
@@ -631,13 +620,11 @@
               font-size: 2em;
             "
           >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Pharetra
-            vel turpis nunc eget lorem dolor sed viverra.
+            {{$t('mainPage.souvenirDes')}}
           </p>
           <div class="button_container">
-            <button id="shopButton" @click="clickShop()">
-              GO TO SHOP<i
+            <button id="shopButton" class="grow-on-hover" @click="clickShop()">
+              {{$t('mainPage.goToShop')}}<i
                 style="align: center; padding-left: 20px"
                 class="fa fa-arrow-right"
               ></i>
@@ -692,7 +679,7 @@
                   :class="arrowLeft1"
                 ></i>
                 <h3 class="textQuestion" style="margin-left: 20px">
-                  งานจัดที่ไหน ?
+                  {{$t('mainPage.Q1')}}
                 </h3>
               </div>
             </div>
@@ -719,8 +706,7 @@
                     class="textAnswer"
                     style="padding-left: 10px; margin-left: 10px"
                   >
-                    ร้าน The Cavalry Club อยู่ซอยพหลโยธิน2 ซึ่งอยู่ระหว่าง
-                    สถานนีรถไฟฟ้า BTSสนามเป้า และ BTSอารีย์
+                   {{$t('mainPage.A1')}}
                   </h3>
                 </div>
                 <img
@@ -759,7 +745,7 @@
                   :class="arrowLeft2"
                 ></i>
                 <h3 class="textQuestion" style="margin-left: 20px">
-                  งานจัดขึ้นวันไหน ?
+                  {{$t('mainPage.Q2')}}
                 </h3>
               </div>
             </div>
@@ -786,9 +772,7 @@
                     class="textAnswer"
                     style="padding-left: 10px; margin-left: 10px"
                   >
-                    วันเสาร์ที่ 20 มีนาคม 2564
-                    เราจัดงานวันเสาร์เพื่อเผื่อเวลาวันอาทิตย์ให้พี่ ๆ
-                    ที่ต้องไปทำงานวันจันทร์ได้พักผ่อนกันให้เต็มที่
+                    {{$t('mainPage.A2')}}
                   </h3>
                 </div>
                 <img
@@ -827,7 +811,7 @@
                   :class="arrowLeft3"
                 ></i>
                 <h3 class="textQuestion" style="margin-left: 20px">
-                  ใครเข้าร่วมงานได้บ้าง ?
+                  {{$t('mainPage.Q3')}}
                 </h3>
               </div>
             </div>
@@ -854,8 +838,7 @@
                     class="textAnswer"
                     style="padding-left: 10px; margin-left: 10px"
                   >
-                    นักศึกษาวิศวกรรมคอมพิวเตอร์ทุกคนตั้งแต่รุ่น 1 ถึงรุ่น 34
-                    รวมถึงอาจารย์และบุคลากรของวิศวกรรมคอมพิวเตอร์ทุกท่าน
+                    {{$t('mainPage.A3')}}
                   </h3>
                 </div>
                 <img
@@ -894,7 +877,7 @@
                   :class="arrowLeft4"
                 ></i>
                 <h3 class="textQuestion" style="margin-left: 20px">
-                  ค่าใช้จ่ายเท่าไหร่ ?
+                  {{$t('mainPage.Q4')}}
                 </h3>
               </div>
             </div>
@@ -921,8 +904,7 @@
                     class="textAnswer"
                     style="padding-left: 10px; margin-left: 10px"
                   >
-                    สามารถซื้อบัตรเข้าร่วมงานได้ที่….
-                    และใครที่อยากสนับสนุนกิจกรรมนักศึกษาวิศวกรรมคอมพิเตอร์สามารถร่วมซื้อของที่ระลึกในงานได้ที่นี่…
+                    {{$t('mainPage.A4')}}
                   </h3>
                 </div>
                 <img
@@ -961,7 +943,7 @@
                   :class="arrowLeft5"
                 ></i>
                 <h3 class="textQuestion" style="margin-left: 20px">
-                  ในงานมีอะไรบ้าง ?
+                  {{$t('mainPage.Q5')}}
                 </h3>
               </div>
             </div>
@@ -988,9 +970,7 @@
                     class="textAnswer"
                     style="padding-left: 10px; margin-left: 10px"
                   >
-                    ภายในงานมีอาหารบุฟเฟ่ต์ และกิจกรรมมากมาย
-                    ทั้งการแสดงจากนักศึกษาปัจจุบัน อาจารย์และบุคลากร
-                    และพื้นที่สำหรับแลกเปลี่ยนความคิดเห็นกับรุ่นพี่ศิษย์เก่า
+                    {{$t('mainPage.A5')}}
                   </h3>
                 </div>
                 <img
@@ -1029,7 +1009,7 @@
                   :class="arrowLeft6"
                 ></i>
                 <h3 class="textQuestion" style="margin-left: 20px">
-                  งานนี้จำเป็นต้องแต่งตัวสวยๆ ไปไหม ?
+                  {{$t('mainPage.Q6')}}
                 </h3>
               </div>
             </div>
@@ -1056,9 +1036,7 @@
                     class="textAnswer"
                     style="padding-left: 10px; margin-left: 10px"
                   >
-                    ไม่ต้องค่ะ ขอแค่ทุกคนแต่งตัวให้เกียติสถานที่ก็พอ
-                    เพราะเราอยากให้ทุกคนได้มาเจอกัน
-                    แต่ทางทีมงานมีรางวัลเครื่องแต่งกายยอดเยี่ยมภายในงานให้ด้วยนะคะ
+                    {{$t('mainPage.A6')}}
                   </h3>
                 </div>
                 <img
@@ -1096,7 +1074,7 @@
               color: #ffffff;
             "
           >
-            SPONSORS
+            {{$t('mainPage.sponsor')}}
           </h4>
           <hr
             style="
@@ -1269,6 +1247,7 @@ export default {
 * {
   z-index: 1;
 }
+
 #ticket-card {
   width: 100%;
 }

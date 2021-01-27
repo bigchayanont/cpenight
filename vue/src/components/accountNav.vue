@@ -24,7 +24,7 @@
                   >
                     <a
                       v-smooth-scroll="{ duration: 1000, updateHistory: false }"
-                      >My Ticket</a
+                      >{{$t('myAccount.myTicket')}}</a
                     >
                   </li>
 
@@ -40,7 +40,7 @@
                         offset: -100,
                         updateHistory: false,
                       }"
-                      >My Account</a
+                      >{{$t('myAccount.myAccount')}}</a
                     >
                   </li>
                 </ul>
@@ -58,7 +58,7 @@
                   "
 
                 >
-                  <a>Mainpage</a>
+                  <a>{{$t('myAccount.mainpage')}}</a>
                   <img
                     style="margin-left: 8px; width: 21px"
                     src="@/assets/user/home.png"
@@ -75,7 +75,7 @@
                     "
                     href="/"
                     class="btn transparent"
-                    >Log Out</a
+                    >{{$t('myAccount.logout')}}</a
                   >
                 </div>
               </div>

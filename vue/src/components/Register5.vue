@@ -26,8 +26,8 @@
                 <div id="header-section">
                   <div>
                     <h1 class="title" style="margin: 0px; cursor: default;">
-                      Please tell us <br />
-                      more about yourself.
+                     {{$t('registerSection.tellusyourself1')}} <br />
+                      {{$t('registerSection.tellusyourself2')}}
                     </h1>
                   </div>
                   <div>
@@ -38,14 +38,14 @@
                 <div>
                   <!-- First Section-->
                   <h2 style="cursor: default;" class="question">
-                    Where do you work?
+                    {{$t('registerInformation.wherework')}}
                   </h2>
                   <div>
                     <div class="input-section">
                       <!-- Input Section -->
                       <div class="input-space">
                         <h1 style="cursor: default" class="inputText">
-                          ORGANIZATION (OPTIONAL)
+                          {{$t('myAccount.organization')}} ({{$t('registerInformation.optional')}})
                         </h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
@@ -62,7 +62,7 @@
                       <!-- Input Section -->
                       <div>
                         <h1 style="cursor: default;" class="inputText">
-                          ROLE (OPTIONAL)
+                          {{$t('myAccount.role')}} ({{$t('registerInformation.optional')}})
                         </h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
@@ -79,13 +79,13 @@
                     </div>
 
                     <h2 style="cursor: default;" class="question">
-                      What do you do?
+                     {{$t('registerInformation.whatdoyoudo')}}
                     </h2>
                     <div class="input-single">
                       <!-- Input Section -->
                       <div class="input-space">
                         <h1 style="cursor: default;" class="inputText">
-                          FIELD OF WORK (OPTIONAL)
+                          {{$t('myAccount.field')}} ({{$t('registerInformation.optional')}})
                         </h1>
                         <div style="margin-top: 20px; padding-right: 10px">
                           <input
@@ -115,7 +115,7 @@
                   "
                 >
                   <div>
-                    <button
+                    <button class = "text grow-on-hover"
                       style="cursor: pointer;"
                       id="backButton"
                       @click="backPage()"
@@ -124,16 +124,16 @@
                         style="align: center; padding-right: 20px"
                         class="fa fa-arrow-left"
                       ></i
-                      >BACK
+                      >{{$t('registerSection.back')}}
                     </button>
                   </div>
                   <div>
-                    <button
+                    <button class = "text grow-on-hover"
                       style="cursor: pointer;"
                       id="nextButton"
                       @click="nextPage()"
                     >
-                      FINISH
+                      {{$t('registerInformation.finish')}}
                     </button>
                   </div>
                 </div>

@@ -22,11 +22,11 @@
                     style="
                       font-family: 'CloudBold';
                       color: #ffffff;
-                      font-size: 2.25em;
+                      font-size: 2em;
                       margin: 0px;
                     "
                   >
-                    ปรัษฐา วีระพงษ์ (แคท) CPE31
+                    {{$t('footer.pkatname')}} CPE31
                   </h4>
                   <div class="footer-info">
                     <img
@@ -64,11 +64,11 @@
                     style="
                       font-family: 'CloudBold';
                       color: #ffffff;
-                      font-size: 2.25em;
+                      font-size: 2em;
                       margin: 0px;
                     "
                   >
-                    ณัฐกนก โภคทรัพย์ไพบูลย์ (ภีร์) CPE 31
+                    {{$t('footer.ppname')}} CPE31
                   </h4>
                   <div class="footer-info">
                     <img
@@ -126,13 +126,13 @@
             <div style="display: flex; justify-content: center">
               <img @click="clickCPE()" style="cursor:pointer;" id="cpelogo" src="@/assets/main/CPE_Logo.png" />
             </div>
-            <p
-              style="margin-bottom:0px; margin-top:0px; font-family:'CloudLight; color:#FFFFFF; font-size:2em; letter-spacing: 2.2px; line-height:1.5em; width:100%;"
+            <div
+              
             >
-              ภาควิชาวิศวกรรมคอมพิวเตอร์ คณะวิศวกรรมศาสตร์
-              มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี ชั้น 10 อาคารวิศววัฒนะ 126
-              ถ.ประชาอุทิศ แขวงบางมด เขตทุ่งครุ กรุงเทพฯ 10140
-            </p>
+              <p class="cpe-content">
+                {{$t('footer.description')}}
+              </p>
+            </div>
           </div>
           <!-- Cpe Logo -->
         </div>
@@ -142,10 +142,8 @@
               <img style="width: 200px" src="@/assets/main/CPE_Logo.png" />
             </div>
 
-            <p id="cpe-content">
-              ภาควิชาวิศวกรรมคอมพิวเตอร์ คณะวิศวกรรมศาสตร์
-              มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี ชั้น 10 อาคารวิศววัฒนะ 126
-              ถ.ประชาอุทิศ แขวงบางมด เขตทุ่งครุ กรุงเทพฯ 10140
+            <p class="cpe-content">
+              {{$t('footer.description')}}
             </p>
           </div>
         </div>
@@ -187,14 +185,14 @@ export default {
   width: 100%;
   display: flex;
 }
-#cpe-content {
+.cpe-content {
   padding-left: 30px;
-  border-left: 1px #ffffff solid;
+  /* border-left: 1px #ffffff solid; */
   margin-bottom: 0px;
   margin-top: 0px;
   font-family: "CloudLight";
   color: #ffffff;
-  font-size: 2em;
+  font-size: 1.75em;
   letter-spacing: 2.2px;
   line-height: 1.5em;
   width: 100%;
@@ -210,8 +208,8 @@ export default {
   width: 100%;
 }
 #cpe-section {
-  padding-left: 40px;
-  border-left: 2px solid #ffffff;
+  padding-left: 20px;
+  padding-right:20px ;
 }
 #footer-header {
   display: flex;
@@ -225,6 +223,7 @@ export default {
 #facebook-container {
   height: 100%;
   width: 100%;
+  border-right: 2px solid #ffffff;
 }
 #cpelogo {
   width: 200px;

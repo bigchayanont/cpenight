@@ -25,7 +25,7 @@
                 @click="backMain()"
                 style="text-decoration: none; cursor: pointer;"
                 id="backToMain"
-              >&lt; Main Page</a>
+              >&lt; {{$t('general.backtomain')}}</a>
               <img
                 @click="backMain()"
                 style="padding-left: 10px; width: 23px; margin-top: -3.5px; cursor: pointer;"
@@ -34,7 +34,7 @@
             </div>
             <div id="left-side" class="column" style>
               <div>
-                <h1 style="cursor: default;" class="title">REGISTER</h1>
+                <h1 style="cursor: default;" class="title">{{$t('general.registerTitle')}}</h1>
                 <br />
                 <div>
                   <GoogleLogin
@@ -43,7 +43,7 @@
                     :onSuccess="googleOnSuccess"
                     :onFailure="googleOnFailure"
                   >
-                    <img class="img-login" src="@/assets/Google.png" />
+                    <img class="img-login grow-on-hover" src="@/assets/Google.png" />
                   </GoogleLogin>
                   <br />
 
@@ -60,7 +60,7 @@
                   </div>
 
                   <img
-                    class="img-login"
+                    class="img-login grow-on-hover"
                     style="margin-top: 15px; cursor: pointer;"
                     src="@/assets/Facebook.png"
                   />
@@ -69,24 +69,26 @@
                 <br />
 
                 <p id="or-text">
-                  <span style="cursor: default;">OR</span>
+                  <span style="cursor: default;">{{$t('general.orText')}}</span>
                 </p>
                 
                 <button
+                class="grow-on-hover"
                   @click="onClick()"
                   id="loginButton"
                   style="cursor: pointer;"
+                  
                 >Sign up with Email</button>
 
                 <div id="register-section">
                   <span
                     class="descript-text"
                     style="color: #ffffff; cursor: default;"
-                  >Already have an account ?</span>
+                  >{{$t('loginRegister.haveAccount')}}</span>
                   <router-link to="/login"
                     class="descript-text"
                     style="margin-left: 10px; color: #f28093"
-                    >Login</router-link
+                    >{{$t('loginRegister.login')}}</router-link
                   >
                 </div>
               </div>

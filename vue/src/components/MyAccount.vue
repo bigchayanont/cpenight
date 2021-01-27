@@ -1,47 +1,68 @@
 <template>
   <div class="section">
     <div class="page-container" id="myaccount">
-      <h1 class="title" style="cursor: default;">MY ACCOUNT</h1>
+      <h1 class="title" style="cursor: default; text-transform: uppercase;">{{$t('myAccount.myAccount')}}</h1>
 
       <!-- Bar -->
-      <div style="margin-top: 30px; width: 100%; display: flex">
-        <h2 style="cursor: default;" id="first-bar" class="bartext">Profile</h2>
+      <!-- <div style="margin-top: 30px; width: 100%; display: flex">
+        <h2 style="cursor: default;" id="first-bar" class="bartext">{{$t('myAccount.profile')}}</h2>
         <h2 @click="OnclickChange()" style="padding-left: 40px; cursor: pointer;" class="bartext">
-          Change Password
+          {{$t('editPassword.changePass')}}
         </h2>
-      </div>
+      </div> -->
       <!-- Bar -->
 
       <!-- Bar -->
-      <div style="margin-top: 2px; display: flex; align-items: center">
+      <!-- <div style="margin-top: 2px; display: flex; align-items: center">
         <hr id="select-profile" class="line_select" />
         <hr id="select-password" class="line" />
         <hr id="select-none" class="line" />
-      </div>
+      </div> -->
       <!-- Bar -->
 
+      <!--New-->
+      <div style="display:flex; margin-top: 30px;">
+        <div style="z-index:3; display:block; justify-content:center; align-items:center;">
+          <h2 style="cursor: pointer; padding-left:15px; padding-right:15px;" id="first-bar" class="bartext">{{$t('myAccount.profile')}}</h2>
+          <hr id="select-profile" class="line_select" />
+        </div>
+
+        <div style="display:block; justify-content:center; align-items:center;">
+          <h2 @click="OnclickChange()" style="text-align:center; padding-left:15px; padding-right:15px; cursor: pointer;" class="bartext">
+          {{$t('editPassword.changePass')}}
+        </h2>
+          <!-- <hr id="select-password" class="line" /> -->
+        </div>
+      </div>
+
+      <div style="z-index:1;">
+        <hr style="width:100%; margin-top:-5px;" id="select-password" class="line" />
+      </div>
+
       <!-- Profile -->
-      <div id="profile-section">
+      <div id="profile-section" >
         <!-- Profile Pic-->
-        <div id="picture-container">
+        <div id="picture-container" >
           <div>
             <label for="image">
               <div v-if="editSelect" id="profile-mask">
-                <!-- <input
+                <form enctype="multipart/form-data">
+                <input
                   type="file"
                   name="image"
                   id="image"
                   accept="image/*"
                   @change="previewImage"
                   style="display: none"
-                /> -->
+                />
+                </form>
               </div>
               <div style="position: relative">
-                <!-- <img style="cursor: pointer" v-if="editSelect" id="camera" src="@/assets/user/camera.png" /> -->
+                <img style="cursor: pointer" v-if="editSelect" id="camera" src="@/assets/user/camera.png" />
                 <div class="profilepic">
-                  <!-- <img style="cursor: pointer" :class="changeOpacity()" :src="preview" /> -->
+                  <img style="cursor: pointer" :class="changeOpacity()" :src="preview" />
                   <!-- ลบอันล่างทิ้งถ้าจะใช้ -->
-                  <img style="cursor: pointer" :src="preview" />
+                  <!-- <img style="cursor: pointer" :src="preview" /> -->
                 </div>
               </div>
             </label>
@@ -53,7 +74,7 @@
         <div id="input-section">
           <!-- General -->
           <div class="box" style="padding: 15px">
-            <h1 style="cursor: default;" class="inputHead">GENERAL</h1>
+            <h1 style="cursor: pointer;" class="inputHead">{{$t('myAccount.general')}}</h1>
             <div class="input-container">
               <div>
                 <div class="general-container">
@@ -64,10 +85,10 @@
                         align-items: center;
                         justify-content: center;
                         display: grid;
-                        grid-template-columns: 40% 60%;
+                        grid-template-columns: 30% 70%;
                       "
                     >
-                      <h3 style="cursor: default;" class="inputText">FIRST NAME</h3>
+                      <h3 style="cursor: default;" class="inputText">{{$t('myAccount.firstname')}}</h3>
                       <input
                         v-if="editSelect == false"
                         style="width: 85%"
@@ -91,11 +112,11 @@
                         align-items: center;
                         justify-content: center;
                         display: grid;
-                        grid-template-columns: 40% 60%;
+                        grid-template-columns: 30% 70%;
                         margin-top: 15px;
                       "
                     >
-                      <h3 style="cursor: default;" class="inputText">LAST NAME</h3>
+                      <h3 style="cursor: default;" class="inputText">{{$t('myAccount.lastname')}}</h3>
                       <input
                         v-if="editSelect == false"
                         style="width: 85%"
@@ -123,11 +144,11 @@
                         align-items: center;
                         justify-content: center;
                         display: grid;
-                        grid-template-columns: 40% 60%;
+                        grid-template-columns: 30% 70%;
                         margin-top: 15px;
                       "
                     >
-                      <h3 style="cursor: default;" class="inputText">NICKNAME</h3>
+                      <h3 style="cursor: default;" class="inputText">{{$t('myAccount.nickname')}}</h3>
                       <input
                         v-if="editSelect == false"
                         style="width: 85%"
@@ -157,10 +178,10 @@
                         align-items: center;
                         justify-content: center;
                         display: grid;
-                        grid-template-columns: 40% 60%;
+                        grid-template-columns: 30% 70%;
                       "
                     >
-                      <h3 style="cursor: default;" class="inputText">BIRTH DATE</h3>
+                      <h3 style="cursor: default;" class="inputText">{{$t('myAccount.birthDate')}}</h3>
                       <input
                         v-if="editSelect == false"
                         style="width: 85%"
@@ -214,11 +235,11 @@
                         align-items: center;
                         justify-content: center;
                         display: grid;
-                        grid-template-columns: 40% 60%;
+                        grid-template-columns: 30% 70%;
                         margin-top: 15px;
                       "
                     >
-                      <h3 style="cursor: default;" class="inputText">CPE</h3>
+                      <h3 style="cursor: default;" class="inputText">{{$t('myAccount.cpe')}}</h3>
                       <input
                         v-if="editSelect == false"
                         style="width: 85%"
@@ -253,7 +274,7 @@
             style="margin-top: 20px; margin-bottom: 30px; width: 100%"
           >
             <div class="box" id="contact-container">
-              <h1 style="cursor: default;" class="inputHead">CONTACT</h1>
+              <h1 style="cursor: default;" class="inputHead">{{$t('myAccount.contact')}}</h1>
               <div class="input-container">
                 <!-- Input Container -->
                 <div
@@ -269,10 +290,10 @@
                       align-items: center;
                       justify-content: center;
                       display: grid;
-                      grid-template-columns: 40% 60%;
+                      grid-template-columns: 30% 70%;
                     "
                   >
-                    <h3 style="cursor: default;" class="inputText">PHONE</h3>
+                    <h3 style="cursor: default;" class="inputText">{{$t('myAccount.phone')}}</h3>
                     <input
                       v-if="editSelect == false"
                       style="margin-left: 30px; width: 85%"
@@ -315,10 +336,10 @@
                       align-items: center;
                       justify-content: center;
                       display: grid;
-                      grid-template-columns: 40% 60%;
+                      grid-template-columns: 30% 70%;
                     "
                   >
-                    <h3 style="cursor: default;" class="inputText">LINE</h3>
+                    <h3 style="cursor: default;" class="inputText">{{$t('myAccount.line')}}</h3>
                     <input
                       v-if="editSelect == false"
                       style="margin-left: 30px; width: 85%"
@@ -359,10 +380,10 @@
                       align-items: center;
                       justify-content: center;
                       display: grid;
-                      grid-template-columns: 40% 60%;
+                      grid-template-columns: 30% 70%;
                     "
                   >
-                    <h3 style="cursor: default;" class="inputText">FACEBOOK</h3>
+                    <h3 style="cursor: default;" class="inputText">{{$t('myAccount.facebook')}}</h3>
                     <input
                       v-if="editSelect == false"
                       style="margin-left: 30px; width: 85%"
@@ -391,7 +412,7 @@
             </div>
 
             <div class="box" id="work-container">
-              <h1 style="cursor: default;" class="inputHead">WORK</h1>
+              <h1 style="cursor: default;" class="inputHead">{{$t('myAccount.work')}}</h1>
               <div class="input-container">
                 <!-- Input Container -->
                 <div
@@ -407,10 +428,10 @@
                       align-items: center;
                       justify-content: center;
                       display: grid;
-                      grid-template-columns: 40% 60%;
+                      grid-template-columns: 30% 70%;
                     "
                   >
-                    <h3 style="cursor: default;" class="inputText">ORGANIZATION</h3>
+                    <h3 style="cursor: default;" class="inputText">{{$t('myAccount.organization')}}</h3>
                     <input
                       v-if="editSelect == false"
                       style="margin-left: 30px; width: 85%"
@@ -451,10 +472,10 @@
                       align-items: center;
                       justify-content: center;
                       display: grid;
-                      grid-template-columns: 40% 60%;
+                      grid-template-columns: 30% 70%;
                     "
                   >
-                    <h3 style="cursor: default;" class="inputText">ROLE</h3>
+                    <h3 style="cursor: default;" class="inputText">{{$t('myAccount.role')}}</h3>
                     <input
                       v-if="editSelect == false"
                       style="margin-left: 30px; width: 85%"
@@ -495,10 +516,10 @@
                       align-items: center;
                       justify-content: center;
                       display: grid;
-                      grid-template-columns: 40% 60%;
+                      grid-template-columns: 30% 70%;
                     "
                   >
-                    <h3 style="cursor: default;" class="inputText">FIELD</h3>
+                    <h3 style="cursor: default;" class="inputText">{{$t('myAccount.field')}}</h3>
                     <input
                       v-if="editSelect == false"
                       style="margin-left: 30px; width: 85%"
@@ -532,8 +553,8 @@
           <div id="button">
             <!-- Edit -->
             <div v-show="!editSelect">
-              <button style="cursor: pointer;" @click="editSelect = true" class="white_button">
-                EDIT PROFILE
+              <button style="cursor: pointer;" @click="editSelect = true" class="grow-on-hover white_button">
+                {{$t('myAccount.editprofile')}}
               </button>
             </div>
 
@@ -542,9 +563,9 @@
               <button
                 @click="saveProfile()"
                 style="margin-right: 30px; cursor: pointer;"
-                class="pink_button"
+                class="pink_button grow-on-hover"
               >
-                SAVE CHANGE
+                {{$t('myAccount.saveprofile')}} 
               </button>
               <button
                 @click="
@@ -552,9 +573,9 @@
                   editSelect = false;
                 "
                 style="cursor: pointer;"
-                class="white_button"
+                class="white_button grow-on-hover"
               >
-                CANCEL
+                {{$t('myAccount.cancel')}}
               </button>
             </div>
           </div>
@@ -603,6 +624,7 @@ export default {
       preview: "",
       tempImage: "",
       image: null,
+      imageChanged: false,
       preview_list: [],
       image_list: [],
       show: false,
@@ -644,6 +666,18 @@ export default {
         this.tempImage = this.profile.profilePic;
         this.display.profilePic = this.profile.profilePic;
       }
+
+      UserService.getUserProfile().then(
+      response => {
+        if(response){
+          console.log(response);
+          this.preview = response;
+        }
+        else{
+          console.log("Not found!");
+        }
+      })
+
       bus.$emit('display',this.display);
     }
     })
@@ -685,40 +719,15 @@ export default {
   },
   methods: {
     previewImage: function (event) {
-      var input = event.target;
-      if (input.files) {
-        var reader = new FileReader();
-        reader.onload = (e) => {
-          this.tempImage = this.preview;
-          this.preview = e.target.result;
-        };
-        this.image = input.files[0];
-        reader.readAsDataURL(input.files[0]);
-        // mkdirp.sync('/assets/profilePicture/' + this.profile.id);
+      if (event.target.files[0]) {
+        this.tempImage = this.preview;
+        this.preview = URL.createObjectURL(event.target.files[0]);
+        const formData = new FormData();
+        formData.append('uploadedImages',event.target.files[0]);
+        this.image = formData;
+        this.imageChanged = true;
       }
     },
-    previewMultiImage: function (event) {
-      var input = event.target;
-      var count = input.files.length;
-      var index = 0;
-      if (input.files) {
-        while (count--) {
-          var reader = new FileReader();
-          reader.onload = (e) => {
-            this.preview_list.push(e.target.result);
-          };
-          this.image_list.push(input.files[index]);
-          reader.readAsDataURL(input.files[index]);
-          index++;
-        }
-      }
-    },
-    // reset: function () {
-    //   this.image = null;
-    //   this.preview = null;
-    //   this.image_list = [];
-    //   this.preview_list = [];
-    // },
     changeOpacity() {
       let change = "profilechange"
       if (this.editSelect === true){
@@ -726,7 +735,8 @@ export default {
       }
     },
     saveProfile() {
-      this.tempImage = this.preview
+      //this.tempImage = this.preview;
+      //this.profile.profilePic = this.preview;
       this.profile.firstName = this.inputFirstName;
       this.profile.lastName = this.inputLastName;
       this.profile.nickName = this.inputNickName;
@@ -749,6 +759,27 @@ export default {
       this.display.firstName = this.inputFirstName;
       this.display.lastName = this.inputLastName;
       this.editSelect = false;
+      if(this.imageChanged) {
+        UserService.uploadProfile(this.image).then(
+          response => {
+            if(response){
+              console.log(response);
+            }
+            else{
+              console.log("Uploading Failed!");
+            }
+          })
+        UserService.getUserProfile().then(
+          response => {
+            if(response){
+              console.log(JSON.stringify(response));
+              this.preview = response;
+            }
+            else{
+              console.log("Not found!");
+            }
+          })
+        }
       UserService.editData(this.profile).then(
         response => {
           if(response){
@@ -760,6 +791,8 @@ export default {
         })
       localStorage.removeItem("firstName");
       localStorage.setItem("firstName",this.profile.firstName);
+      this.imageChanged = false;
+      this.image = null;
       alert('Save Profile Successful');
     },
     cancel() {
@@ -777,6 +810,9 @@ export default {
       this.inputOrgan = this.profile.organ;
       this.inputRole = this.profile.role;
       this.inputField = this.profile.field;
+      this.imageChanged = false;
+      this.image = null;
+      this.preview = this.tempImage;
     },
     OnclickChange() {
       this.$emit("selectReturn", false);
@@ -837,11 +873,12 @@ export default {
   grid-template-columns: 50% 50%;
 }
 #select-profile {
-  width: 8%;
+  z-index:2;
 }
 
 #select-password {
-  width: 20%;
+  margin-top:2.5px;
+  z-index:1;
 }
 
 #select-none {
@@ -884,9 +921,7 @@ export default {
 #input-section {
   margin-left: 30px;
 }
-#first-bar {
-  padding-left: 40px;
-}
+
 #profile-section {
   margin-top: 35px;
   width: 100%;
@@ -905,7 +940,7 @@ export default {
 
 .profilepic img {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 #button {
@@ -1060,24 +1095,24 @@ input[data-v-7ecbf6ee] {
 }
 
 @media screen and (max-width: 1920px) {
-  #select-profile {
+  /* #select-profile {
     width: 9%;
-  }
+  } */
 }
 
 @media screen and (max-width: 1440px) {
-  #select-profile {
+  /* #select-profile {
     width: 12%;
-  }
+  } */
   #profile-section {
     justify-content: space-between;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  #first-bar {
+  /* #first-bar {
     padding-left: 25px;
-  }
+  } */
 }
 
 @media screen and (max-width: 768px) {
@@ -1088,9 +1123,9 @@ input[data-v-7ecbf6ee] {
   #input-section {
     margin-left: 0px;
   }
-  #first-bar {
+  /* #first-bar {
     padding-left: 10px;
-  }
+  } */
 
   #profile-section {
     margin-top: 35px;
@@ -1137,9 +1172,9 @@ input[data-v-7ecbf6ee] {
     margin-bottom: 30px;
     /* display: none; */
   }
-  #select-profile {
+  /* #select-profile {
     width: 30%;
-  }
+  } */
   .general-container {
     display: block;
   }
@@ -1186,9 +1221,9 @@ input[data-v-7ecbf6ee] {
   .title {
     font-size: 4em;
   }
-  #select-profile {
+  /* #select-profile {
     width: 37%;
-  }
+  } */
   .inputHead {
     font-size: 2em;
   }
@@ -1212,3 +1247,6 @@ input[data-v-7ecbf6ee] {
   }
 }
 </style>
+}
+
+

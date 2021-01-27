@@ -27,6 +27,7 @@
     "vue-cookie": "^1.1.4",
     "vue-cookies": "^1.7.4",
     "vue-google-login": "^2.0.5",
+    "vue-i18n": "^8.22.4",
     "vue-loader": "^15.9.6",
     "vue-navigation-bar": "^4.1.0",
     "vue-router": "^3.4.9",
