@@ -156,10 +156,13 @@ exports.uploadPic = (req, res) => {
 
 /*display pic to the user */
   exports.displayPic = (req,res) => {
-    User.findById(req.params.id), (err, usr) => {
+    User.findOne({
+      where: {
+      id: req.params.id,
+      }}). then((user) => {
       if(err) console.log('cant find id usr');
       res.sendFile('./data/uploads/' + req.params.id);
-    };
+    }
 }
 
 const storage = multer.diskStorage({
