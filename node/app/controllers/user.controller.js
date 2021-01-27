@@ -149,7 +149,7 @@ exports.uploadPic = (req, res) => {
       res.status(500).send({ message: err.message });
     }
     else{
-      var _ext = req.originalname.substring(file.originalname.indexOf("."));
+      var _ext = req.originalname.substring(req.originalname.indexOf("."));
       let profilePic = req.query.id+_ext;
       User.update({
 	      profilePic : profilePic
