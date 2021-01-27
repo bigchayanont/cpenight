@@ -149,7 +149,7 @@ exports.uploadPic = (req, res) => {
       res.status(500).send({ message: err.message });
     }
     else{
-     let profilePic = req.query.id + '-' + file.originalname;
+     let profilePic = req.query.id + '-' + req.originalname;
       User.update({
 	      profilePic : profilePic
         },
@@ -186,9 +186,9 @@ const storage = multer.diskStorage({
         console.log(req.query.id)
         if (err) throw err;
         for (const file of files) {
-          fs.unlink(path.join('./data/uploads/' + req.query.id, file), err => {
+          fs.unlink('./data/uploads/' + req.query.id + '/' + file), err => {
           if (err) throw err;
-          });
+          };
         }
       });
       /* User.update({
