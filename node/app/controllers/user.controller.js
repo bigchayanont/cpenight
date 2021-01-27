@@ -161,7 +161,7 @@ exports.displayPic = (req,res) => {
       id: req.params.id,
       }}). then((user) => {
       if(!user) console.log('cant find id usr');
-      res.sendFile('./data/uploads/' + user.id + '/' + user.profilePic,{ root: __dirname });
+      res.sendFile('../../data/uploads/' + user.id + '/' + user.profilePic,{ root: __dirname });
     })
 }
 
