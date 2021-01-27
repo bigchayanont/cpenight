@@ -55,7 +55,6 @@ exports.editData = (req, res) => {
   User.update(
     {
       email: req.body.email,
-      profilePic: req.body.profilePic,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       nickName: req.body.nickName,
@@ -141,7 +140,6 @@ exports.uploadPic = (req, res) => {
     console.log('mkdir err -->' + err);
   });
   console.log("id: ",req.query.id);
-  console.log(req)
 
   upload(req, res, (err) =>{
     if(err){
@@ -150,21 +148,8 @@ exports.uploadPic = (req, res) => {
       res.status(500).send({ message: err.message });
     }
     else{
-      //var _ext = req.originalname.substring(req.originalname.indexOf("."));
-      let profilePic = req.query.id;
-      User.update({
-	      profilePic : profilePic
-        },
-        {
-          where: {id: req.query.id},
-        })
-      .then(() => {
-        console.log('image path saved to DB --> ' + req.query.id);
-      })
-      .catch((err) => {
-        console.log('image path failed when saving to DB ' + err)
-      }),
-      res.send({ message: "upload image success", profilePic : profilePic})
+      console.log('id UPLOAD IMG --> ' + req.query.id);
+      res.send({ message: "upload image success" })
     }
     });
 }
@@ -183,17 +168,8 @@ exports.uploadPic = (req, res) => {
 
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
-    //callback(fs.mkdir('/data/uploads/' + request.user._id));
-      /* fs.readdir('./data/uploads/' + req.query.id,{ recursive: true }, (err, files) => {
-        console.log(req.query.id)
-        if (err) throw err;
-        for (const currentfile of files) {
-          fs.unlink('./data/uploads/' + req.query.id + '/' + currentfile), err => {
-          if (err) throw err;
-          };
-          }
-      }); */
-      /* User.update({
+    // callback(fs.mkdir('/data/uploads/' + request.user._id));
+      User.update({
 	      profilePic : req.query.id + '-' + file.originalname
       },
       {
@@ -204,13 +180,12 @@ const storage = multer.diskStorage({
       })
       .catch((err) => {  
         console.log('upload failed' + err)
-      }), */
+      }),
     callback(null, './data/uploads/' + req.query.id); //will automate catagory
   },
   filename: function (req, file, callback) {
     console.log(file);
-    var _ext = file.originalname.substring(file.originalname.indexOf("."));
-    callback(null, req.query.id+_ext);
+    callback(null, req.query.id + '-' + file.originalname);
     }
   });
   // Function to upload images
