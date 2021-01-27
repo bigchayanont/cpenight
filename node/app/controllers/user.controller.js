@@ -182,7 +182,7 @@ exports.uploadPic = (req, res) => {
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     //callback(fs.mkdir('/data/uploads/' + request.user._id));
-      fs.readdir('./data/uploads/' + req.query.id,{ recursive: true }, (err, files) => {
+      /* fs.readdir('./data/uploads/' + req.query.id,{ recursive: true }, (err, files) => {
         console.log(req.query.id)
         if (err) throw err;
         for (const currentfile of files) {
@@ -190,7 +190,7 @@ const storage = multer.diskStorage({
           if (err) throw err;
           };
           }
-      });
+      }); */
       /* User.update({
 	      profilePic : req.query.id + '-' + file.originalname
       },
