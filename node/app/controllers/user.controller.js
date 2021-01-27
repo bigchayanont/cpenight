@@ -160,7 +160,7 @@ exports.displayPic = (req,res) => {
       where: {
       id: req.params.id,
       }}). then((user) => {
-      if(err) console.log('cant find id usr');
+      if(!user) console.log('cant find id usr');
       res.sendFile('./data/uploads/' + user.id + '/' + user.profilePic);
     })
 }
