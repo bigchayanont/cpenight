@@ -141,6 +141,7 @@ exports.uploadPic = (req, res) => {
     console.log('mkdir err -->' + err);
   });
   console.log("id: ",req.query.id);
+  console.log(req)
 
   upload(req, res, (err) =>{
     if(err){
