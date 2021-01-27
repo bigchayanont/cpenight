@@ -158,7 +158,7 @@ exports.uploadPic = (req, res) => {
 exports.displayPic = (req,res) => {
     User.findOne({
       where: {
-      id: req.params.id,
+      id: req.query.id,
       }}). then((user) => {
       if(!user) console.log('cant find id usr');
       res.sendFile('../../data/uploads/' + user.id + '/' + user.profilePic,{ root: __dirname });
