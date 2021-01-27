@@ -173,7 +173,7 @@ const storage = multer.diskStorage({
       fs.readdir('./data/uploads/' + req.query.id,{ recursive: true }, (err, files) => {
         if (err) throw err;
         for (const file of files) {
-        fs.unlink(path.join('./data/uploads/' + req.query.id, file), err => {
+        fs.unlink(path.join('./data/uploads/' + req.query.id, { recursive: true }, file), err => {
           if (err) throw err;
           });
         }
