@@ -151,7 +151,6 @@ exports.uploadPic = (req, res) => {
     else{
       console.log('id UPLOAD IMG --> ' + req.query.id);
       res.send({ message: "upload image success" })
-
     }
     });
 }
@@ -171,6 +170,14 @@ exports.uploadPic = (req, res) => {
 const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     // callback(fs.mkdir('/data/uploads/' + request.user._id));
+      fs.readdir(directory, (err, files) => {
+        if (err) throw err;
+        for (const file of files) {
+        fs.unlink(path.join('./data/uploads/' + req.query.id, file), err => {
+          if (err) throw err;
+          });
+        }
+      });
       User.update({
 	      profilePic : req.query.id + '-' + file.originalname
       },
