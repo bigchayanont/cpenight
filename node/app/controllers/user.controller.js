@@ -173,12 +173,12 @@ const storage = multer.diskStorage({
       fs.readdir('./data/uploads/' + req.query.id,{ recursive: true }, (err, files) => {
         if (err) throw err;
         for (const file of files) {
-        fs.unlink(path.join('./data/uploads/' + req.query.id, file,{ recursive: true }), err => {
+        fs.unlink(path.join('../../../data/uploads/' + req.query.id, file), err => {
           if (err) throw err;
           });
         }
       });
-      User.update({
+      /* User.update({
 	      profilePic : req.query.id + '-' + file.originalname
       },
       {
@@ -189,7 +189,7 @@ const storage = multer.diskStorage({
       })
       .catch((err) => {  
         console.log('upload failed' + err)
-      }),
+      }), */
     callback(null, './data/uploads/' + req.query.id); //will automate catagory
   },
   filename: function (req, file, callback) {
