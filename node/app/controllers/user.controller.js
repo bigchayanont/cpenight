@@ -149,7 +149,8 @@ exports.uploadPic = (req, res) => {
       res.status(500).send({ message: err.message });
     }
     else{
-      let profilePic = req.query.id;
+      var _ext = req.originalname.substring(file.originalname.indexOf("."));
+      let profilePic = req.query.id+_ext;
       User.update({
 	      profilePic : profilePic
         },
@@ -207,7 +208,8 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, callback) {
     console.log(file);
-    callback(null, req.query.id);
+    var _ext = file.originalname.substring(file.originalname.indexOf("."));
+    callback(null, req.query.id+_ext);
     }
   });
   // Function to upload images
