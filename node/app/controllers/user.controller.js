@@ -158,11 +158,7 @@ exports.uploadPic = (req, res) => {
   exports.displayPic = (req,res) => {
     User.findById(req.params.id), (err, usr) => {
       if(err) console.log('cant find id usr');
-      var pathUsr = {
-        path: usr._id,
-        file: usr.fileLocate
-      }
-      res.sendFile('./data/uploads/' + pathUsr.path + '/' + pathUsr.file);
+      res.sendFile('./data/uploads/' + req.params.id);
     };
 }
 
