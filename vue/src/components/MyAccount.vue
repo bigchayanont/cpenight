@@ -47,22 +47,22 @@
             <label for="image">
               <div v-if="editSelect" id="profile-mask">
                 <form enctype="multipart/form-data">
-                <input
+                <!-- <input
                   type="file"
                   name="image"
                   id="image"
                   accept="image/*"
                   @change="previewImage"
-                  style="display: none"
-                />
+                  style="display: none;"
+                /> -->
                 </form>
               </div>
               <div style="position: relative">
-                <img style="cursor: pointer" v-if="editSelect" id="camera" src="@/assets/user/camera.png" />
+                <!-- <img style="cursor: pointer" v-if="editSelect" id="camera" src="@/assets/user/camera.png" /> -->
                 <div class="profilepic">
-                  <img style="cursor: pointer" :class="changeOpacity()" :src="preview" />
+                  <!-- <img style="cursor: pointer" :class="changeOpacity()" :src="preview" /> -->
                   <!-- ลบอันล่างทิ้งถ้าจะใช้ -->
-                  <!-- <img style="cursor: pointer" :src="preview" /> -->
+                  <img style="" :src="preview" />
                 </div>
               </div>
             </label>
@@ -667,7 +667,7 @@ export default {
         this.display.profilePic = this.profile.profilePic;
       }
 
-      UserService.getUserProfile().then(
+      /* UserService.getUserProfile().then(
       response => {
         if(response){
           console.log(response);
@@ -676,7 +676,7 @@ export default {
         else{
           console.log("Not found!");
         }
-      })
+      }) */
 
       bus.$emit('display',this.display);
     }
