@@ -149,20 +149,20 @@ exports.uploadPic = (req, res) => {
       res.status(500).send({ message: err.message });
     }
     else{
+     let profilePic = req.query.id + '-' + file.originalname;
       User.update({
-	      profilePic : req.query.id + '-' + file.originalname
+	      profilePic : profilePic
         },
         {
           where: {id: req.query.id},
         })
       .then(() => {
-        console.log('image path re --> ' + req.query.id);
+        console.log('image path saved to DB --> ' + req.query.id);
       })
-      .catch((err) => {  
-        console.log('upload failed' + err)
+      .catch((err) => {
+        console.log('image path failed when saving to DB ' + err)
       }),
-      console.log('id UPLOAD IMG --> ' + req.query.id);
-      res.send({ message: "upload image success" })
+      res.send({ message: "upload image success", profilePic : profilePic})
     }
     });
 }
@@ -183,9 +183,10 @@ const storage = multer.diskStorage({
   destination: function (req, file, callback) {
     //callback(fs.mkdir('/data/uploads/' + request.user._id));
       fs.readdir('./data/uploads/' + req.query.id,{ recursive: true }, (err, files) => {
+        console.log(req.query.id)
         if (err) throw err;
         for (const file of files) {
-       fs.unlink(path.join('./data/uploads/' + req.query.id, file), err => {
+          fs.unlink(path.join('./data/uploads/' + req.query.id, file), err => {
           if (err) throw err;
           });
         }
