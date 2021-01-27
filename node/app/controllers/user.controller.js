@@ -139,12 +139,6 @@ exports.changePassword = (req, res) => {
 exports.uploadPic = (req, res) => {
   fs.mkdir('./data/uploads/' + req.query.id,{ recursive: true }, (err) => {
     console.log('mkdir err -->' + err);
-    fs.rmdir('./data/uploads/' + req.query.id, { recursive: true }, (err) => {
-      if (err) {
-          throw err;
-      }
-      fs.mkdir('./data/uploads/' + req.query.id,{ recursive: true })
-    })
   });
   console.log("id: ",req.query.id);
 
@@ -155,7 +149,7 @@ exports.uploadPic = (req, res) => {
       res.status(500).send({ message: err.message });
     }
     else{
-      let profilePic = req.query.id + '-' + req.originalname;
+      let profilePic = req.query.id;
       User.update({
 	      profilePic : profilePic
         },
@@ -213,7 +207,7 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, callback) {
     console.log(file);
-    callback(null, req.query.id + '-' + file.originalname);
+    callback(null, req.query.id);
     }
   });
   // Function to upload images
